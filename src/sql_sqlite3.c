@@ -24,7 +24,7 @@ static bool _sql_sqlite3_update(dbi_object_t obj,
 static bool _sql_sqlite3_select(dbi_object_t obj, 
 							const char *tbname, const char *fields);
 /******************************************************************************/
-sql_sqlite3_t sqlite3 = {
+dbc_t sqlite3 = {
 	.filter = {
 		.and = _sql_sqlite3_and,
 		.or = _sql_sqlite3_or,

@@ -1,14 +1,21 @@
 #include "includes.h"
 
+dbc_t dbc;
+
 int main(int argc, char **argv)
 {
-	//dbi_api_test();
-
+	dbc_sql_args_t dbc_args = {
+		.sqltype = E_DBC_SQL_TYPE_SQLITE3,
+		.dbdir = ".",
+		.dbname = "test.db",
+	};
+	
 	dbi_object_t obj = dbi_object_new();
+	dbc = dbc_connect(obj, dbc_args);
 
-	sqlite3.connect(obj, ".", "test.db");
+	dbc.connect(obj, ".", "test.db");
 
-	sqlite3.insert(obj, "iot_bas_alminfoext", 
+	dbc.insert(obj, "iot_bas_alminfoext", 
 			"device_type, device_model, mete_type, report_level, "
 			"upperlimit1_exist, upperlimit1, upperlimit2_exist, upperlimit2, "
 			"lowerlimit2_exist, lowerlimit2, upperlimit3_exist, upperlimit3, "
@@ -25,19 +32,20 @@ int main(int argc, char **argv)
 			5, 1.2, 5, 1.2, 
 			5, 1.2, 5, 1.2, 
 			5, 1.2, 10, 15, 2.5);
-	sqlite3.query(obj);
+	dbc.query(obj);
 
-	sqlite3.select(obj, "iot_bas_alminfoext", "upperlimit1_exist, upperlimit1");
-	sqlite3.filter.and(obj, "upperlimit1_exist = 5");
-	sqlite3.filter.and(obj, "upperlimit2 = %f", 1.2);
-	sqlite3.filter.or(obj, "delta = %f", 2.5);
-	sqlite3.filter.limit(obj, 2, 5);
-	sqlite3.query(obj);
+	dbc.select(obj, "iot_bas_alminfoext", "upperlimit1_exist, upperlimit1");
+	dbc.filter.and(obj, "upperlimit1_exist = 5");
+	dbc.filter.and(obj, "upperlimit2 = %f", 1.2);
+	dbc.filter.or(obj, "delta = %f", 2.5);
+	dbc.filter.limit(obj, 2, 5);
+	dbc.query(obj);
 
-	sqlite3.disconnect(obj);
+	dbc.disconnect(obj);
 	dbi_object_delete(obj);
 	return 0;
 }
+
 
 
 
