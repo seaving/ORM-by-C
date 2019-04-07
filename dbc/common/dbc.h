@@ -22,6 +22,8 @@ sqlite3 mysql ...
 #define __DBC_H__
 
 typedef intptr_t dbi_object_t;
+typedef char* string_t;
+typedef unsigned char* binary_t;
 /******************************************************************************/
 
 typedef enum __dbc_sql_type__
@@ -105,6 +107,366 @@ typedef struct __dbc_result__
 	*/
 	unsigned int (*gets)(dbi_object_t obj, 
 				unsigned int rowidx, const char *fmt, ...);
+
+	/*
+	* 函数: get_char
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: char
+	* 说明: 
+	*/
+	char (*get_char)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_uchar
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: unsigned char
+	* 说明: 
+	*/
+	unsigned char (*get_uchar)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_short
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: short
+	* 说明: 
+	*/
+	short (*get_short)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_ushort
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: unsigned short
+	* 说明: 
+	*/
+	unsigned short (*get_ushort)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_int
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: int
+	* 说明: 
+	*/
+	int (*get_int)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_uint
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: unsigned int
+	* 说明: 
+	*/
+	unsigned int (*get_uint)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_long
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: long
+	* 说明: 
+	*/
+	long (*get_long)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_ulong
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: unsigned long
+	* 说明: 
+	*/
+	unsigned long (*get_ulong)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_longlong
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: long long
+	* 说明: 
+	*/
+	long long (*get_longlong)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_ulonglong
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: unsigned long long
+	* 说明: 
+	*/
+	unsigned long long (*get_ulonglong)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_float
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: float
+	* 说明: 
+	*/
+	float (*get_float)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_double
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: double
+	* 说明: 
+	*/
+	double (*get_double)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_string
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: const char *
+	* 说明: 
+	*/
+	const string_t (*get_string)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_binary
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: const unsigned char *
+	* 说明: 
+	*/
+	const binary_t (*get_binary)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_datetime
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		field 	字段名
+	* 返回: time_t
+	* 说明: 
+	*/
+	time_t (*get_datetime)(dbi_object_t obj, 
+				unsigned int rowidx, const char *field);
+
+	/*
+	* 函数: get_char_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: char
+	* 说明: 
+	*/
+	char (*get_char_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_uchar_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: unsigned char
+	* 说明: 
+	*/
+	unsigned char (*get_uchar_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_short_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: short
+	* 说明: 
+	*/
+	short (*get_short_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_ushort_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: unsigned short
+	* 说明: 
+	*/
+	unsigned short (*get_ushort_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_int_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: int
+	* 说明: 
+	*/
+	int (*get_int_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_uint_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: unsigned int
+	* 说明: 
+	*/
+	unsigned int (*get_uint_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_long_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: long
+	* 说明: 
+	*/
+	long (*get_long_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_ulong_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: unsigned long
+	* 说明: 
+	*/
+	unsigned long (*get_ulong_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_longlong_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: long long
+	* 说明: 
+	*/
+	long long (*get_longlong_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_ulonglong_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: unsigned long long
+	* 说明: 
+	*/
+	unsigned long long (*get_ulonglong_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_float_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: float
+	* 说明: 
+	*/
+	float (*get_float_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_double_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: double
+	* 说明: 
+	*/
+	double (*get_double_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_string_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: const char *
+	* 说明: 
+	*/
+	const string_t (*get_string_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_binary_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: const unsigned char *
+	* 说明: 
+	*/
+	const binary_t (*get_binary_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
+
+	/*
+	* 函数: get_datetime_by_colidx
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		columnidx 	列号，从1开始
+	* 返回: time_t
+	* 说明: 
+	*/
+	time_t (*get_datetime_by_colidx)(dbi_object_t obj, 
+				unsigned int rowidx, unsigned int columnidx);
 
 	/*
 	* 函数: count
@@ -248,7 +610,7 @@ typedef struct __dbc__
 	* 说明: 结合filter中提供的方法构造条件
 	*		set_fmt 格式遵从sql语法，"field1=value1, field2='value2', field3='value3'"
 	*/
-	bool (*update)(dbi_object_t obj, const char *tbname, const char *set_fmt);
+	bool (*update)(dbi_object_t obj, const char *tbname, const char *set_fmt, ...);
 	/*
 	* 函数: select
 	* 功能: 查询操作

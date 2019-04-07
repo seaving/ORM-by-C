@@ -33,6 +33,9 @@ int main(int argc, char **argv)
 			5, 1.2, 10, 15, 2.5);
 	dbc.query(obj);
 
+	dbc.update(obj, "iot_bas_alminfoext", "upperlimit1_exist=%d", 128);
+	dbc.query(obj);
+
 	dbc.select(obj, "iot_bas_alminfoext", "upperlimit1_exist", "upperlimit1", NULL);
 	dbc.filter.and(obj, "upperlimit1_exist = 5");
 	dbc.filter.and(obj, "upperlimit2 = %f", 1.2);
@@ -40,14 +43,16 @@ int main(int argc, char **argv)
 	dbc.filter.limit(obj, 2, 5);
 	dbc.query(obj);
 
-	int upperlimit1_exist = 0;
+	char upperlimit1_exist = 0;
 	float upperlimit1 = 0;
-	dbc.result.gets(obj, 1, "upperlimit1_exist.%i upperlimit1.%f", 
+	dbc.result.gets(obj, 1, "upperlimit1_exist.%c upperlimit1.%f", 
 			&upperlimit1_exist, &upperlimit1);
 
 	LOG_TRACE("count = %llu\n", dbc.result.count(obj));
 	LOG_TRACE("%d|%f\n", upperlimit1_exist, upperlimit1);
-	
+	LOG_TRACE("%d|%f\n", dbc.result.get_char(obj, 1, "upperlimit1_exist"), 
+						dbc.result.get_float(obj, 1, "upperlimit1"));
+
 	dbc.disconnect(obj);
 	dbi_object_delete(obj);
 	return 0;

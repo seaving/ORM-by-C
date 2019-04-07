@@ -56,6 +56,847 @@ static unsigned int _dbc_result_gets(
 }
 
 /*
+* 函数: _dbc_result_get_char
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: char
+* 说明: 
+*/
+static char _dbc_result_get_char(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_char_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_uchar
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: unsigned char
+* 说明: 
+*/
+static unsigned char _dbc_result_get_uchar(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_uchar_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_short
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: short
+* 说明: 
+*/
+static short _dbc_result_get_short(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_short_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_ushort
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: unsigned short
+* 说明: 
+*/
+static unsigned short _dbc_result_get_ushort(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_ushort_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_int
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: int
+* 说明: 
+*/
+static int _dbc_result_get_int(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_int_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_uint
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: unsigned int
+* 说明: 
+*/
+static unsigned int _dbc_result_get_uint(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_uint_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_long
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: long
+* 说明: 
+*/
+static long _dbc_result_get_long(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_long_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_ulong
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: unsigned long
+* 说明: 
+*/
+static unsigned long _dbc_result_get_ulong(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_ulong_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_longlong
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: long long
+* 说明: 
+*/
+static long long _dbc_result_get_longlong(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0L;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_longlong_value_by_fieldname(results, field);
+	}
+
+	return 0L;
+}
+
+/*
+* 函数: _dbc_result_get_ulonglong
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: unsigned long long
+* 说明: 
+*/
+static unsigned long long _dbc_result_get_ulonglong(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0L;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_ulonglong_value_by_fieldname(results, field);
+	}
+
+	return 0L;
+}
+
+/*
+* 函数: _dbc_result_get_float
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: float
+* 说明: 
+*/
+static float _dbc_result_get_float(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_float_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_double
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: double
+* 说明: 
+*/
+static double _dbc_result_get_double(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_double_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_string
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: const char *
+* 说明: 
+*/
+static const string_t _dbc_result_get_string(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return NULL;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return (const string_t) dbi_result_get_string_value_by_fieldname(results, field);
+	}
+
+	return NULL;
+}
+
+/*
+* 函数: _dbc_result_get_binary
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: const unsigned char *
+* 说明: 
+*/
+static const binary_t _dbc_result_get_binary(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return NULL;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return (const binary_t) dbi_result_get_binary_value_by_fieldname(results, field);
+	}
+
+	return NULL;
+}
+
+/*
+* 函数: _dbc_result_get_datetime
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		field	字段名
+* 返回: time_t
+* 说明: 
+*/
+static time_t _dbc_result_get_datetime(dbi_object_t obj, 
+			unsigned int rowidx, const char *field)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| field == NULL)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_datetime_value_by_fieldname(results, field);
+	}
+
+	return 0;
+}
+
+
+/*
+* 函数: _dbc_result_get_char_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: char
+* 说明: 
+*/
+static char _dbc_result_get_char_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_char_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_uchar_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: unsigned char
+* 说明: 
+*/
+static unsigned char _dbc_result_get_uchar_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_uchar_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_short_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: short
+* 说明: 
+*/
+static short _dbc_result_get_short_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_short_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_ushort_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: unsigned short
+* 说明: 
+*/
+static unsigned short _dbc_result_get_ushort_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_ushort_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_int_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: int
+* 说明: 
+*/
+static int _dbc_result_get_int_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_int_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_uint_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: unsigned int
+* 说明: 
+*/
+static unsigned int _dbc_result_get_uint_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_uint_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_long_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: long
+* 说明: 
+*/
+static long _dbc_result_get_long_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_long_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_ulong_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: unsigned long
+* 说明: 
+*/
+static unsigned long _dbc_result_get_ulong_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_ulong_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_longlong_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: long long
+* 说明: 
+*/
+static long long _dbc_result_get_longlong_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0L;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_longlong_value_by_idx(results, columnidx);
+	}
+
+	return 0L;
+}
+
+/*
+* 函数: _dbc_result_get_ulonglong_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: unsigned long long
+* 说明: 
+*/
+static unsigned long long _dbc_result_get_ulonglong_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0L;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_ulonglong_value_by_idx(results, columnidx);
+	}
+
+	return 0L;
+}
+
+/*
+* 函数: _dbc_result_get_float_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: float
+* 说明: 
+*/
+static float _dbc_result_get_float_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_float_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_double_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: double
+* 说明: 
+*/
+static double _dbc_result_get_double_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_double_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
+* 函数: _dbc_result_get_string_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: const char *
+* 说明: 
+*/
+static const string_t _dbc_result_get_string_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return NULL;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return (const string_t) dbi_result_get_string_value_by_idx(results, columnidx);
+	}
+
+	return NULL;
+}
+
+/*
+* 函数: _dbc_result_get_binary_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: const unsigned char *
+* 说明: 
+*/
+static const binary_t _dbc_result_get_binary_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return NULL;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return (const binary_t) dbi_result_get_binary_value_by_idx(results, columnidx);
+	}
+
+	return NULL;
+}
+
+/*
+* 函数: _dbc_result_get_datetime_by_colidx
+* 功能: 在row中批量获取字段的值
+* 参数: obj 	dbi object
+*		rowidx	第几行，从1开始
+*		columnidx	列号，从1开始
+* 返回: time_t
+* 说明: 
+*/
+static time_t _dbc_result_get_datetime_by_colidx(dbi_object_t obj, 
+			unsigned int rowidx, unsigned int columnidx)
+{
+	dbi_results_t results = dbi_object_get_results(obj);
+	if (results == NULL
+		|| rowidx <= 0 
+		|| columnidx <= 0)
+	{
+		return 0;
+	}
+
+	if (dbi_result_row_seek(results, rowidx))
+	{
+		return dbi_result_get_datetime_value_by_idx(results, columnidx);
+	}
+
+	return 0;
+}
+
+/*
 * 函数: _dbc_result_count
 * 功能: 获取当前结果集合中总行数
 * 参数: obj			dbi 对象
@@ -121,21 +962,56 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 	{
 		return dbc;
 	}
+#define set_fun(c, f) \
+	do { \
+		if (c == NULL) \
+		{ \
+			c = f; \
+		} \
+	} while (0)
+
+	set_fun(dbc.result.gets, _dbc_result_gets);
+
+	set_fun(dbc.result.get_char, _dbc_result_get_char);
+	set_fun(dbc.result.get_uchar, _dbc_result_get_uchar);
+	set_fun(dbc.result.get_short, _dbc_result_get_short);
+	set_fun(dbc.result.get_ushort, _dbc_result_get_ushort);
+	set_fun(dbc.result.get_int, _dbc_result_get_int);
+	set_fun(dbc.result.get_uint, _dbc_result_get_uint);
+	set_fun(dbc.result.get_long, _dbc_result_get_long);
+	set_fun(dbc.result.get_ulong, _dbc_result_get_ulong);
+	set_fun(dbc.result.get_longlong, _dbc_result_get_longlong);
+	set_fun(dbc.result.get_ulonglong, _dbc_result_get_ulonglong);
+	set_fun(dbc.result.get_float, _dbc_result_get_float);
+	set_fun(dbc.result.get_double, _dbc_result_get_double);
+	set_fun(dbc.result.get_string, _dbc_result_get_string);
+	set_fun(dbc.result.get_binary, _dbc_result_get_binary);
+	set_fun(dbc.result.get_datetime, _dbc_result_get_datetime);
+
+	set_fun(dbc.result.get_char_by_colidx, _dbc_result_get_char_by_colidx);
+	set_fun(dbc.result.get_uchar_by_colidx, _dbc_result_get_uchar_by_colidx);
+	set_fun(dbc.result.get_short_by_colidx, _dbc_result_get_short_by_colidx);
+	set_fun(dbc.result.get_ushort_by_colidx, _dbc_result_get_ushort_by_colidx);
+	set_fun(dbc.result.get_int_by_colidx, _dbc_result_get_int_by_colidx);
+	set_fun(dbc.result.get_uint_by_colidx, _dbc_result_get_uint_by_colidx);
+	set_fun(dbc.result.get_long_by_colidx, _dbc_result_get_long_by_colidx);
+	set_fun(dbc.result.get_ulong_by_colidx, _dbc_result_get_ulong_by_colidx);
+	set_fun(dbc.result.get_longlong_by_colidx, _dbc_result_get_longlong_by_colidx);
+	set_fun(dbc.result.get_ulonglong_by_colidx, _dbc_result_get_ulonglong_by_colidx);
+	set_fun(dbc.result.get_float_by_colidx, _dbc_result_get_float_by_colidx);
+	set_fun(dbc.result.get_double_by_colidx, _dbc_result_get_double_by_colidx);
+	set_fun(dbc.result.get_string_by_colidx, _dbc_result_get_string_by_colidx);
+	set_fun(dbc.result.get_binary_by_colidx, _dbc_result_get_binary_by_colidx);
+	set_fun(dbc.result.get_datetime_by_colidx, _dbc_result_get_datetime_by_colidx);
 	
-	if (dbc.result.gets == NULL)
-	{
-		dbc.result.gets = _dbc_result_gets;
-	}
-	if (dbc.result.count == NULL)
-	{
-		dbc.result.count = _dbc_result_count;
-	}
-	
+	set_fun(dbc.result.count, _dbc_result_count);
+
 	if (dbi_connect(obj) == false)
 	{
 		LOG_TRACE("dbi connect sql error!\n");
 	}
 
 	return dbc;
+#undef set_fun
 }
 

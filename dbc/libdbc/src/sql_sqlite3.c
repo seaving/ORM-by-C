@@ -27,7 +27,7 @@ static bool _sql_sqlite3_insert(dbi_object_t obj, const char *tbname,
 static bool _sql_sqlite3_delete(dbi_object_t obj, const char *tbname);
 
 static bool _sql_sqlite3_update(dbi_object_t obj, 
-						const char *tbname, const char *set_fmt);
+						const char *tbname, const char *set_fmt, ...);
 
 static bool _sql_sqlite3_select(dbi_object_t obj, const char *tbname, 
 						const char *field1, ...);
@@ -273,7 +273,7 @@ static bool _sql_sqlite3_insert(
 		return false;
 	}
 	
-	len = strlen(fields) + strlen(values_fmt);
+	len = strlen(tbname) + strlen(fields) + strlen(values_fmt);
 	if (len <= 0)
 	{
 		return false;
@@ -336,18 +336,33 @@ static bool _sql_sqlite3_delete(
 */
 static bool _sql_sqlite3_update(
 	dbi_object_t obj, const char *tbname, 
-	const char *set_fmt)
+	const char *set_fmt, ...)
 {
+	int size = 0;
+	char *fmt = NULL;
+	va_list ap;
 	if (obj == DBI_OBJECT_NULL 
-		|| tbname == NULL)
+		|| tbname == NULL 
+		|| set_fmt == NULL)
 	{
 		return false;
 	}
 
-	dbi_object_statement_composef(
-		obj, "UPDATE %s SET %s WHERE 1=1", 
-			tbname, set_fmt);
+	size = strlen(tbname) + strlen(set_fmt) + 65;
+	fmt = calloc(1, size);
+	if (fmt == NULL)
+	{
+		return false;
+	}
 
+	snprintf(fmt, size - 1, "UPDATE %s SET %s WHERE 1=1", tbname, set_fmt);
+
+	va_start(ap, set_fmt);
+	dbi_object_statement_composef2(obj, fmt, ap);
+	va_end(ap);
+	
+	free(fmt);
+	
 	return true;
 }
 
