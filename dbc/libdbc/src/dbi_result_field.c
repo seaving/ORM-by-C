@@ -1,5 +1,13 @@
 #include "includes.h"
 
+#include "dbi_object.h"
+#include "dbi_connect.h"
+#include "dbi_query.h"
+#include "dbi_result_row.h"
+#include "dbi_result_field.h"
+#include "dbi_error.h"
+#include "dbi_misc.h"
+
 /*
 * 函数: _bdi_result_parse_field_formatstr
 * 功能: 解析format字符串
@@ -1426,6 +1434,42 @@ unsigned int dbi_result_field_bindf2(
 unsigned int dbi_result_field_get_values(
 	dbi_results_t row, const char *format, ...)
 {
+	unsigned int numtokens = 0;
+	va_list ap;
+	va_start(ap, format);
+	numtokens = dbi_result_field_get_values2(row, format, ap);
+	va_end(ap);
+
+	return numtokens;
+}
+
+/*
+* 函数: dbi_result_field_get_values2
+* 功能: 在row中批量获取字段的值
+* 参数: result	结果集合
+*		fmt 	格式化字符串，类似printf函数格式
+*		args 	格式化参数列表，用于保存获取到的值
+* 返回: unsigned int	获取成功字段数量
+*		- 0 			失败
+* 说明: fmt 格式: "fieldname1.%ul fieldname2.%s fieldname3.%s"
+*				fmt字符串中必须是[字段名.格式化标识]，多个字段之间用空格隔开
+*		... 为可变参数，每个参数传参必须加上取地址符号 &
+*		举例: dbi_result_field_get_values(row, "name.%s sex.%s age.%d", &name, &sex, &age)
+*	--- 格式字符:
+*		%c / %uc: char / unsigned char
+*		%h / %uh: short / unsigned short
+*		%l / %ul: int / unsigned int(long与int一样)
+*		%i / %ui: int / unsigned int(long与int一样)
+*		%L / %uL: long long / unsigned long long
+*		%f: float
+*		%d: double
+*		%s: string
+*		%b: unsigned char * 二进制字符串
+*		%t: time_t 表示日期和/或时间的时间值
+*/
+unsigned int dbi_result_field_get_values2(
+	dbi_results_t row, const char *format, va_list args)
+{
 	char **tokens = NULL;
 	char **fieldnames = NULL;
 	unsigned int curidx = 0;
@@ -1437,7 +1481,7 @@ unsigned int dbi_result_field_get_values(
 	{
 		return 0;
 	}
-	
+
 	numtokens = _bdi_parse_field_formatstr(format, &tokens, &fieldnames);
 	if (numtokens == 0)
 	{
@@ -1451,8 +1495,8 @@ unsigned int dbi_result_field_get_values(
 			LOG_TRACE(format, args); \
 		} \
 	} while (0)
-
-	va_start(ap, format);
+	
+	va_copy(ap, args);
 	while (curidx < numtokens)
 	{
 		uflag = strlen(tokens[curidx]) > 1 && tokens[curidx][0] == 'u';

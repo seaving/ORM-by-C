@@ -21,7 +21,7 @@ sqlite3 mysql ...
 #ifndef __DBC_H__
 #define __DBC_H__
 
-#include "dbi_object.h"
+typedef intptr_t dbi_object_t;
 /******************************************************************************/
 
 typedef enum __dbc_sql_type__
@@ -43,7 +43,47 @@ typedef struct __dbc_sql_args_
 	const char *encoding;
 	const char *version;
 } dbc_sql_args_t;
+/******************************************************************************/
+typedef struct __dbc_result__
+{
+	/*
+	* 函数: gets
+	* 功能: 在row中批量获取字段的值
+	* 参数: obj		dbi object
+	*		rowidx	第几行，从1开始
+	*		fmt 	格式化字符串，类似printf函数格式
+	*		args	格式化参数列表，用于保存获取到的值
+	* 返回: unsigned int	获取成功字段数量
+	*		- 0 			失败
+	* 说明: fmt 格式: "fieldname1.%ul fieldname2.%s fieldname3.%s"
+	*				fmt字符串中必须是[字段名.格式化标识]，多个字段之间用空格隔开
+	*		... 为可变参数，每个参数传参必须加上取地址符号 &
+	*		举例: gets(row, "name.%s sex.%s age.%d", &name, &sex, &age)
+	*	--- 格式字符:
+	*		%c / %uc: char / unsigned char
+	*		%h / %uh: short / unsigned short
+	*		%l / %ul: int / unsigned int(long与int一样)
+	*		%i / %ui: int / unsigned int(long与int一样)
+	*		%L / %uL: long long / unsigned long long
+	*		%f: float
+	*		%d: double
+	*		%s: string
+	*		%b: unsigned char * 二进制字符串
+	*		%t: time_t 表示日期和/或时间的时间值
+	*/
+	unsigned int (*gets)(dbi_object_t obj, 
+				unsigned int rowidx, const char *fmt, ...);
 
+	/*
+	* 函数: count
+	* 功能: 获取当前结果集合中总行数
+	* 参数: obj			dbi 对象
+	* 返回: unsigned long long	行数
+	* 说明: 
+	*/
+	unsigned long long (*count)(dbi_object_t obj);
+
+} dbc_result_t;
 /******************************************************************************/
 typedef struct __dbc_filter__
 {
@@ -94,19 +134,10 @@ typedef struct __dbc_filter__
 /******************************************************************************/
 typedef struct __dbc__
 {
+	//-------------------------------------
+	dbc_result_t result;
 	dbc_filter_t filter;
 	//-------------------------------------
-	/*
-	* 函数: _sql_sqlite3_connect
-	* 功能: 连接操作
-	* 参数: obj 		对象实例
-	*		dbdir		数据库路径
-	*		dbname		数据库名称
-	* 返回: bool
-	*		- false 失败
-	* 说明: 
-	*/
-	bool (*connect)(dbi_object_t obj, const char *dbdir, const char *dbname);
 	/*
 	* 函数: disconnect
 	* 功能: 断开连接操作
@@ -196,6 +227,25 @@ typedef struct __dbc__
 *		仅仅只是用来传递参数而已，这本是设计的初衷
 */
 dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args);
+
+/*
+* 函数: dbi_object_new
+* 功能: 创建对象实例
+* 参数: 无
+* 返回: dbi对象
+*		- 0		失败
+* 说明: 
+*/
+extern dbi_object_t dbi_object_new();
+
+/*
+* 函数: dbi_object_delete
+* 功能: 销毁对象实例
+* 参数: obj		dbi对象
+* 返回: 无
+* 说明: 
+*/
+extern void dbi_object_delete(dbi_object_t obj);
 
 #endif
 

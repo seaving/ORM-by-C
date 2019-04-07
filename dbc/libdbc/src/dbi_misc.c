@@ -1,5 +1,12 @@
 #include "includes.h"
 
+#include "dbi_object.h"
+#include "dbi_connect.h"
+#include "dbi_query.h"
+#include "dbi_result_row.h"
+#include "dbi_result_field.h"
+#include "dbi_error.h"
+#include "dbi_misc.h"
 
 /*
 * º¯Êý: dbi_driver_list_debug

@@ -1,4 +1,5 @@
 #include "includes.h"
+#include "dbi_api_test.h"
 
 dbc_t dbc;
 
@@ -12,8 +13,6 @@ int main(int argc, char **argv)
 	
 	dbi_object_t obj = dbi_object_new();
 	dbc = dbc_connect(obj, dbc_args);
-
-	dbc.connect(obj, ".", "test.db");
 
 	dbc.insert(obj, "iot_bas_alminfoext", 
 			"device_type, device_model, mete_type, report_level, "
@@ -41,6 +40,14 @@ int main(int argc, char **argv)
 	dbc.filter.limit(obj, 2, 5);
 	dbc.query(obj);
 
+	int upperlimit1_exist = 0;
+	float upperlimit1 = 0;
+	dbc.result.gets(obj, 1, "upperlimit1_exist.%i upperlimit1.%f", 
+			&upperlimit1_exist, &upperlimit1);
+
+	LOG_TRACE("count = %llu\n", dbc.result.count(obj));
+	LOG_TRACE("%d|%f\n", upperlimit1_exist, upperlimit1);
+	
 	dbc.disconnect(obj);
 	dbi_object_delete(obj);
 	return 0;

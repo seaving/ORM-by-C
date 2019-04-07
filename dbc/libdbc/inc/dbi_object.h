@@ -115,6 +115,16 @@ void dbi_object_statement_clear_buf(dbi_object_t obj);
 */
 void dbi_object_statement_debug(dbi_object_t obj);
 
+/*
+* 函数: dbi_object_get_results
+* 功能: 获取结果集
+* 参数: obj		dbi对象
+* 返回: dbi_results_t
+*		- NULL	失败
+* 说明: 
+*/
+dbi_results_t *dbi_object_get_results(dbi_object_t obj);
+
 #endif
 
 

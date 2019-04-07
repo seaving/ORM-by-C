@@ -1,5 +1,13 @@
 #include "includes.h"
 
+#include "dbi_object.h"
+#include "dbi_connect.h"
+#include "dbi_query.h"
+#include "dbi_result_row.h"
+#include "dbi_result_field.h"
+#include "dbi_error.h"
+#include "dbi_misc.h"
+
 
 /******************************************************************************/
 static bool _sql_sqlite3_and(dbi_object_t obj, char *condition_fmt, ...);
@@ -7,9 +15,6 @@ static bool _sql_sqlite3_or(dbi_object_t obj, char *condition_fmt, ...);
 
 static bool _sql_sqlite3_limit(dbi_object_t obj, 
 						unsigned int offset, unsigned int limit);
-
-static bool _sql_sqlite3_connect(dbi_object_t obj, const char *dbdir, 
-						const char *dbname);
 
 static bool _sql_sqlite3_query(dbi_object_t obj);
 
@@ -30,7 +35,6 @@ dbc_t sqlite3 = {
 		.or = _sql_sqlite3_or,
 		.limit = _sql_sqlite3_limit,
 	},
-	.connect = _sql_sqlite3_connect,
 	.disconnect = dbi_disconnect,
 	.query = _sql_sqlite3_query,
 	.insert = _sql_sqlite3_insert,
@@ -180,28 +184,6 @@ static bool _sql_sqlite3_query(dbi_object_t obj)
 	if (dbi_query_by_statement_buf(obj) == false)
 	{
 		dbi_error_debug(obj);
-		return false;
-	}
-
-	return true;
-}
-/******************************************************************************/
-/*
-* 函数: _sql_sqlite3_connect
-* 功能: 连接操作
-* 参数: obj 		对象实例
-*		dbdir		数据库路径
-*		dbname		数据库名称
-* 返回: bool
-*		- false 失败
-* 说明:	
-*/
-static bool _sql_sqlite3_connect(
-	dbi_object_t obj, const char *dbdir, const char *dbname)
-{
-	dbi_connect_sqlite3_init(obj, dbdir, dbname);
-	if (dbi_connect(obj) == false)
-	{
 		return false;
 	}
 
