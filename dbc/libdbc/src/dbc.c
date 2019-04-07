@@ -121,9 +121,16 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 	{
 		return dbc;
 	}
-
-	dbc.result.gets = _dbc_result_gets;
-	dbc.result.count = _dbc_result_count;
+	
+	if (dbc.result.gets == NULL)
+	{
+		dbc.result.gets = _dbc_result_gets;
+	}
+	if (dbc.result.count == NULL)
+	{
+		dbc.result.count = _dbc_result_count;
+	}
+	
 	if (dbi_connect(obj) == false)
 	{
 		LOG_TRACE("dbi connect sql error!\n");

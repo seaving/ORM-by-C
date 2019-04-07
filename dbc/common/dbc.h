@@ -44,6 +44,38 @@ typedef struct __dbc_sql_args_
 	const char *version;
 } dbc_sql_args_t;
 /******************************************************************************/
+typedef struct __dbc_sql_fun__
+{
+	/*
+	* 函数: sum
+	* 功能: 汇总，本质也是构造字符串
+	* 参数: field		被统计的字段
+	* 返回: char *
+	*		- NULL		失败
+	* 说明: 配合select使用
+	*/
+	const char *(*sum)(const char *field);
+	/*
+	* 函数: count
+	* 功能: 统计数量，本质也是构造字符串
+	* 参数: field		被统计的字段
+	* 返回: char *
+	*		- NULL		失败
+	* 说明: 配合select使用
+	*/
+	const char *(*count)(const char *field);
+	/*
+	* 函数: distinct
+	* 功能: 去重，本质也是构造字符串
+	* 参数: field		去重字段
+	* 返回: char *
+	*		- NULL		失败
+	* 说明: 配合select使用
+	*/
+	const char *(*distinct)(const char *field);
+} dbc_sql_fun_t;
+
+/******************************************************************************/
 typedef struct __dbc_result__
 {
 	/*
@@ -130,11 +162,33 @@ typedef struct __dbc_filter__
 	* 说明: 该函数结合select使用
 	*/
 	bool (*limit)(dbi_object_t obj, unsigned int offset, unsigned int limit_);
+	/*
+	* 函数: sort
+	* 功能: 构造条件，sql语句中的order by命令-排序
+	* 参数: obj 			对象实例
+	*		fields 			要排序的字段，多个字段逗号给开
+	*		asc				为true表示升序，false降序
+	* 返回: bool
+	*		- false 失败
+	* 说明: 该函数结合select使用
+	*/
+	bool (*sort)(dbi_object_t obj, const char *fields, bool asc);
+	/*
+	* 函数: group
+	* 功能: 构造条件，sql语句中的group by命令-分组
+	* 参数: obj 			对象实例
+	*		fields 			分组字段，多个字段逗号给开
+	* 返回: bool
+	*		- false 失败
+	* 说明: 该函数结合select使用
+	*/
+	bool (*group)(dbi_object_t obj, const char *fields);
 } dbc_filter_t;
 /******************************************************************************/
 typedef struct __dbc__
 {
 	//-------------------------------------
+	dbc_sql_fun_t sql_fun;
 	dbc_result_t result;
 	dbc_filter_t filter;
 	//-------------------------------------
@@ -200,13 +254,15 @@ typedef struct __dbc__
 	* 功能: 查询操作
 	* 参数: obj 			对象实例
 	*		tbname			表名称
-	*		fields			要查询的字段，*号表示所有字段
+	*		field1			要查询的字段，*号表示所有字段
+	*		... 			字段列表
 	* 返回: bool
 	*		- false 失败
 	* 说明: 结合filter中提供的方法构造条件
-	*		field 格式遵从sql语法，"field1, field2, field3"，用逗号隔开
+	*		可变参数列表必须以NULL结尾，否则程序会内存溢出
+	*		select(obj, taname, "field1", "field2", "count(name)", NULL);
 	*/
-	bool (*select)(dbi_object_t obj, const char *tbname, const char *fields);
+	bool (*select)(dbi_object_t obj, const char *tbname, const char *field1, ...);
 } dbc_t;
 /******************************************************************************/
 

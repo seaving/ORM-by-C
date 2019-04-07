@@ -8,8 +8,11 @@
 #include "dbi_error.h"
 #include "dbi_misc.h"
 
-
 /******************************************************************************/
+static const char *_sql_sqlite3_fun_sum(const char *field);
+static const char *_sql_sqlite3_fun_count(const char *field);
+static const char *_sql_sqlite3_fun_distinct(const char *field);
+
 static bool _sql_sqlite3_and(dbi_object_t obj, char *condition_fmt, ...);
 static bool _sql_sqlite3_or(dbi_object_t obj, char *condition_fmt, ...);
 
@@ -24,12 +27,17 @@ static bool _sql_sqlite3_insert(dbi_object_t obj, const char *tbname,
 static bool _sql_sqlite3_delete(dbi_object_t obj, const char *tbname);
 
 static bool _sql_sqlite3_update(dbi_object_t obj, 
-							const char *tbname, const char *set_fmt);
+						const char *tbname, const char *set_fmt);
 
-static bool _sql_sqlite3_select(dbi_object_t obj, 
-							const char *tbname, const char *fields);
+static bool _sql_sqlite3_select(dbi_object_t obj, const char *tbname, 
+						const char *field1, ...);
 /******************************************************************************/
 dbc_t sqlite3 = {
+	.sql_fun = {
+		.sum = _sql_sqlite3_fun_sum,
+		.count = _sql_sqlite3_fun_count,
+		.distinct = _sql_sqlite3_fun_distinct,
+	},
 	.filter = {
 		.and = _sql_sqlite3_and,
 		.or = _sql_sqlite3_or,
@@ -43,6 +51,52 @@ dbc_t sqlite3 = {
 	.select = _sql_sqlite3_select,
 };
 /******************************************************************************/
+/*
+* 函数: sum
+* 功能: 汇总，本质也是构造字符串
+* 参数: field		被统计的字段
+* 返回: char *
+*		- NULL		失败
+* 说明: 配合select使用
+*/
+static const char *_sql_sqlite3_fun_sum(const char *field)
+{
+	static char str[256] = {0};
+	snprintf(str, sizeof(str) - 1, "sum(%s)", field);
+	return str;
+}
+
+/*
+* 函数: count
+* 功能: 统计数量，本质也是构造字符串
+* 参数: field		被统计的字段
+* 返回: char *
+*		- NULL		失败
+* 说明: 配合select使用
+*/
+static const char *_sql_sqlite3_fun_count(const char *field)
+{
+	static char str[256] = {0};
+	snprintf(str, sizeof(str) - 1, "count(%s)", field);
+	return str;
+}
+
+/*
+* 函数: distinct
+* 功能: 去重，本质也是构造字符串
+* 参数: field		去重字段
+* 返回: char *
+*		- NULL		失败
+* 说明: 配合select使用
+*/
+static const char *_sql_sqlite3_fun_distinct(const char *field)
+{
+	static char str[256] = {0};
+	snprintf(str, sizeof(str) - 1, "DISTINCT %s", field);
+	return str;
+}
+/******************************************************************************/
+
 /*
 * 函数: _sql_sqlite3_and
 * 功能: 构造条件，sql语句中的AND条件
@@ -302,26 +356,64 @@ static bool _sql_sqlite3_update(
 * 功能: 查询操作
 * 参数: obj 			对象实例
 *		tbname			表名称
-*		fields			要查询的字段，*号表示所有字段
+*		field1			要查询的字段，*号表示所有字段
+*		...				字段列表
 * 返回: bool
 *		- false 失败
 * 说明: 结合filter中提供的方法构造条件
-*		field 格式遵从sql语法，"field1, field2, field3"，用逗号隔开
+*		可变参数列表必须以NULL结尾，否则程序会内存溢出
+*		_sql_sqlite3_select(obj, taname, "field1", "field2", "count(name)", NULL);
 */
 static bool _sql_sqlite3_select(
 	dbi_object_t obj, const char *tbname, 
-	const char *fields)
+	const char *field1, ...)
 {
+	int i = 0;
+	int cnt = 0;
+	int offset = 0;
+	int len = 0;
+	const char *field = NULL;
+	char *fields = NULL;
+	va_list ap;
 	if (obj == DBI_OBJECT_NULL 
-		|| tbname == NULL)
+		|| tbname == NULL
+		|| field1 == NULL)
 	{
 		return false;
 	}
 
+	va_start(ap, field1);
+	len += strlen(field1) + 1 + 1; // 一个逗号 一个空格
+	for (cnt = 1; (field = va_arg(ap, const char *)) != NULL; cnt ++)
+	{
+		len += strlen(field) + 1 + 1;
+	}
+	va_end(ap);
+
+	fields = calloc(1, len + 1);
+	if (fields == NULL)
+	{
+		LOG_TRACE("calloc error!\n");
+		return false;
+	}
+
+	va_start(ap, field1);
+	offset = snprintf(fields, len - offset, 
+				"%s%s", field1, cnt > 1 ? ", " : " ");
+	for (i = 1; i < cnt - 1; i ++)
+	{
+		offset = snprintf(fields + offset, 
+					len - offset, "%s, ", va_arg(ap, const char *));
+	}
+	offset = snprintf(fields + offset, 
+				len - offset, "%s ", va_arg(ap, const char *));	
+	va_end(ap);
+
 	dbi_object_statement_composef(
 		obj, "SELECT %s FROM %s WHERE 1=1", 
 			fields, tbname);
-
+	free(fields);
+	
 	return true;
 }
 

@@ -8,6 +8,8 @@
 #include "asprintf.h"
 #include "dbc.h"
 
+#include "tb_iot_bas_alminfoext.h"
+
 
 #endif
 

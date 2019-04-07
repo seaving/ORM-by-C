@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 			5, 1.2, 10, 15, 2.5);
 	dbc.query(obj);
 
-	dbc.select(obj, "iot_bas_alminfoext", "upperlimit1_exist, upperlimit1");
+	dbc.select(obj, "iot_bas_alminfoext", "upperlimit1_exist", "upperlimit1", NULL);
 	dbc.filter.and(obj, "upperlimit1_exist = 5");
 	dbc.filter.and(obj, "upperlimit2 = %f", 1.2);
 	dbc.filter.or(obj, "delta = %f", 2.5);

@@ -9,13 +9,13 @@
 #include "dbi_misc.h"
 
 /*
-* 函数: _bdi_result_parse_field_formatstr
+* 函数: bdi_result_parse_field_formatstr
 * 功能: 解析format字符串
 * 参数: 
 * 返回: 
-* 说明: 此函数内部使用
+* 说明: 
 */
-static unsigned int _bdi_parse_field_formatstr(
+unsigned int bdi_parse_field_formatstr(
 	const char *format, char ***tokens_dest, char ***fieldnames_dest)
 {
 	unsigned int found = 0;
@@ -71,13 +71,13 @@ static unsigned int _bdi_parse_field_formatstr(
 }
 
 /*
-* 函数: _dbi_free_string_list
+* 函数: dbi_free_string_list
 * 功能: 
 * 参数: 
 * 返回: 
-* 说明: 此函数内部使用
+* 说明: 
 */
-static void _dbi_free_string_list(char **ptrs, int total)
+void dbi_free_string_list(char **ptrs, int total)
 {
 	int i = 0;
 
@@ -1245,7 +1245,7 @@ unsigned int dbi_result_field_bindf2(
 		return 0;
 	}
 	
-	numtokens = _bdi_parse_field_formatstr(format, &tokens, &fieldnames);
+	numtokens = bdi_parse_field_formatstr(format, &tokens, &fieldnames);
 	if (numtokens == 0)
 	{
 		return 0;
@@ -1400,8 +1400,8 @@ unsigned int dbi_result_field_bindf2(
 	
 	va_end(ap);
 
-	_dbi_free_string_list(tokens, numtokens);
-	_dbi_free_string_list(fieldnames, numtokens);
+	dbi_free_string_list(tokens, numtokens);
+	dbi_free_string_list(fieldnames, numtokens);
 	
 	return numtokens;
 #undef assert_return
@@ -1482,7 +1482,7 @@ unsigned int dbi_result_field_get_values2(
 		return 0;
 	}
 
-	numtokens = _bdi_parse_field_formatstr(format, &tokens, &fieldnames);
+	numtokens = bdi_parse_field_formatstr(format, &tokens, &fieldnames);
 	if (numtokens == 0)
 	{
 		return 0;
@@ -1635,10 +1635,11 @@ unsigned int dbi_result_field_get_values2(
 
 	va_end(ap);
 
-	_dbi_free_string_list(tokens, numtokens);
-	_dbi_free_string_list(fieldnames, numtokens);
+	dbi_free_string_list(tokens, numtokens);
+	dbi_free_string_list(fieldnames, numtokens);
 
 	return numtokens;
 #undef assert_return
 }
+
 

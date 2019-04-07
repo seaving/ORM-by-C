@@ -3,6 +3,26 @@
 
 #include "dbi_object.h"
 
+
+/*
+* 函数: bdi_result_parse_field_formatstr
+* 功能: 解析format字符串
+* 参数: 
+* 返回: 
+* 说明: 
+*/
+unsigned int bdi_parse_field_formatstr(
+	const char *format, char ***tokens_dest, char ***fieldnames_dest);
+
+/*
+* 函数: _dbi_free_string_list
+* 功能: 
+* 参数: 
+* 返回: 
+* 说明: 
+*/
+void dbi_free_string_list(char **ptrs, int total);
+
 /*
 * 函数: dbi_result_field_get_length_by_fieldname
 * 功能: 通过fieldname获取该字段内容的长度

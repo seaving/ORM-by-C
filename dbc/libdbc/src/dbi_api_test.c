@@ -17,6 +17,13 @@ int dbi_api_test()
 	unsigned int n = 0;
 	unsigned int loop_cnt = 0;
 	dbi_results_t results = NULL;
+
+	dbi_results_t result = NULL;
+	const char *name = "caixiwen";
+	dbi_result_bind_string(result, "name", &name);
+	
+	LOG_TRACE("count = %llu\n", dbi_result_get_rows_count(result));
+	return 0;
 	
 	dbi_object_t obj = dbi_object_new();
 	if (obj == 0)

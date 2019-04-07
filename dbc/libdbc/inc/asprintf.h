@@ -29,7 +29,6 @@ int vasprintf(char **result, const char *format, va_list args);
 */
 int asprintf(char **result, const char *format, ...);
 
-
 #endif
 
 
