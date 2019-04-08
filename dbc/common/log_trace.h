@@ -2,6 +2,8 @@
 #define __LOG_TRACE_H__
 
 #include "sys_inc.h"
+#include "version.h"
+
 
 #define LOG_TRACE_ENABLE
 

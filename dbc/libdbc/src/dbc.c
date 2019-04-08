@@ -1,4 +1,6 @@
-#include "includes.h"
+#include "dbc.h"
+#include "log_trace.h"
+#include "asprintf.h"
 
 #include "dbi_object.h"
 #include "dbi_connect.h"
@@ -1000,7 +1002,6 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 	set_fun(dbc.exec, _dbc_exec);
 
 	set_fun(dbc.result.gets, _dbc_result_gets);
-
 	set_fun(dbc.result.get_char, _dbc_result_get_char);
 	set_fun(dbc.result.get_uchar, _dbc_result_get_uchar);
 	set_fun(dbc.result.get_short, _dbc_result_get_short);

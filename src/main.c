@@ -1,4 +1,8 @@
-#include "includes.h"
+#include "sys_inc.h"
+#include "log_trace.h"
+#include "asprintf.h"
+#include "dbc.h"
+
 #include "dbi_api_test.h"
 
 dbc_t dbc;

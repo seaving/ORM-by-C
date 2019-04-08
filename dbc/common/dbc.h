@@ -21,6 +21,8 @@ sqlite3 mysql ...
 #ifndef __DBC_H__
 #define __DBC_H__
 
+#include "sys_inc.h"
+
 typedef intptr_t dbi_object_t;
 /******************************************************************************/
 
