@@ -11,6 +11,33 @@
 #include "sql_sqlite3.h"
 
 /*
+* 函数: _dbc_exec
+* 功能: 执行sql
+* 参数: obj 			对象实例
+*		sql_fmt 		sql语句字符串
+*		... 			格式化参数列表
+* 返回: bool
+*		- false 失败
+* 说明: 直接用来执行sql语句的方法
+*/
+static bool _dbc_exec(dbi_object_t obj, const char *sql_fmt, ...)
+{
+	dbi_results_t result = NULL;
+	va_list ap;
+	if (obj == DBI_OBJECT_NULL 
+		|| sql_fmt == NULL)
+	{
+		return false;
+	}
+
+	va_start(ap, sql_fmt);
+	result = dbi_queryf2(obj, sql_fmt, ap);
+	va_end(ap);
+
+	return result ? true : false;
+}
+
+/*
 * 函数: _dbc_result_gets
 * 功能: 在row中批量获取字段的值
 * 参数: obj		dbi object
@@ -969,6 +996,8 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 			c = f; \
 		} \
 	} while (0)
+
+	set_fun(dbc.exec, _dbc_exec);
 
 	set_fun(dbc.result.gets, _dbc_result_gets);
 

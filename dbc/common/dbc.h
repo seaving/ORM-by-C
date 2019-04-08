@@ -563,6 +563,17 @@ typedef struct __dbc__
 	*/
 	bool (*disconnect)(dbi_object_t obj);
 	/*
+	* 函数: exec
+	* 功能: 执行sql
+	* 参数: obj 			对象实例
+	*		sql_fmt			sql语句字符串
+	*		...				格式化参数列表
+	* 返回: bool
+	*		- false 失败
+	* 说明: 直接用来执行sql语句的方法
+	*/
+	bool (*exec)(dbi_object_t obj, const char *sql_fmt, ...);
+	/*
 	* 函数: query
 	* 功能: 执行sql
 	* 参数: obj 			对象实例
