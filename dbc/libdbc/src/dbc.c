@@ -400,7 +400,7 @@ static double _dbc_result_get_double(dbi_object_t obj,
 * 返回: const char *
 * 说明: 
 */
-static const string_t _dbc_result_get_string(dbi_object_t obj, 
+static const char *_dbc_result_get_string(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
 {
 	dbi_results_t results = dbi_object_get_results(obj);
@@ -413,7 +413,7 @@ static const string_t _dbc_result_get_string(dbi_object_t obj,
 
 	if (dbi_result_row_seek(results, rowidx))
 	{
-		return (const string_t) dbi_result_get_string_value_by_fieldname(results, field);
+		return dbi_result_get_string_value_by_fieldname(results, field);
 	}
 
 	return NULL;
@@ -428,7 +428,7 @@ static const string_t _dbc_result_get_string(dbi_object_t obj,
 * 返回: const unsigned char *
 * 说明: 
 */
-static const binary_t _dbc_result_get_binary(dbi_object_t obj, 
+static const unsigned char *_dbc_result_get_binary(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
 {
 	dbi_results_t results = dbi_object_get_results(obj);
@@ -441,7 +441,7 @@ static const binary_t _dbc_result_get_binary(dbi_object_t obj,
 
 	if (dbi_result_row_seek(results, rowidx))
 	{
-		return (const binary_t) dbi_result_get_binary_value_by_fieldname(results, field);
+		return dbi_result_get_binary_value_by_fieldname(results, field);
 	}
 
 	return NULL;
@@ -821,7 +821,7 @@ static double _dbc_result_get_double_by_colidx(dbi_object_t obj,
 * 返回: const char *
 * 说明: 
 */
-static const string_t _dbc_result_get_string_by_colidx(dbi_object_t obj, 
+static const char *_dbc_result_get_string_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
 {
 	dbi_results_t results = dbi_object_get_results(obj);
@@ -834,7 +834,7 @@ static const string_t _dbc_result_get_string_by_colidx(dbi_object_t obj,
 
 	if (dbi_result_row_seek(results, rowidx))
 	{
-		return (const string_t) dbi_result_get_string_value_by_idx(results, columnidx);
+		return dbi_result_get_string_value_by_idx(results, columnidx);
 	}
 
 	return NULL;
@@ -849,7 +849,7 @@ static const string_t _dbc_result_get_string_by_colidx(dbi_object_t obj,
 * 返回: const unsigned char *
 * 说明: 
 */
-static const binary_t _dbc_result_get_binary_by_colidx(dbi_object_t obj, 
+static const unsigned char *_dbc_result_get_binary_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
 {
 	dbi_results_t results = dbi_object_get_results(obj);
@@ -862,7 +862,7 @@ static const binary_t _dbc_result_get_binary_by_colidx(dbi_object_t obj,
 
 	if (dbi_result_row_seek(results, rowidx))
 	{
-		return (const binary_t) dbi_result_get_binary_value_by_idx(results, columnidx);
+		return dbi_result_get_binary_value_by_idx(results, columnidx);
 	}
 
 	return NULL;

@@ -22,8 +22,6 @@ sqlite3 mysql ...
 #define __DBC_H__
 
 typedef intptr_t dbi_object_t;
-typedef char* string_t;
-typedef unsigned char* binary_t;
 /******************************************************************************/
 
 typedef enum __dbc_sql_type__
@@ -46,6 +44,7 @@ typedef struct __dbc_sql_args_
 	const char *version;
 } dbc_sql_args_t;
 /******************************************************************************/
+#define CHARPOINT char*
 typedef struct __dbc_sql_fun__
 {
 	/*
@@ -56,7 +55,7 @@ typedef struct __dbc_sql_fun__
 	*		- NULL		失败
 	* 说明: 配合select使用
 	*/
-	const char *(*sum)(const char *field);
+	const CHARPOINT (*sum)(const char *field);
 	/*
 	* 函数: count
 	* 功能: 统计数量，本质也是构造字符串
@@ -65,7 +64,7 @@ typedef struct __dbc_sql_fun__
 	*		- NULL		失败
 	* 说明: 配合select使用
 	*/
-	const char *(*count)(const char *field);
+	const CHARPOINT (*count)(const char *field);
 	/*
 	* 函数: distinct
 	* 功能: 去重，本质也是构造字符串
@@ -74,7 +73,7 @@ typedef struct __dbc_sql_fun__
 	*		- NULL		失败
 	* 说明: 配合select使用
 	*/
-	const char *(*distinct)(const char *field);
+	const CHARPOINT (*distinct)(const char *field);
 } dbc_sql_fun_t;
 
 /******************************************************************************/
@@ -261,7 +260,7 @@ typedef struct __dbc_result__
 	* 返回: const char *
 	* 说明: 
 	*/
-	const string_t (*get_string)(dbi_object_t obj, 
+	const CHARPOINT (*get_string)(dbi_object_t obj, 
 				unsigned int rowidx, const char *field);
 
 	/*
@@ -273,7 +272,7 @@ typedef struct __dbc_result__
 	* 返回: const unsigned char *
 	* 说明: 
 	*/
-	const binary_t (*get_binary)(dbi_object_t obj, 
+	const unsigned CHARPOINT (*get_binary)(dbi_object_t obj, 
 				unsigned int rowidx, const char *field);
 
 	/*
@@ -441,7 +440,7 @@ typedef struct __dbc_result__
 	* 返回: const char *
 	* 说明: 
 	*/
-	const string_t (*get_string_by_colidx)(dbi_object_t obj, 
+	const CHARPOINT (*get_string_by_colidx)(dbi_object_t obj, 
 				unsigned int rowidx, unsigned int columnidx);
 
 	/*
@@ -453,7 +452,7 @@ typedef struct __dbc_result__
 	* 返回: const unsigned char *
 	* 说明: 
 	*/
-	const binary_t (*get_binary_by_colidx)(dbi_object_t obj, 
+	const unsigned CHARPOINT (*get_binary_by_colidx)(dbi_object_t obj, 
 				unsigned int rowidx, unsigned int columnidx);
 
 	/*
@@ -626,6 +625,7 @@ typedef struct __dbc__
 	*/
 	bool (*select)(dbi_object_t obj, const char *tbname, const char *field1, ...);
 } dbc_t;
+#undef CHARPOINT
 /******************************************************************************/
 
 /*
