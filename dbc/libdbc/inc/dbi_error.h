@@ -19,7 +19,7 @@
 		if (instance && instance->conn) \
 		{ \
 			dbi_errno = dbi_conn_error(instance->conn, &errmsg); \
-			LOG_TRACE("dbi_errno: [ %d ], errmsg: [ %s ]\n", dbi_errno, errmsg); \
+			LOG_DEBUG_TRACE("dbi_errno: [ %d ], errmsg: [ %s ]\n", dbi_errno, errmsg); \
 		} \
 	} while (0);
 

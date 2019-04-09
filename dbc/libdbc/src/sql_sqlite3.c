@@ -15,17 +15,23 @@
 static const char *_sql_sqlite3_fun_sum(const char *field);
 static const char *_sql_sqlite3_fun_count(const char *field);
 static const char *_sql_sqlite3_fun_distinct(const char *field);
+static const char *_sql_sqlite3_fun_max(const char *field);
+/******************************************************************************/
+static bool _sql_sqlite3_filter_and(dbi_object_t obj, char *condition_fmt, ...);
+static bool _sql_sqlite3_filter_or(dbi_object_t obj, char *condition_fmt, ...);
 
-static bool _sql_sqlite3_and(dbi_object_t obj, char *condition_fmt, ...);
-static bool _sql_sqlite3_or(dbi_object_t obj, char *condition_fmt, ...);
-
-static bool _sql_sqlite3_limit(dbi_object_t obj, 
+static bool _sql_sqlite3_filter_limit(dbi_object_t obj, 
 						unsigned int offset, unsigned int limit);
-
+/******************************************************************************/
+static bool _sql_sqlite3_join_inner(dbi_object_t obj, const char *tbname);
+/******************************************************************************/
 static bool _sql_sqlite3_query(dbi_object_t obj);
-
+/******************************************************************************/
 static bool _sql_sqlite3_insert(dbi_object_t obj, const char *tbname, 
 						const char *fields, const char *values_fmt, ...);
+
+static bool _sql_sqlite3_insertfrom(dbi_object_t obj, 
+						const char *tbname, const char *fields);
 
 static bool _sql_sqlite3_delete(dbi_object_t obj, const char *tbname);
 
@@ -40,15 +46,20 @@ dbc_t sqlite3 = {
 		.sum = _sql_sqlite3_fun_sum,
 		.count = _sql_sqlite3_fun_count,
 		.distinct = _sql_sqlite3_fun_distinct,
+		.max = _sql_sqlite3_fun_max,
 	},
 	.filter = {
-		.and = _sql_sqlite3_and,
-		.or = _sql_sqlite3_or,
-		.limit = _sql_sqlite3_limit,
+		.and = _sql_sqlite3_filter_and,
+		.or = _sql_sqlite3_filter_or,
+		.limit = _sql_sqlite3_filter_limit,
+	},
+	.join = {
+		.inner = _sql_sqlite3_join_inner,
 	},
 	.disconnect = dbi_disconnect,
 	.query = _sql_sqlite3_query,
 	.insert = _sql_sqlite3_insert,
+	.insertfrom = _sql_sqlite3_insertfrom,
 	.delete = _sql_sqlite3_delete,
 	.update = _sql_sqlite3_update,
 	.select = _sql_sqlite3_select,
@@ -98,10 +109,25 @@ static const char *_sql_sqlite3_fun_distinct(const char *field)
 	snprintf(str, sizeof(str) - 1, "DISTINCT %s", field);
 	return str;
 }
+
+/*
+* 函数: _sql_sqlite3_fun_max
+* 功能: 获取字段最大值
+* 参数: field		字段
+* 返回: char *
+*		- NULL		失败
+* 说明: 配合select使用
+*/
+static const char *_sql_sqlite3_fun_max(const char *field)
+{
+	static char str[256] = {0};
+	snprintf(str, sizeof(str) - 1, "MAX(%s)", field);
+	return str;
+}
 /******************************************************************************/
 
 /*
-* 函数: _sql_sqlite3_and
+* 函数: _sql_sqlite3_filter_and
 * 功能: 构造条件，sql语句中的AND条件
 *		该函数自动会把AND加上，不需要用户处理
 *		用户只需要按照字符串的形式把条件传参
@@ -111,11 +137,11 @@ static const char *_sql_sqlite3_fun_distinct(const char *field)
 * 返回: bool
 *		- false 失败
 * 说明: 规定condition只能是一个判断语句
-*	e.g. _sql_sqlite3_and(obj, "name != 'jorry'")
-*	e.g. _sql_sqlite3_and(obj, "age > 20")
-*	e.g. _sql_sqlite3_and(obj, "age == %d", age)
+*	e.g. _sql_sqlite3_filter_and(obj, "name != 'jorry'")
+*	e.g. _sql_sqlite3_filter_and(obj, "age > 20")
+*	e.g. _sql_sqlite3_filter_and(obj, "age == %d", age)
 */
-static bool _sql_sqlite3_and(dbi_object_t obj, char *condition_fmt, ...)
+static bool _sql_sqlite3_filter_and(dbi_object_t obj, char *condition_fmt, ...)
 {
 	int len = 0;
 	char *sql = NULL;
@@ -136,7 +162,7 @@ static bool _sql_sqlite3_and(dbi_object_t obj, char *condition_fmt, ...)
 	sql = calloc(1, len + 1);
 	if (sql == NULL)
 	{
-		LOG_TRACE("calloc error!\n");
+		LOG_DEBUG_TRACE("calloc error!\n");
 		return false;
 	}
 	
@@ -151,7 +177,7 @@ static bool _sql_sqlite3_and(dbi_object_t obj, char *condition_fmt, ...)
 }
 
 /*
-* 函数: _sql_sqlite3_or
+* 函数: _sql_sqlite3_filter_or
 * 功能: 构造条件，sql语句中的OR条件
 *		该函数自动会把OR加上，不需要用户处理
 *		用户只需要按照字符串的形式把条件传参
@@ -161,11 +187,11 @@ static bool _sql_sqlite3_and(dbi_object_t obj, char *condition_fmt, ...)
 * 返回: bool
 *		- false 失败
 * 说明: 规定condition只能是一个判断语句
-*	e.g. _sql_sqlite3_or(obj, "name != 'jorry'")
-*	e.g. _sql_sqlite3_or(obj, "age > 20")
-*	e.g. _sql_sqlite3_or(obj, "age == %d", age)
+*	e.g. _sql_sqlite3_filter_or(obj, "name != 'jorry'")
+*	e.g. _sql_sqlite3_filter_or(obj, "age > 20")
+*	e.g. _sql_sqlite3_filter_or(obj, "age == %d", age)
 */
-static bool _sql_sqlite3_or(dbi_object_t obj, char *condition_fmt, ...)
+static bool _sql_sqlite3_filter_or(dbi_object_t obj, char *condition_fmt, ...)
 {
 	int len = 0;
 	char *sql = NULL;
@@ -186,7 +212,7 @@ static bool _sql_sqlite3_or(dbi_object_t obj, char *condition_fmt, ...)
 	sql = calloc(1, len + 1);
 	if (sql == NULL)
 	{
-		LOG_TRACE("calloc error!\n");
+		LOG_DEBUG_TRACE("calloc error!\n");
 		return false;
 	}
 
@@ -200,7 +226,7 @@ static bool _sql_sqlite3_or(dbi_object_t obj, char *condition_fmt, ...)
 	return true;
 }
 /*
-* 函数: _sql_sqlite3_limit
+* 函数: _sql_sqlite3_filter_limit
 * 功能: 构造条件，sql语句中的LIMIT OFFSET命令
 * 参数: obj 			对象实例
 *		offset			偏移到第几行
@@ -209,7 +235,7 @@ static bool _sql_sqlite3_or(dbi_object_t obj, char *condition_fmt, ...)
 *		- false 失败
 * 说明: 该函数结合select使用
 */
-static bool _sql_sqlite3_limit(dbi_object_t obj, 
+static bool _sql_sqlite3_filter_limit(dbi_object_t obj, 
 	unsigned int offset, unsigned int limit)
 {
 	if (obj == DBI_OBJECT_NULL)
@@ -220,7 +246,27 @@ static bool _sql_sqlite3_limit(dbi_object_t obj,
 	dbi_object_statement_composef(obj, "LIMIT %u OFFSET %u", limit, offset);
 	return true;
 }
+/******************************************************************************/
+/*
+* 函数: _sql_sqlite3_join_inner
+* 功能: 内连接
+* 参数: obj 		对象实例
+*		tbname		表名称
+* 返回: bool
+*		- false 失败
+* 说明: 
+*/
+static bool _sql_sqlite3_join_inner(dbi_object_t obj, const char *tbname)
+{
+	if (obj == DBI_OBJECT_NULL 
+		|| tbname == NULL)
+	{
+		return false;
+	}
 
+	dbi_object_statement_composef(obj, "INNER JOIN %s ON 1 = 1", tbname);
+	return true;
+}
 /******************************************************************************/
 /*
 * 函数: _sql_sqlite3_query
@@ -286,7 +332,7 @@ static bool _sql_sqlite3_insert(
 	sql = calloc(1, len + 1);
 	if (sql == NULL)
 	{
-		LOG_TRACE("calloc error!\n");
+		LOG_DEBUG_TRACE("calloc error!\n");
 		return false;
 	}
 
@@ -299,6 +345,49 @@ static bool _sql_sqlite3_insert(
 	va_end(ap);
 
 	free(sql);
+
+	return true;
+}
+
+/*
+* 函数: _sql_sqlite3_insertfrom
+* 功能: 插入操作
+* 参数: obj 			对象实例
+*		tbname			表名
+*		fields			字段列表- *号或者为空字符串或者NULL表示所有字段
+* 返回: bool
+*		- false 失败
+* 说明: 字段列表是字符串格式: "field1, field2, field3, field4" 用逗号隔开
+*		配合select使用，从其他表获取数据并插入到本表
+*/
+static bool _sql_sqlite3_insertfrom(
+	dbi_object_t obj, const char *tbname, const char *fields)
+{
+	char *fmt = NULL;
+	int len = fields ? strlen(fields) : 0;
+	if (obj == DBI_OBJECT_NULL
+		|| tbname == NULL
+		|| len < 0)
+	{
+		return false;
+	}
+
+	if (len == 0 
+		|| (len == 1 
+				&& *fields == '*'))
+	{
+		fmt = "INSERT INTO %s ";
+	}
+	else if (len > 1)
+	{
+		fmt = "INSERT INTO %s (%s) ";
+	}
+	else
+	{
+		return false;
+	}
+	
+	dbi_object_statement_composef(obj, fmt, fields);
 
 	return true;
 }
@@ -411,7 +500,7 @@ static bool _sql_sqlite3_select(
 	fields = calloc(1, len + 1);
 	if (fields == NULL)
 	{
-		LOG_TRACE("calloc error!\n");
+		LOG_DEBUG_TRACE("calloc error!\n");
 		return false;
 	}
 

@@ -25,14 +25,14 @@ dbi_object_t dbi_object_new()
 	instance = calloc(sizeof(dbi_instance_t), 1);
 	if (instance == NULL)
 	{
-		LOG_PERROR("calloc error!\n");
+		LOG_DEBUG_PERROR("calloc error!\n");
 		return (dbi_object_t) NULL;
 	}
 
 	ret = dbi_initialize_r("/usr/local/lib/dbd", &instance->instance);
 	if (ret < 0)
 	{
-		LOG_TRACE("unable to initialize libdbi! "
+		LOG_DEBUG_TRACE("unable to initialize libdbi! "
 			"make sure you specified a valid driver directory.\n");
 		dbi_object_delete((dbi_object_t) instance);
 		return (dbi_object_t) NULL;
@@ -40,7 +40,7 @@ dbi_object_t dbi_object_new()
 
 	if (instance->instance == NULL)
 	{
-		LOG_TRACE("dbi_initialize_r error!\n");
+		LOG_DEBUG_TRACE("dbi_initialize_r error!\n");
 		dbi_object_delete((dbi_object_t) instance);
 		return (dbi_object_t) NULL;
 	}
@@ -201,9 +201,9 @@ void dbi_object_statement_debug(dbi_object_t obj)
 	dbi_instance_t *instance = (dbi_instance_t *) obj;
 	if (instance)
 	{
-		LOG_TRACE("+--------------------------------------------------------+\n");
-		LOG_TRACE("%s\n", instance->statement);
-		LOG_TRACE("+--------------------------------------------------------+\n");
+		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
+		LOG_DEBUG_TRACE("%s\n", instance->statement);
+		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
 	}
 }
 

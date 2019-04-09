@@ -41,7 +41,7 @@ dbi_results_t dbi_query(dbi_object_t obj, const char *sql)
 	dbi_instance_t *instance = (dbi_instance_t *) obj;
 	if (instance == NULL || instance->conn == NULL)
 	{
-		LOG_TRACE("%s\n", 
+		LOG_DEBUG_TRACE("%s\n", 
 			instance == NULL ? "dbi object null!" : 
 			instance->conn == NULL ? "dbi object not yet connection!" : "");
 		return NULL;
@@ -66,7 +66,7 @@ dbi_results_t dbi_query_by_statement_buf(dbi_object_t obj)
 	dbi_instance_t *instance = (dbi_instance_t *) obj;
 	if (instance == NULL || instance->conn == NULL)
 	{
-		LOG_TRACE("%s\n", 
+		LOG_DEBUG_TRACE("%s\n", 
 			instance == NULL ? "dbi object null!" : 
 			instance->conn == NULL ? "dbi object not yet connection!" : "");
 		return NULL;
@@ -120,7 +120,7 @@ dbi_results_t dbi_queryf2(dbi_object_t obj, const char *sql_fmt, va_list args)
 	dbi_instance_t *instance = (dbi_instance_t *) obj;
 	if (instance == NULL || instance->conn == NULL)
 	{
-		LOG_TRACE("%s\n", 
+		LOG_DEBUG_TRACE("%s\n", 
 			instance == NULL ? "dbi object null!" : 
 			instance->conn == NULL ? "dbi object not yet connection!" : "");
 		return NULL;
@@ -151,7 +151,7 @@ dbi_results_t dbi_query_db_list(dbi_object_t obj, const char *pattern)
 	dbi_instance_t *instance = (dbi_instance_t *) obj;
 	if (instance == NULL || instance->conn == NULL)
 	{
-		LOG_TRACE("%s\n", 
+		LOG_DEBUG_TRACE("%s\n", 
 			instance == NULL ? "dbi object null!" : 
 			instance->conn == NULL ? "dbi object not yet connection!" : "");
 		return NULL;
@@ -181,7 +181,7 @@ dbi_results_t dbi_query_table_list(dbi_object_t obj,
 		|| instance->conn == NULL 
 		|| db == NULL)
 	{
-		LOG_TRACE("%s\n", 
+		LOG_DEBUG_TRACE("%s\n", 
 			instance == NULL ? "dbi object null!" : 
 			instance->conn == NULL ? "dbi object not yet connection!" : 
 			db == NULL ? "db is null!" : "");
@@ -210,7 +210,7 @@ bool dbi_switches_db(dbi_object_t obj, const char *db)
 		|| instance->conn == NULL 
 		|| db == NULL)
 	{
-		LOG_TRACE("%s\n", 
+		LOG_DEBUG_TRACE("%s\n", 
 			instance == NULL ? "dbi object null!" : 
 			instance->conn == NULL ? "dbi object not yet connection!" : 
 			db == NULL ? "db is null!" : "");

@@ -965,7 +965,7 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 	dbc_t dbc;
 
 	memset(&dbc, 0, sizeof(dbc_t));
-	
+
 	switch (args.sqltype)
 	{
 		case E_DBC_SQL_TYPE_SQLITE:
@@ -982,22 +982,26 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 			//	obj, args.hostname, args.username, 
 			//	args.password, args.dbname, args.encoding);
 		default:
-			LOG_TRACE("Not support SQL: %d\n", args.sqltype);
+			LOG_DEBUG_TRACE("Not support SQL: %d\n", args.sqltype);
 			sqltype_flag = false;
 			break;
 	}
 	
+#define set_fun(c, f) \
+		do { \
+			if (c == NULL) \
+			{ \
+				c = f; \
+			} \
+		} while (0)
+
+	set_fun(dbc.disconnect, dbi_disconnect);
+
+	dbc.valid = false;
 	if (sqltype_flag == false)
 	{
 		return dbc;
 	}
-#define set_fun(c, f) \
-	do { \
-		if (c == NULL) \
-		{ \
-			c = f; \
-		} \
-	} while (0)
 
 	set_fun(dbc.exec, _dbc_exec);
 
@@ -1036,12 +1040,26 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 	
 	set_fun(dbc.result.count, _dbc_result_count);
 
+	dbc.valid = true;
 	if (dbi_connect(obj) == false)
 	{
-		LOG_TRACE("dbi connect sql error!\n");
+		LOG_DEBUG_TRACE("dbi connect sql error!\n");
+		dbc.valid = false;
 	}
 
 	return dbc;
 #undef set_fun
+}
+
+/*
+* 函数: dbc_is_valid
+* 功能: 判断dbc是否有效
+* 参数: dbc		dbc实例
+* 返回: bool	false表示无效dbc
+* 说明: 在dbc_connect后返回dbc，此时应该再调用此函数来判断dbc是否有效
+*/
+bool dbc_is_valid(dbc_t dbc)
+{
+	return dbc.valid;
 }
 

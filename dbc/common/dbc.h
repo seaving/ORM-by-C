@@ -76,6 +76,15 @@ typedef struct __dbc_sql_fun__
 	* 说明: 配合select使用
 	*/
 	const CHARPOINT (*distinct)(const char *field);
+	/*
+	* 函数: max
+	* 功能: 获取字段最大值
+	* 参数: field		字段
+	* 返回: char *
+	*		- NULL		失败
+	* 说明: 配合select使用
+	*/
+	const CHARPOINT (*max)(const char *field);
 } dbc_sql_fun_t;
 
 /******************************************************************************/
@@ -548,12 +557,29 @@ typedef struct __dbc_filter__
 	bool (*group)(dbi_object_t obj, const char *fields);
 } dbc_filter_t;
 /******************************************************************************/
+typedef struct __dbc_join__
+{
+	/*
+	* 函数: inner
+	* 功能: 内连接
+	* 参数: obj 		对象实例
+	*		tbname 		表名称
+	* 返回: bool
+	*		- false 失败
+	* 说明: 
+	*/
+	bool (*inner)(dbi_object_t obj, const char *tbname);
+} dbc_join_t;
+/******************************************************************************/
 typedef struct __dbc__
 {
+	//-------------------------------------
+	bool valid;
 	//-------------------------------------
 	dbc_sql_fun_t sql_fun;
 	dbc_result_t result;
 	dbc_filter_t filter;
+	dbc_join_t join;
 	//-------------------------------------
 	/*
 	* 函数: disconnect
@@ -601,6 +627,18 @@ typedef struct __dbc__
 	*/
 	bool (*insert)(dbi_object_t obj, const char *tbname, 
 					const char *fields, const char *values_fmt, ...);
+	/*
+	* 函数: insertfrom
+	* 功能: 插入操作
+	* 参数: obj 			对象实例
+	*		tbname			表名
+	*		fields			字段列表 - *号表示所有字段
+	* 返回: bool
+	*		- false 失败
+	* 说明: 字段列表是字符串格式: "field1, field2, field3, field4" 用逗号隔开
+	*		配合select使用，从其他表获取数据并插入到本表
+	*/
+	bool (*insertfrom)(dbi_object_t obj, const char *tbname, const char *fields);
 	/*
 	* 函数: delete
 	* 功能: 删除操作
@@ -658,6 +696,26 @@ typedef struct __dbc__
 *		仅仅只是用来传递参数而已，这本是设计的初衷
 */
 dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args);
+
+/*
+* 函数: dbc_is_valid
+* 功能: 判断dbc是否有效
+* 参数: dbc		dbc实例
+* 返回: bool	false表示无效dbc
+* 说明: 在dbc_connect后返回dbc，此时应该再调用此函数来判断dbc是否有效
+*/
+bool dbc_is_valid(dbc_t dbc);
+
+/*
+* 函数: dbc_result_foreach
+* 功能: 宏定义循环遍历每一行
+* 参数: rowidx		当前指向的行数
+*		rowcnt		总共的行数
+* 返回: 
+* 说明: 此宏定义目的是怕程序猿忽略rowidx是从1开始的，并且结束条件是<= rowcnt
+*/
+#define dbc_result_foreach(rowidx, rowcnt) \
+	for (rowidx = 1; rowidx <= rowcnt; rowidx ++)
 
 /*
 * 函数: dbi_object_new

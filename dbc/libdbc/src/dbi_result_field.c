@@ -43,7 +43,7 @@ unsigned int bdi_parse_field_formatstr(
 	if (tokens == NULL 
 		|| fieldnames == NULL)
 	{
-		LOG_TRACE("calloc error!\n");
+		LOG_DEBUG_TRACE("calloc error!\n");
 		return 0;
 	}
 	
@@ -1257,7 +1257,7 @@ unsigned int dbi_result_field_bindf2(
 	do { \
 		if (ret == false) \
 		{ \
-			LOG_TRACE(msg); \
+			LOG_DEBUG_TRACE(msg); \
 		} \
 	} while (0)
 
@@ -1494,7 +1494,7 @@ unsigned int dbi_result_field_get_values2(
 	do { \
 		if ((f) == 0) \
 		{ \
-			LOG_TRACE(format, args); \
+			LOG_DEBUG_TRACE(format, args); \
 		} \
 	} while (0)
 	

@@ -26,7 +26,7 @@ void dbi_driver_list_debug(dbi_object_t obj)
 	   	while ((drviers = dbi_driver_list_r(
 	   				drviers, instance->instance)) != NULL)
 	   	{
-	      	LOG_TRACE("%s\n", dbi_driver_get_name(drviers));
+	      	LOG_DEBUG_TRACE("%s\n", dbi_driver_get_name(drviers));
 	   	}
    	}
 }

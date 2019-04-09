@@ -267,28 +267,28 @@ bool dbi_connect(dbi_object_t obj)
 	dbi_instance_t *instance = (dbi_instance_t *) obj;
 	if (instance == NULL)
 	{
-		LOG_TRACE("dbi object error!\n");
+		LOG_DEBUG_TRACE("dbi object error!\n");
 		return false;
 	}
 
 	instance->conn = dbi_conn_new_r(instance->drivername, instance->instance);
 	if (instance->conn == NULL)
 	{
-		LOG_TRACE("dbi_conn_new_r error!\n");
+		LOG_DEBUG_TRACE("dbi_conn_new_r error!\n");
 		dbi_error_debug(obj);
 		return false;
 	}
 
 	_dbi_driver_set_option(obj);
 
-	LOG_TRACE("dbi object connecting ...\n");
+	LOG_DEBUG_TRACE("dbi object connecting ...\n");
 	if (dbi_conn_connect(instance->conn) < 0)
 	{
-		LOG_TRACE("could not connect, please check the option settings!\n");
+		LOG_DEBUG_TRACE("could not connect, please check the option settings!\n");
 		dbi_error_debug(obj);
 		return false;
 	}
-	LOG_TRACE("dbi object connection successful.\n");
+	LOG_DEBUG_TRACE("dbi object connection successful.\n");
 
 	return true;
 }
@@ -307,7 +307,7 @@ bool dbi_disconnect(dbi_object_t obj)
 	dbi_instance_t *instance = (dbi_instance_t *) obj;
 	if (instance == NULL)
 	{
-		LOG_TRACE("dbi object error!\n");
+		LOG_DEBUG_TRACE("dbi object error!\n");
 		return false;
 	}
 
@@ -341,7 +341,7 @@ bool dbi_connection_is_alive(dbi_object_t obj)
 	if (instance == NULL 
 		|| instance->conn == NULL)
 	{
-		LOG_TRACE("%s\n", 
+		LOG_DEBUG_TRACE("%s\n", 
 			instance == NULL ? "dbi object null!" : 
 			instance->conn == NULL ? "dbi object not yet connection!" : "");
 		return false;
