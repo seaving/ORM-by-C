@@ -36,7 +36,10 @@ dbi_object 是线程不安全的(改进空间还有很多啊~~)
 2019年4月10日：
 新增dbc容器，在C++中类似于接口，对外程序猿通过创建dbc实例操作数据库，不用关系底层用的是何种数据库，
 dbc旨在把sql语句全部封装，insert、select、update、delete、create、join、order by、where等等sql命令全部封装成函数，
-程序猿需要select的时候 只需要调用dbc.select方法，具体的select的sql语句是底层去构造对应数据库的sql语句
+程序猿需要select的时候 只需要调用dbc.select方法，具体的select的sql语句是底层去构造对应数据库的sql语句.
+dbc其实是结构体，结构体中有sql的方法，也就是函数指针，如果要支持sqlite3 或者mysql等，只需要继承dbc结构体，实现结构体中的方法，
+上层使用者在new 一个dbc的时候，传入当前要连接的数据（sqlite3，mysql等），dbc自动选择子类对象（实际上就是定义声明dbc数据类型的sqlite，mysql变量，然后实现dbc中的各种方法，
+这样用户new一个dbc的时候，就是返回一个对应数据库的dbc类型变量，具体看dbc_connect函数，里面有set_fun的宏，有点类似于C++中的子类重写父类方法）。
 --------------------------------------------------
 先git commit一下吧，虽然是初版，但是后续还会更新，让C针对数据库编程更简便。。。
 
