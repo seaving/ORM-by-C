@@ -505,14 +505,15 @@ static bool _sql_sqlite3_select(
 	}
 
 	va_start(ap, field1);
+	offset = 0;
 	offset = snprintf(fields, len - offset, 
 				"%s%s", field1, cnt > 1 ? ", " : " ");
 	for (i = 1; i < cnt - 1; i ++)
 	{
-		offset = snprintf(fields + offset, 
+		offset += snprintf(fields + offset, 
 					len - offset, "%s, ", va_arg(ap, const char *));
 	}
-	offset = snprintf(fields + offset, 
+	offset += snprintf(fields + offset, 
 				len - offset, "%s ", va_arg(ap, const char *));	
 	va_end(ap);
 

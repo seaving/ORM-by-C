@@ -16,9 +16,9 @@
 #include <libgen.h>
 #include <linux/sockios.h>
 
-//#include <libdaemon/daemon.h>
-//#include <libubox/blobmsg_json.h>
-//#include <libubus.h>
+#include <libdaemon/daemon.h>
+#include <libubox/blobmsg_json.h>
+#include <libubus.h>
 
 #include <math.h>
 

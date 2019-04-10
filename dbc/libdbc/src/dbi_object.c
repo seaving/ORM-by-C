@@ -29,7 +29,7 @@ dbi_object_t dbi_object_new()
 		return (dbi_object_t) NULL;
 	}
 
-	ret = dbi_initialize_r("/usr/local/lib/dbd", &instance->instance);
+	ret = dbi_initialize_r("/usr/lib/dbd", &instance->instance);
 	if (ret < 0)
 	{
 		LOG_DEBUG_TRACE("unable to initialize libdbi! "
