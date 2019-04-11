@@ -1,6 +1,6 @@
 # ORM-by-C 嵌入式数据库编程
 
-*C语言实现基于libdbi仿python ORM数据库操作
+C语言实现基于libdbi仿python ORM数据库操作
 ----------------------------------------------
 前言: 
 *		在用C编写数据库程序，假如使用的是mysql，那么程序猿需要针对mysql的的库提供的api进行编程，
@@ -43,7 +43,7 @@ dbc组成:
 *		安装数据库引擎的源码库，比如我现在使用的是sqlite3，则需要安装sqlite3源码库，因为dbi就是这些源码库
 *	的API的一个统一的封装，必须依赖，否则在安装libdriver时，会提示找不到sqlite3的头文件等错误，libdbddriver
 *	也必须基于数据库引擎源码库以及libdbi安装成功才能进行编译安装。
-
+*
 * libsqlite3安装方法：（其他数据库如mysql可以到网上搜索方法，大同小异）
 *	下载最新版sqlite3源码
 *	 wget https://www.sqlite.org/2019/sqlite-autoconf-3270200.tar.gz
@@ -54,7 +54,7 @@ dbc组成:
 *	 ./configure
 *	 make
 *	 sudo make install
-
+*
 * libdbi的安装方法:
 *	 下载最新版libdbi
 *	 wget https://nchc.dl.sourceforge.net/project/libdbi/libdbi/libdbi-0.9.0/libdbi-0.9.0.tar.gz
