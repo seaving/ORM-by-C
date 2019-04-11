@@ -12,7 +12,6 @@ C语言实现基于libdbi仿python ORM数据库操作
 不足：	
 	我把dbi的提供的API基本浏览了一遍，dbi其实只是对数据库的统一封装而已，并没有ORM（其实C语言不存在ORM，因为C语言是面向过程的）,
 	上层应用程序还是需要造sql语句。
-
 ------------------------------------------------
 之前在用python开发后台过程中接触到了ORM，一个字爽，太方便了。在操作数据库的过程中，基本上不需要构造一句sql语句，sql语句中的命令都被实现成了方法，
 比如我要加一个判断，直接调用过滤器中的and方法或者or方法，底层会进行构造sql语句。
@@ -23,15 +22,43 @@ C语言实现基于libdbi仿python ORM数据库操作
 为了赶项目进度，就把关系映射实现放弃了，直接做简单版本的。
 目前简单的实现了sqlite3的数据库封装（项目需要，先实现sqlite3），对于其他数据库，只需要仿照sqlite3来实现各个数据库的封装。
 程序猿在操作sqlite3时，基本不需要再构造sql语句，通过sqlite3中封装的insert select update delete 以及过滤器中的and or limit 等来进行操作
---------------------------------------------------
+------------------------------------------------
 dbi_object 实现对libdbi的API进行进一步封装，对外统一使用dbi object来操作接口
 sql_sqlite3 实现sqlite3基于dbi_object的进一步封装，所有函数静态化，对外通过sqlite3结构体来操作：
 	sqlite3.insert， sqlite3.select, sqlite3.filter.and ...，
 	sqlite3结构体起到一个namespace的作用（因为insert， select ...这些名词并不是sqlite所有）
 --------------------------------------------------
-现在实现的是简单版本，只是实现了最基本的增删改查，复杂的像join，like，have，create等还未实现，但是实现起来也并不复杂，因为本质是构造字符串
+编译:
+	在编译dbc之前，需要安装libdbi，libsqlite3
+安装数据库引擎的源码库，比如我现在使用的是sqlite3，那就要安装sqlite3源码库，因为dbi就是这些源码库的api的一个统一的封装，必须依赖，否则在安装libdriver时，会提示找不到sqlite3的头文件等
+libsqlite3安装方法：
+	wget https://www.sqlite.org/2019/sqlite-autoconf-3270200.tar.gz 下载最新版sqlite3源码
+	tar zxvf sqlite-autoconf-3270200.tar.gz 解压文件
+	cd sqlite-autoconf-3270200 进入到解压后的文件夹中
+	./configure
+	make
+	sudo make install
+（其他数据库如mysql可以到网上搜索方法，大同小异）
+
+libdbi的安装方法:
+	wget https://nchc.dl.sourceforge.net/project/libdbi/libdbi/libdbi-0.9.0/libdbi-0.9.0.tar.gz 下载最新版libdbi
+	tar zxvf libdbi-0.9.0.tar.gz 解压文件
+	cd libdbi-0.9.0 进入到解压后的文件夹中
+	./configure
+	make
+	sudo make install
+
+至此，libdbi库编译安装完毕，接着编译liddriver
+	wget https://jaist.dl.sourceforge.net/project/libdbi-drivers/libdbi-drivers/libdbi-drivers-0.9.0/libdbi-drivers-0.9.0.tar.gz 下载与libdbi对应的版本
+	tar zxvf libdbi-drivers-0.9.0.tar.gz 解压文件
+	cd libdbi-drivers-0.9.0 进入到解压目录
+	./configure --with-sqlite3 (你也可以选定支持的数据库引擎 ./configure --with-sqlite --with-pgsql)
+	make
+	sudo make install
+至此，dbi相关的库都已经编译安装完成，默认库位置在/usr/local/lib/和/usr/local/lib/dbd/目录下，分别为libdbi的库目录以及libdriver的库目录，/usr/local/lib/dbd/就是dbd_object_new中需要制定的driver路径
+------------------------------------------------
 --------------------------------------------------
-dbi_object 是线程不安全的(改进空间还有很多啊~~)
+dbi_object 是线程不安全的(后续改进并且增加连接池管理~~)
 --------------------------------------------------
 2019年4月10日：
 新增dbc容器，在C++中类似于接口，对外程序猿通过创建dbc实例操作数据库，不用关系底层用的是何种数据库，
