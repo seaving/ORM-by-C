@@ -116,6 +116,15 @@ void dbi_object_statement_clear_buf(dbi_object_t obj);
 void dbi_object_statement_debug(dbi_object_t obj);
 
 /*
+* 函数: dbi_object_statement_get_buf
+* 功能: 获取sql语句buf的指针
+* 参数: obj		dbi对象
+* 返回: 无
+* 说明: 
+*/
+char *dbi_object_statement_get_buf(dbi_object_t obj);
+
+/*
 * 函数: dbi_object_get_results
 * 功能: 获取结果集
 * 参数: obj		dbi对象

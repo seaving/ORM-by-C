@@ -258,10 +258,23 @@ static bool _sql_sqlite3_filter_limit(dbi_object_t obj,
 */
 static bool _sql_sqlite3_join_inner(dbi_object_t obj, const char *tbname)
 {
+	char *p = NULL;
+	char *statement = NULL;
+	
 	if (obj == DBI_OBJECT_NULL 
 		|| tbname == NULL)
 	{
 		return false;
+	}
+	
+	statement = dbi_object_statement_get_buf(obj);
+	if (statement != NULL)
+	{
+		p = strstr(statement, "WHERE 1 = 1");
+		if (p)
+		{
+			*p = '\0';
+		}
 	}
 
 	dbi_object_statement_composef(obj, "INNER JOIN %s ON 1 = 1", tbname);
@@ -376,19 +389,19 @@ static bool _sql_sqlite3_insertfrom(
 		|| (len == 1 
 				&& *fields == '*'))
 	{
-		fmt = "INSERT INTO %s ";
+		fmt = "INSERT INTO %s";
+		dbi_object_statement_composef(obj, fmt, tbname);
 	}
 	else if (len > 1)
 	{
-		fmt = "INSERT INTO %s (%s) ";
+		fmt = "INSERT INTO %s (%s)";
+		dbi_object_statement_composef(obj, fmt, tbname, fields);
 	}
 	else
 	{
 		return false;
 	}
 	
-	dbi_object_statement_composef(obj, fmt, fields);
-
 	return true;
 }
 
@@ -518,7 +531,7 @@ static bool _sql_sqlite3_select(
 	va_end(ap);
 
 	dbi_object_statement_composef(
-		obj, "SELECT %s FROM %s WHERE 1=1", 
+		obj, "SELECT %s FROM %s WHERE 1 = 1", 
 			fields, tbname);
 	free(fields);
 	

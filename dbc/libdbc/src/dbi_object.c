@@ -29,7 +29,7 @@ dbi_object_t dbi_object_new()
 		return (dbi_object_t) NULL;
 	}
 
-	ret = dbi_initialize_r("/usr/lib/dbd", &instance->instance);
+	ret = dbi_initialize_r("/usr/local/lib/dbd", &instance->instance);
 	if (ret < 0)
 	{
 		LOG_DEBUG_TRACE("unable to initialize libdbi! "
@@ -129,7 +129,8 @@ int dbi_object_statement_composef(dbi_object_t obj, char *fmt, ...)
 			offset = strlen(instance->statement);
 			ret = snprintf(instance->statement + offset, 
 					size - offset - 1, "%s%s", 
-					instance->statement[offset] == ' ' ? "" : " ", result);
+					instance->statement[offset - 1 < 0 ? 0 : offset - 1] 
+							== ' ' ? "" : " ", result);
 			free(result);
 		}
 	}
@@ -165,7 +166,8 @@ int dbi_object_statement_composef2(dbi_object_t obj, char *fmt, va_list args)
 			offset = strlen(instance->statement);
 			ret = snprintf(instance->statement + offset, 
 					size - offset - 1, "%s%s", 
-					instance->statement[offset] == ' ' ? "" : " ", result);
+					instance->statement[offset - 1 < 0 ? 0 : offset - 1] 
+							== ' ' ? "" : " ", result);
 			free(result);
 		}
 	}
@@ -175,7 +177,7 @@ int dbi_object_statement_composef2(dbi_object_t obj, char *fmt, va_list args)
 
 /*
 * 函数: dbi_object_statement_clear_buf
-* 功能: 获取sql语句buf的指针
+* 功能: 清空sql语句buf的指针
 * 参数: obj		dbi对象
 * 返回: 无
 * 说明: 
@@ -205,6 +207,24 @@ void dbi_object_statement_debug(dbi_object_t obj)
 		LOG_DEBUG_TRACE("%s\n", instance->statement);
 		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
 	}
+}
+
+/*
+* 函数: dbi_object_statement_get_buf
+* 功能: 获取sql语句buf的指针
+* 参数: obj		dbi对象
+* 返回: 无
+* 说明: 
+*/
+char *dbi_object_statement_get_buf(dbi_object_t obj)
+{
+	dbi_instance_t *instance = (dbi_instance_t *) obj;
+	if (instance)
+	{
+		return instance->statement;
+	}
+
+	return NULL;
 }
 
 /*

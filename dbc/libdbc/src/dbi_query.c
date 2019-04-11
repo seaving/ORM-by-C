@@ -48,6 +48,7 @@ dbi_results_t dbi_query(dbi_object_t obj, const char *sql)
 	}
 	
 	_dbi_result_free(obj);
+	LOG_DEBUG_TRACE("%s\n", sql);
 	instance->result = dbi_conn_query(instance->conn, sql);
 	
 	return instance->result;
@@ -130,6 +131,7 @@ dbi_results_t dbi_queryf2(dbi_object_t obj, const char *sql_fmt, va_list args)
 	_dbi_result_free(obj);
 	if (sql)
 	{
+		LOG_DEBUG_TRACE("%s\n", sql);
 		instance->result = dbi_conn_query(instance->conn, sql);
 		free(sql);
 	}
