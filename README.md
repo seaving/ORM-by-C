@@ -78,6 +78,11 @@ C语言实现基于libdbi仿python ORM数据库操作
 		dbc其实是结构体，结构体中有sql的方法，也就是函数指针，如果要支持sqlite3 或者mysql等，只需要继承dbc结构体，实现结构体中的方法，上层使用者在创建一个dbc的时候，传入当前要连接的数据（sqlite3，mysql等），dbc自动选择子类对象，实际上就是定义声明dbc数据类型的sqlite，mysql变量，然后实现dbc中的各种方法，这样用户创建一个dbc的时候，就是返回一个对应数据库的dbc类型变量，具体看dbc_connect函数，里面有set_fun的宏，有点类似于C++中的子类重写父类方法。<br>
 <br>
 
+2、2019年4月12日：<br>
+	dbc中增加了事务begin、commit、rollback<br>
+	dbc中增加了continuty方法用于作为sql与sql之间的连接符，dbc.query可以批量执行多条sql<br>
+	dbc中增加了insert_many、value_add方法用于批量插入<br>
+
 --------------------------------------------------
 持续更新中 ...
 --------------------------------------------------
