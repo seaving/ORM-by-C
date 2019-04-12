@@ -11,9 +11,9 @@ C语言实现基于libdbi仿python ORM数据库操作
 <br>
 
 ----------------------------------------------
-二、dbc介绍:<br>
-		ORM-by-C项目是基于libdbi库进行实现的，同时编写实现代码思想是编写一个容器，这个容器模版，这个容器能被赋能，当程序猿开发应用时，通过传参方式告诉容器选用何种数据库引擎，容器就会被赋能指定引擎的API方法，所以容器我命名为dbc (database container)。<br>
-		目前简单的实现了sqlite3的数据库封装（项目需要，先实现sqlite3），对于其他数据库，只需要仿照sqlite3来实现各个数据库的封装，程序猿针对sqlite3编程时，基本不需要再构造sql语句，通过sqlite3中封装的insert select update delete 以及过滤器中的and or limit 等来进行操作。<br>
+二、dbc（database container）介绍:<br>
+		ORM-by-C项目是基于libdbi库进行实现的，libdbi统一了各个数据库引擎的API，但是没有把SQL与应用隔离，因此dbc作为数据库引擎的容器，隔离SQL，开发者通过dbc的方法来对数据库进行操作，开发者在开发应用时，通过传参方式告诉容器选用何种数据库引擎，容器就会被赋能指定引擎的API方法（“多态”）。<br>
+		因项目需要，目前实现了sqlite3的数据库封装，对于其他数据库，只需要仿照sqlite3来实现各个数据库的封装，程序猿针对sqlite3编程时，基本不需要再构造sql语句，通过sqlite3中封装的insert select update delete 以及过滤器中的and or limit 等来进行操作。<br>
 
 三、dbc组成:<br>
 1、dbc结构体:<br>
