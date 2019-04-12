@@ -10,8 +10,8 @@
 #if defined(LOG_DEBUG_TRACE_ENABLE)
 #define LOG_DEBUG_TRACE_DAEMON(format, args...) \
 	do { \
-		/*daemon_log(LOG_INFO, */printf("[%s][%s]:%d " format, \
-			MODULE_NAME, __FUNCTION__, __LINE__, ## args); \
+		/*daemon_log(LOG_INFO, */printf("[%s]:%d " format, \
+			__FUNCTION__, __LINE__, ## args); \
 	} while (0)
 #else
 #define LOG_DEBUG_TRACE_DAEMON(format, args...)
@@ -20,8 +20,8 @@
 #if defined(LOG_DEBUG_TRACE_ENABLE)
 #define LOG_DEBUG_TRACE_PERROR(format, args...) \
 	do { \
-		/*daemon_log(LOG_INFO, */printf("[%s][%s]:%d [error info(errno=%d): %s] -> " format, \
-			MODULE_NAME, __FUNCTION__, __LINE__, errno, strerror(errno), ## args); \
+		/*daemon_log(LOG_INFO, */printf("[%s]:%d [error info(errno=%d): %s] -> " format, \
+			__FUNCTION__, __LINE__, errno, strerror(errno), ## args); \
 	} while (0)
 #else
 #define LOG_DEBUG_TRACE_PERROR(format, args...)

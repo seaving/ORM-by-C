@@ -46,9 +46,12 @@ dbi_results_t dbi_query(dbi_object_t obj, const char *sql)
 			instance->conn == NULL ? "dbi object not yet connection!" : "");
 		return NULL;
 	}
-	
-	_dbi_result_free(obj);
+
+	LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
 	LOG_DEBUG_TRACE("%s\n", sql);
+	LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
+
+	_dbi_result_free(obj);
 	instance->result = dbi_conn_query(instance->conn, sql);
 	
 	return instance->result;
@@ -131,7 +134,9 @@ dbi_results_t dbi_queryf2(dbi_object_t obj, const char *sql_fmt, va_list args)
 	_dbi_result_free(obj);
 	if (sql)
 	{
+		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
 		LOG_DEBUG_TRACE("%s\n", sql);
+		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
 		instance->result = dbi_conn_query(instance->conn, sql);
 		free(sql);
 	}

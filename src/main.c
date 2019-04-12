@@ -218,7 +218,58 @@ static void _dbc_test_join()
 				id, name, age, address, salary, dept, emp_id);
 	}
 }
+/******************************************************************************/
+static void _dbc_test_transaction()
+{
+	dbc.begin(obj);
 
+	dbc.insert(obj, TABLE_NAME_2, 
+		"ID, NAME, AGE, ADDRESS, SALARY", 
+		"%d, '%s', %d, '%s', %f", 
+		324, "sdfweefsdfsd_sdfkl_324", 32, "School", 24330.32);
+	dbc.continuity(obj);
+	
+	dbc.insert(obj, TABLE_NAME_2, 
+		"ID, NAME, AGE, ADDRESS, SALARY", 
+		"%d, '%s', %d, '%s', %f", 
+		325, "sdfsdfwe43fffg_325", 43, "Worker", 24033.32);
+	dbc.continuity(obj);
+
+	dbc.insert(obj, TABLE_NAME_2, 
+		"ID, NAME, AGE, ADDRESS, SALARY", 
+		"%d, '%s', %d, '%s', %f", 
+		326, "sdfhhjjhjhjhjthty_326", 38, "OLD", 24033.33);
+	dbc.continuity(obj);
+
+	dbc.insert(obj, TABLE_NAME_2, 
+		"ID, NAME, AGE, ADDRESS, SALARY", 
+		"%d, '%s', %d, '%s', %f", 
+		327, "fsdfsdf3498794jsdfjdsoiflkjfosj_327", 36, "Worker", 34030.32);
+	dbc.continuity(obj);
+
+	dbc.insert_many(obj, TABLE_NAME_2, "ID, NAME, AGE, ADDRESS, SALARY");
+	dbc.value_add(obj, "%d, '%s', %d, '%s', %f", 
+		200, "200-==-=-=df-", 34, "34Worker", 24320.34);
+
+	dbc.value_add(obj, "%d, '%s', %d, '%s', %f", 
+		223, "223-==-=-=df-", 24, "24Worker", 24320.24);
+
+	dbc.value_add(obj, "%d, '%s', %d, '%s', %f", 
+		224, "224-==-=-=df-", 35, "35Worker", 24320.35);
+
+	dbc.value_add(obj, "%d, '%s', %d, '%s', %f", 
+		225, "225-==-=-=df-", 14, "14Worker", 24320.14);
+
+	dbc.value_add(obj, "%d, '%s', %d, '%s', %f", 
+		226, "226-==-=-=df-", 44, "44Worker", 24320.44);
+
+	dbc.value_add(obj, "%d, '%s', %d, '%s', %f", 
+		227, "227-==-=-=df-", 64, "64Worker", 24320.64);
+
+	//dbc.rollback(obj);
+	dbc.commit(obj);
+	dbc.query(obj);
+}
 /******************************************************************************/
 int main(int argc, char **argv)
 {
@@ -270,6 +321,13 @@ int main(int argc, char **argv)
 
 	//join测试
 	_dbc_test_join();
+	LOG_DEBUG_TRACE("*************************************\n");
+
+	//测试事务
+	_dbc_test_transaction();
+	
+	//查看事务后的数据库数据
+	_dbc_test_select();
 	LOG_DEBUG_TRACE("*************************************\n");
 
 	dbc.disconnect(obj);

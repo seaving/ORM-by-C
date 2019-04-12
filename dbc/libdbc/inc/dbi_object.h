@@ -20,14 +20,16 @@ libdbi 需要先编译安装libdbi框架，再安装libdbi driver
 
 #include "sys_inc.h"
 
+#define DBI_STATEMENT_BUF_SIZE	8 * 1024
+
 typedef struct __dbi_instance__
 {
 	dbi_conn conn;
 	dbi_result result;
 	dbi_inst instance;
-	
-	char statement[4048];
-	
+
+	char statement[DBI_STATEMENT_BUF_SIZE];
+
 	char driverdir[256];
 	char sql_name[64];
 	char drivername[64];

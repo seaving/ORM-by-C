@@ -13,6 +13,24 @@
 #include "sql_sqlite3.h"
 
 /*
+* 函数: _dbc_continuity
+* 功能: 如果有多条sql语句，则需要使用此方法继续拼接下一条sql
+* 参数: obj 		对象实例
+* 返回: bool
+*		- false 失败
+* 说明: 起连接符作用
+*/
+static bool _dbc_continuity(dbi_object_t obj)
+{
+	if (obj == DBI_OBJECT_NULL)
+	{
+		return false;
+	}
+
+	return dbi_object_statement_composef(obj, ";");
+}
+
+/*
 * 函数: _dbc_exec
 * 功能: 执行sql
 * 参数: obj 			对象实例
@@ -1003,6 +1021,7 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 		return dbc;
 	}
 
+	set_fun(dbc.continuity, _dbc_continuity);
 	set_fun(dbc.exec, _dbc_exec);
 
 	set_fun(dbc.result.gets, _dbc_result_gets);

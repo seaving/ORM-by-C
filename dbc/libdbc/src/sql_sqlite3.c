@@ -30,6 +30,11 @@ static bool _sql_sqlite3_query(dbi_object_t obj);
 static bool _sql_sqlite3_insert(dbi_object_t obj, const char *tbname, 
 						const char *fields, const char *values_fmt, ...);
 
+static bool _sql_sqlite3_insert_many(dbi_object_t obj, 
+						const char *tbname, const char *fields);
+
+static bool _sql_sqlite3_value_add(dbi_object_t obj, const char *values_fmt, ...);
+
 static bool _sql_sqlite3_insertfrom(dbi_object_t obj, 
 						const char *tbname, const char *fields);
 
@@ -40,6 +45,10 @@ static bool _sql_sqlite3_update(dbi_object_t obj,
 
 static bool _sql_sqlite3_select(dbi_object_t obj, const char *tbname, 
 						const char *field1, ...);
+/******************************************************************************/
+static bool _sql_sqlite3_begin(dbi_object_t obj);
+static bool _sql_sqlite3_commit(dbi_object_t obj);
+static bool _sql_sqlite3_rollback(dbi_object_t obj);
 /******************************************************************************/
 dbc_t sqlite3 = {
 	.sql_fun = {
@@ -59,10 +68,15 @@ dbc_t sqlite3 = {
 	.disconnect = dbi_disconnect,
 	.query = _sql_sqlite3_query,
 	.insert = _sql_sqlite3_insert,
+	.insert_many = _sql_sqlite3_insert_many,
+	.value_add = _sql_sqlite3_value_add,
 	.insertfrom = _sql_sqlite3_insertfrom,
 	.delete = _sql_sqlite3_delete,
 	.update = _sql_sqlite3_update,
 	.select = _sql_sqlite3_select,
+	.begin = _sql_sqlite3_begin,
+	.commit = _sql_sqlite3_commit,
+	.rollback = _sql_sqlite3_rollback,
 };
 /******************************************************************************/
 /*
@@ -363,6 +377,87 @@ static bool _sql_sqlite3_insert(
 }
 
 /*
+* 函数: _sql_sqlite3_insert_many
+* 功能: 批量插入操作
+* 参数: obj 			对象实例
+*		tbname			表名
+*		fields			字段列表
+* 返回: bool
+*		- false 失败
+* 说明: 字段列表是字符串格式: "field1, field2, field3, field4" 用逗号隔开
+*/
+static bool _sql_sqlite3_insert_many(
+	dbi_object_t obj, const char *tbname, const char *fields)
+{
+	if (obj == DBI_OBJECT_NULL
+		|| tbname == NULL 
+		|| fields == NULL)
+	{
+		return false;
+	}
+
+	return dbi_object_statement_composef(obj, 
+			"INSERT INTO %s (%s) VALUES", tbname, fields);
+}
+
+/*
+* 函数: _sql_sqlite3_value_add
+* 功能: 增加一条数据值，配合insert_many使用
+* 参数: obj 			对象实例
+*		tbname			表名
+*		values_fmt		值列表
+*		... 			参数列表
+* 返回: bool
+*		- false 失败
+* 说明: 值列表是字符串格式: "value1, value2, value3, value4" 用逗号隔开
+*		该方法是服务于insert_many的
+*/
+static bool _sql_sqlite3_value_add(dbi_object_t obj, const char *values_fmt, ...)
+{
+	int len = 0;
+	char *sql = NULL;
+	char *statement = NULL;
+
+	va_list ap;
+	if (obj == DBI_OBJECT_NULL
+		|| values_fmt == NULL)
+	{
+		return false;
+	}
+
+	statement = dbi_object_statement_get_buf(obj);
+	if (strlen(statement) <= 0)
+	{
+		return false;
+	}
+
+	len = strlen(values_fmt);
+	if (len <= 0)
+	{
+		return false;
+	}
+	
+	len += 64;
+	sql = calloc(1, len + 1);
+	if (sql == NULL)
+	{
+		LOG_DEBUG_TRACE("calloc error!\n");
+		return false;
+	}
+
+	snprintf(sql, len, "%s (%s)",
+		statement[strlen(statement) - 1] == ')' ? "," : "", values_fmt);
+
+	va_start(ap, values_fmt);
+	dbi_object_statement_composef2(obj, sql, ap);
+	va_end(ap);
+
+	free(sql);
+
+	return true;
+}
+
+/*
 * 函数: _sql_sqlite3_insertfrom
 * 功能: 插入操作
 * 参数: obj 			对象实例
@@ -537,4 +632,71 @@ static bool _sql_sqlite3_select(
 	
 	return true;
 }
+/******************************************************************************/
+/*
+* 函数: _sql_sqlite3_begin
+* 功能: 事务开始
+* 参数: obj 			对象实例
+* 返回: bool
+*		- false 失败
+* 说明: 
+*/
+static bool _sql_sqlite3_begin(dbi_object_t obj)
+{
+	if (obj == DBI_OBJECT_NULL)
+	{
+		return false;
+	}
+
+	return dbi_object_statement_composef(obj, "BEGIN;");
+}
+
+/*
+* 函数: _sql_sqlite3_commit
+* 功能: 提交事务
+* 参数: obj 			对象实例
+* 返回: bool
+*		- false 失败
+* 说明: 
+*/
+static bool _sql_sqlite3_commit(dbi_object_t obj)
+{
+	int statement_len  = 0;
+	char *statement = NULL;
+	
+	if (obj == DBI_OBJECT_NULL)
+	{
+		return false;
+	}
+
+	statement = dbi_object_statement_get_buf(obj);
+	statement_len = strlen(statement);
+	return dbi_object_statement_composef(obj, "%s COMMIT;", 
+		statement_len <= 0 ? "" : statement[statement_len - 1] == ';' ? "" : ";");
+}
+
+/*
+* 函数: _sql_sqlite3_rollback
+* 功能: 回滚
+* 参数: obj 			对象实例
+* 返回: bool
+*		- false 失败
+* 说明: 
+*/
+static bool _sql_sqlite3_rollback(dbi_object_t obj)
+{
+	int statement_len  = 0;
+	char *statement = NULL;
+	
+	if (obj == DBI_OBJECT_NULL)
+	{
+		return false;
+	}
+
+	statement = dbi_object_statement_get_buf(obj);
+	statement_len = strlen(statement);
+	return dbi_object_statement_composef(obj, "%s ROLLBACK;", 
+		statement_len <= 0 ? "" : statement[statement_len - 1] == ';' ? "" : ";");
+}
+
 

@@ -582,6 +582,15 @@ typedef struct __dbc__
 	dbc_join_t join;
 	//-------------------------------------
 	/*
+	* 函数: continuity
+	* 功能: 如果有多条sql语句，则需要使用此方法继续拼接下一条sql
+	* 参数: obj 		对象实例
+	* 返回: bool
+	*		- false 失败
+	* 说明: 起连接符作用
+	*/
+	bool (*continuity)(dbi_object_t obj);
+	/*
 	* 函数: disconnect
 	* 功能: 断开连接操作
 	* 参数: obj 		对象实例
@@ -627,6 +636,41 @@ typedef struct __dbc__
 	*/
 	bool (*insert)(dbi_object_t obj, const char *tbname, 
 					const char *fields, const char *values_fmt, ...);
+	/*
+	* 函数: insert_many
+	* 功能: 批量插入操作
+	* 参数: obj 			对象实例
+	*		tbname			表名
+	*		fields			字段列表
+	* 返回: bool
+	*		- false 失败
+	* 说明: 字段列表是字符串格式: "field1, field2, field3, field4" 用逗号隔开
+	*/
+	bool (*insert_many)(dbi_object_t obj, const char *tbname, const char *fields);
+	/*
+	* 函数: value_add
+	* 功能: 增加一条数据值，配合insert_many使用
+	* 参数: obj 			对象实例
+	*		tbname			表名
+	*		values_fmt		值列表
+	*		... 			参数列表
+	* 返回: bool
+	*		- false 失败
+	* 说明: 值列表是字符串格式: "value1, value2, value3, value4" 用逗号隔开
+	*		该方法是服务于insert_many的
+	*/
+	bool (*value_add)(dbi_object_t obj, const char *values_fmt, ...);
+	/*
+	* 函数: add_value
+	* 功能: 插入操作
+	* 参数: obj 			对象实例
+	*		tbname			表名
+	*		fields			字段列表
+	* 返回: bool
+	*		- false 失败
+	* 说明: 字段列表是字符串格式: "field1, field2, field3, field4" 用逗号隔开
+	*/
+	bool (*add_value)(dbi_object_t obj, const char *tbname, const char *fields);
 	/*
 	* 函数: insertfrom
 	* 功能: 插入操作
@@ -675,6 +719,33 @@ typedef struct __dbc__
 	*		select(obj, taname, "field1", "field2", "count(name)", NULL);
 	*/
 	bool (*select)(dbi_object_t obj, const char *tbname, const char *field1, ...);
+	/*
+	* 函数: begin
+	* 功能: 事务开始
+	* 参数: obj 			对象实例
+	* 返回: bool
+	*		- false 失败
+	* 说明: 
+	*/
+	bool (*begin)(dbi_object_t obj);
+	/*
+	* 函数: commit
+	* 功能: 提交事务
+	* 参数: obj 			对象实例
+	* 返回: bool
+	*		- false 失败
+	* 说明: 
+	*/
+	bool (*commit)(dbi_object_t obj);
+	/*
+	* 函数: rollback
+	* 功能: 回滚
+	* 参数: obj 			对象实例
+	* 返回: bool
+	*		- false 失败
+	* 说明: 
+	*/
+	bool (*rollback )(dbi_object_t obj);
 } dbc_t;
 #undef CHARPOINT
 /******************************************************************************/
