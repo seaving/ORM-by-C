@@ -136,6 +136,7 @@ char *dbi_object_statement_get_buf(dbi_object_t obj);
 */
 dbi_results_t *dbi_object_get_results(dbi_object_t obj);
 
+
 #endif
 
 

@@ -192,24 +192,6 @@ void dbi_object_statement_clear_buf(dbi_object_t obj)
 }
 
 /*
-* 函数: dbi_object_statement_debug
-* 功能: 输出当前sql语句
-* 参数: obj		dbi对象
-* 返回: 无
-* 说明: 
-*/
-void dbi_object_statement_debug(dbi_object_t obj)
-{
-	dbi_instance_t *instance = (dbi_instance_t *) obj;
-	if (instance)
-	{
-		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
-		LOG_DEBUG_TRACE("%s\n", instance->statement);
-		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
-	}
-}
-
-/*
 * 函数: dbi_object_statement_get_buf
 * 功能: 获取sql语句buf的指针
 * 参数: obj		dbi对象

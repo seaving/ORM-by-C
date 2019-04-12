@@ -47,9 +47,7 @@ dbi_results_t dbi_query(dbi_object_t obj, const char *sql)
 		return NULL;
 	}
 
-	LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
-	LOG_DEBUG_TRACE("%s\n", sql);
-	LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
+	LOG_DEBUG_TRACE("---->>> %s\n\n", sql);
 
 	_dbi_result_free(obj);
 	instance->result = dbi_conn_query(instance->conn, sql);
@@ -76,7 +74,7 @@ dbi_results_t dbi_query_by_statement_buf(dbi_object_t obj)
 		return NULL;
 	}
 
-	dbi_object_statement_debug(obj);
+	LOG_DEBUG_TRACE("---->>> %s\n\n", instance->statement);
 	
 	_dbi_result_free(obj);
 	instance->result = dbi_conn_query(instance->conn, instance->statement);
@@ -130,13 +128,12 @@ dbi_results_t dbi_queryf2(dbi_object_t obj, const char *sql_fmt, va_list args)
 		return NULL;
 	}
 
-	vasprintf(&sql, sql_fmt, args);	
+	vasprintf(&sql, sql_fmt, args);
 	_dbi_result_free(obj);
 	if (sql)
 	{
-		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
-		LOG_DEBUG_TRACE("%s\n", sql);
-		LOG_DEBUG_TRACE("+--------------------------------------------------------+\n");
+		LOG_DEBUG_TRACE("---->>> %s\n\n", sql);
+
 		instance->result = dbi_conn_query(instance->conn, sql);
 		free(sql);
 	}
