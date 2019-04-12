@@ -74,7 +74,7 @@ C语言实现基于libdbi仿python ORM数据库操作
 ------------------------------------------------
 五、更新说明：<br>
 1、2019年4月10日：<br>
-		新增dbc容器，在C++中类似于接口，对外程序猿通过创建dbc实例操作数据库，不用关系底层用的是何种数据库，dbc旨在把sql语句全部封装，insert、select、update、delete、create、join、order by、where等等sql命令全部封装成函数，比如程序猿需要select的时候 只需要调用dbc.select方法，具体的select的sql语句是底层去构造对应数据库的sql语句。<br>
+		新增dbc容器，类似于接口，对外程序猿通过创建dbc实例操作数据库，不用关系底层用的是何种数据库，dbc旨在把sql语句全部封装，insert、select、update、delete、create、join、order by、where等等sql命令全部封装成函数，比如程序猿需要select的时候 只需要调用dbc.select方法，具体的select的sql语句是底层去构造对应数据库的sql语句。<br>
 		dbc其实是结构体，结构体中有sql的方法，也就是函数指针，如果要支持sqlite3 或者mysql等，只需要继承dbc结构体，实现结构体中的方法，上层使用者在创建一个dbc的时候，传入当前要连接的数据（sqlite3，mysql等），dbc自动选择子类对象，实际上就是定义声明dbc数据类型的sqlite，mysql变量，然后实现dbc中的各种方法，这样用户创建一个dbc的时候，就是返回一个对应数据库的dbc类型变量，具体看dbc_connect函数，里面有set_fun的宏，有点类似于C++中的子类重写父类方法。<br>
 <br>
 
