@@ -11,13 +11,13 @@
 #include "dbi_misc.h"
 
 /*
-* º¯Êı: _dbi_driver_set_option
-* ¹¦ÄÜ: ÉèÖÃÇı¶¯µÄ²ÎÊı
-* ²ÎÊı: obj		¶ÔÏóÊµÀı
-* ·µ»Ø: bool	
-*		- false	Ê§°Ü
-*		- true	³É¹¦
-* ËµÃ÷: 
+* å‡½æ•°: _dbi_driver_set_option
+* åŠŸèƒ½: è®¾ç½®é©±åŠ¨çš„å‚æ•°
+* å‚æ•°: obj		å¯¹è±¡å®ä¾‹
+* è¿”å›: bool	
+*		- false	å¤±è´¥
+*		- true	æˆåŠŸ
+* è¯´æ˜: 
 */
 static bool _dbi_driver_set_option(dbi_object_t obj)
 {
@@ -164,11 +164,11 @@ static bool _dbi_driver_set_option(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: dbi_connect_mysql_init
-* ¹¦ÄÜ: Á¬½ÓmysqlÊı¾İ¿âÖ®Ç°ĞèÒªÌî³äÒ»Ğ©²ÎÊı
-* ²ÎÊı: obj		¶ÔÏóÊµÀı
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_connect_mysql_init
+* åŠŸèƒ½: è¿æ¥mysqlæ•°æ®åº“ä¹‹å‰éœ€è¦å¡«å……ä¸€äº›å‚æ•°
+* å‚æ•°: obj		å¯¹è±¡å®ä¾‹
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_connect_mysql_init(
 	dbi_object_t obj, const char *hostname, 
@@ -200,11 +200,11 @@ void dbi_connect_mysql_init(
 }
 
 /*
-* º¯Êı: dbi_connect_sqlite_init
-* ¹¦ÄÜ: Á¬½ÓsqliteÊı¾İ¿âÖ®Ç°ĞèÒªÌî³äÒ»Ğ©²ÎÊı
-* ²ÎÊı: obj		¶ÔÏóÊµÀı
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_connect_sqlite_init
+* åŠŸèƒ½: è¿æ¥sqliteæ•°æ®åº“ä¹‹å‰éœ€è¦å¡«å……ä¸€äº›å‚æ•°
+* å‚æ•°: obj		å¯¹è±¡å®ä¾‹
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_connect_sqlite_init(dbi_object_t obj, 
 	const char *dbdir, const char *dbname)
@@ -225,11 +225,11 @@ void dbi_connect_sqlite_init(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: dbi_connect_sqlite3_init
-* ¹¦ÄÜ: Á¬½Ósqlite3Êı¾İ¿âÖ®Ç°ĞèÒªÌî³äÒ»Ğ©²ÎÊı
-* ²ÎÊı: obj		¶ÔÏóÊµÀı
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_connect_sqlite3_init
+* åŠŸèƒ½: è¿æ¥sqlite3æ•°æ®åº“ä¹‹å‰éœ€è¦å¡«å……ä¸€äº›å‚æ•°
+* å‚æ•°: obj		å¯¹è±¡å®ä¾‹
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_connect_sqlite3_init(dbi_object_t obj, 
 	const char *dbdir, const char *dbname)
@@ -250,13 +250,13 @@ void dbi_connect_sqlite3_init(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: dbi_connect
-* ¹¦ÄÜ: Í¨¹ıdbi objectÁ¬½ÓÊı¾İ¿â
-* ²ÎÊı: obj			dbi¶ÔÏó
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-*		- true ³É¹¦
-* ËµÃ÷: ÔÚµ÷ÓÃdbi_connectÖ®Ç°ÇëÎñ±ØÏÈµ÷ÓÃÏàÓ¦µÄsql conect³õÊ¼»¯º¯Êı
+* å‡½æ•°: dbi_connect
+* åŠŸèƒ½: é€šè¿‡dbi objectè¿æ¥æ•°æ®åº“
+* å‚æ•°: obj			dbiå¯¹è±¡
+* è¿”å›: bool
+*		- false å¤±è´¥
+*		- true æˆåŠŸ
+* è¯´æ˜: åœ¨è°ƒç”¨dbi_connectä¹‹å‰è¯·åŠ¡å¿…å…ˆè°ƒç”¨ç›¸åº”çš„sql conectåˆå§‹åŒ–å‡½æ•°
 *		e.g. 
 *			- dbi_connect_mysql_init
 *			- dbi_connect_sqlite_init
@@ -294,13 +294,13 @@ bool dbi_connect(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: dbi_disconnect
-* ¹¦ÄÜ: Í¨¹ıdbi object¶Ï¿ªÁ¬½ÓÊı¾İ¿â
-* ²ÎÊı: obj			dbi¶ÔÏó
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-*		- true ³É¹¦
-* ËµÃ÷: 
+* å‡½æ•°: dbi_disconnect
+* åŠŸèƒ½: é€šè¿‡dbi objectæ–­å¼€è¿æ¥æ•°æ®åº“
+* å‚æ•°: obj			dbiå¯¹è±¡
+* è¿”å›: bool
+*		- false å¤±è´¥
+*		- true æˆåŠŸ
+* è¯´æ˜: 
 */
 bool dbi_disconnect(dbi_object_t obj)
 {
@@ -327,13 +327,13 @@ bool dbi_disconnect(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: dbi_connection_is_alive
-* ¹¦ÄÜ: ÅĞ¶ÏÁ¬½ÓÊÇ·ñÕı³£
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: bool
-*		- false Á¬½Ó¿ÉÄÜ¶Ï¿ª
-*		- true	Á¬½ÓÕı³£
-* ËµÃ÷: ¶àping¼¸´ÎÌá¸ß×¼È·ÂÊ
+* å‡½æ•°: dbi_connection_is_alive
+* åŠŸèƒ½: åˆ¤æ–­è¿æ¥æ˜¯å¦æ­£å¸¸
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: bool
+*		- false è¿æ¥å¯èƒ½æ–­å¼€
+*		- true	è¿æ¥æ­£å¸¸
+* è¯´æ˜: å¤špingå‡ æ¬¡æé«˜å‡†ç¡®ç‡
 */
 bool dbi_connection_is_alive(dbi_object_t obj)
 {	

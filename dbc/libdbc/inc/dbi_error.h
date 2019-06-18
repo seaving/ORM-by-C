@@ -5,11 +5,11 @@
 #include "dbi_object.h"
 
 /*
-* º¯Êý: dbi_error_debug
-* ¹¦ÄÜ: ´òÓ¡µ±Ç°³ö´íÐÅÏ¢
-* ²ÎÊý: obj		¶ÔÏóÊµÀý
-* ·µ»Ø: ÎÞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_error_debug
+* åŠŸèƒ½: æ‰“å°å½“å‰å‡ºé”™ä¿¡æ¯
+* å‚æ•°: obj		å¯¹è±¡å®žä¾‹
+* è¿”å›ž: æ— 
+* è¯´æ˜Ž: 
 */
 #define dbi_error_debug(obj) \
 	do { \
@@ -24,31 +24,31 @@
 	} while (0);
 
 /*
-* º¯Êý: dbi_error_debug
-* ¹¦ÄÜ: ´òÓ¡µ±Ç°³ö´íÐÅÏ¢
-* ²ÎÊý: obj		¶ÔÏóÊµÀý
-* ·µ»Ø: ÎÞ
-* ËµÃ÷: ²¶»ñµ½µÄÐÅÏ¢ÊÇµ±Ç°²Ù×÷²úÉúµÄ´íÎóÐÅÏ¢£¬ÀàËÆÓÚerrno
+* å‡½æ•°: dbi_error_debug
+* åŠŸèƒ½: æ‰“å°å½“å‰å‡ºé”™ä¿¡æ¯
+* å‚æ•°: obj		å¯¹è±¡å®žä¾‹
+* è¿”å›ž: æ— 
+* è¯´æ˜Ž: æ•èŽ·åˆ°çš„ä¿¡æ¯æ˜¯å½“å‰æ“ä½œäº§ç”Ÿçš„é”™è¯¯ä¿¡æ¯ï¼Œç±»ä¼¼äºŽerrno
 */
 //void dbi_error_debug(dbi_object_t obj);
 
 /*
-* º¯Êý: dbi_get_errno
-* ¹¦ÄÜ: »ñÈ¡µ±Ç°´íÎó´úÂë
-* ²ÎÊý: obj		¶ÔÏóÊµÀý
-* ·µ»Ø: int		´íÎóÂë
-*		- 0		±íÊ¾Î´·¢ÏÖ´íÎó
-* ËµÃ÷: ²¶»ñµ½µÄÐÅÏ¢ÊÇµ±Ç°²Ù×÷²úÉúµÄ´íÎóÐÅÏ¢£¬ÀàËÆÓÚerrno
+* å‡½æ•°: dbi_get_errno
+* åŠŸèƒ½: èŽ·å–å½“å‰é”™è¯¯ä»£ç 
+* å‚æ•°: obj		å¯¹è±¡å®žä¾‹
+* è¿”å›ž: int		é”™è¯¯ç 
+*		- 0		è¡¨ç¤ºæœªå‘çŽ°é”™è¯¯
+* è¯´æ˜Ž: æ•èŽ·åˆ°çš„ä¿¡æ¯æ˜¯å½“å‰æ“ä½œäº§ç”Ÿçš„é”™è¯¯ä¿¡æ¯ï¼Œç±»ä¼¼äºŽerrno
 */
 const int dbi_get_errno(dbi_object_t obj);
 
 /*
-* º¯Êý: dbi_get_errmsg
-* ¹¦ÄÜ: »ñÈ¡µ±Ç°´íÎóÐÅÏ¢
-* ²ÎÊý: obj		¶ÔÏóÊµÀý
-* ·µ»Ø: ´íÎóÐÅÏ¢Ö¸Õë
-*		- NULL	ÎÞ´íÎóÐÅÏ¢
-* ËµÃ÷: ²¶»ñµ½µÄÐÅÏ¢ÊÇµ±Ç°²Ù×÷²úÉúµÄ´íÎóÐÅÏ¢£¬ÀàËÆÓÚerrno
+* å‡½æ•°: dbi_get_errmsg
+* åŠŸèƒ½: èŽ·å–å½“å‰é”™è¯¯ä¿¡æ¯
+* å‚æ•°: obj		å¯¹è±¡å®žä¾‹
+* è¿”å›ž: é”™è¯¯ä¿¡æ¯æŒ‡é’ˆ
+*		- NULL	æ— é”™è¯¯ä¿¡æ¯
+* è¯´æ˜Ž: æ•èŽ·åˆ°çš„ä¿¡æ¯æ˜¯å½“å‰æ“ä½œäº§ç”Ÿçš„é”™è¯¯ä¿¡æ¯ï¼Œç±»ä¼¼äºŽerrno
 */
 const char *dbi_get_errmsg(dbi_object_t obj);
 

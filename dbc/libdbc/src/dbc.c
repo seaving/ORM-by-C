@@ -13,12 +13,12 @@
 #include "sql_sqlite3.h"
 
 /*
-* º¯Êı: _dbc_continuity
-* ¹¦ÄÜ: Èç¹ûÓĞ¶àÌõsqlÓï¾ä£¬ÔòĞèÒªÊ¹ÓÃ´Ë·½·¨¼ÌĞøÆ´½ÓÏÂÒ»Ìõsql
-* ²ÎÊı: obj 		¶ÔÏóÊµÀı
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ÆğÁ¬½Ó·û×÷ÓÃ
+* å‡½æ•°: _dbc_continuity
+* åŠŸèƒ½: å¦‚æœæœ‰å¤šæ¡sqlè¯­å¥ï¼Œåˆ™éœ€è¦ä½¿ç”¨æ­¤æ–¹æ³•ç»§ç»­æ‹¼æ¥ä¸‹ä¸€æ¡sql
+* å‚æ•°: obj 		å¯¹è±¡å®ä¾‹
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: èµ·è¿æ¥ç¬¦ä½œç”¨
 */
 static bool _dbc_continuity(dbi_object_t obj)
 {
@@ -31,14 +31,14 @@ static bool _dbc_continuity(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: _dbc_exec
-* ¹¦ÄÜ: Ö´ĞĞsql
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		sql_fmt 		sqlÓï¾ä×Ö·û´®
-*		... 			¸ñÊ½»¯²ÎÊıÁĞ±í
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: Ö±½ÓÓÃÀ´Ö´ĞĞsqlÓï¾äµÄ·½·¨
+* å‡½æ•°: _dbc_exec
+* åŠŸèƒ½: æ‰§è¡Œsql
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		sql_fmt 		sqlè¯­å¥å­—ç¬¦ä¸²
+*		... 			æ ¼å¼åŒ–å‚æ•°åˆ—è¡¨
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: ç›´æ¥ç”¨æ¥æ‰§è¡Œsqlè¯­å¥çš„æ–¹æ³•
 */
 static bool _dbc_exec(dbi_object_t obj, const char *sql_fmt, ...)
 {
@@ -58,29 +58,29 @@ static bool _dbc_exec(dbi_object_t obj, const char *sql_fmt, ...)
 }
 
 /*
-* º¯Êı: _dbc_result_gets
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj		dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		fmt 	¸ñÊ½»¯×Ö·û´®£¬ÀàËÆprintfº¯Êı¸ñÊ½
-*		args 	¸ñÊ½»¯²ÎÊıÁĞ±í£¬ÓÃÓÚ±£´æ»ñÈ¡µ½µÄÖµ
-* ·µ»Ø: unsigned int	»ñÈ¡³É¹¦×Ö¶ÎÊıÁ¿
-*		- 0 			Ê§°Ü
-* ËµÃ÷: fmt ¸ñÊ½: "fieldname1.%ul fieldname2.%s fieldname3.%s"
-*				fmt×Ö·û´®ÖĞ±ØĞëÊÇ[×Ö¶ÎÃû.¸ñÊ½»¯±êÊ¶]£¬¶à¸ö×Ö¶ÎÖ®¼äÓÃ¿Õ¸ñ¸ô¿ª
-*		... Îª¿É±ä²ÎÊı£¬Ã¿¸ö²ÎÊı´«²Î±ØĞë¼ÓÉÏÈ¡µØÖ··ûºÅ &
-*		¾ÙÀı: _dbc_result_gets(row, "name.%s sex.%s age.%d", &name, &sex, &age)
-*	--- ¸ñÊ½×Ö·û:
+* å‡½æ•°: _dbc_result_gets
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj		dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		fmt 	æ ¼å¼åŒ–å­—ç¬¦ä¸²ï¼Œç±»ä¼¼printfå‡½æ•°æ ¼å¼
+*		args 	æ ¼å¼åŒ–å‚æ•°åˆ—è¡¨ï¼Œç”¨äºä¿å­˜è·å–åˆ°çš„å€¼
+* è¿”å›: unsigned int	è·å–æˆåŠŸå­—æ®µæ•°é‡
+*		- 0 			å¤±è´¥
+* è¯´æ˜: fmt æ ¼å¼: "fieldname1.%ul fieldname2.%s fieldname3.%s"
+*				fmtå­—ç¬¦ä¸²ä¸­å¿…é¡»æ˜¯[å­—æ®µå.æ ¼å¼åŒ–æ ‡è¯†]ï¼Œå¤šä¸ªå­—æ®µä¹‹é—´ç”¨ç©ºæ ¼éš”å¼€
+*		... ä¸ºå¯å˜å‚æ•°ï¼Œæ¯ä¸ªå‚æ•°ä¼ å‚å¿…é¡»åŠ ä¸Šå–åœ°å€ç¬¦å· &
+*		ä¸¾ä¾‹: _dbc_result_gets(row, "name.%s sex.%s age.%d", &name, &sex, &age)
+*	--- æ ¼å¼å­—ç¬¦:
 *		%c / %uc: char / unsigned char
 *		%h / %uh: short / unsigned short
-*		%l / %ul: int / unsigned int(longÓëintÒ»Ñù)
-*		%i / %ui: int / unsigned int(longÓëintÒ»Ñù)
+*		%l / %ul: int / unsigned int(longä¸intä¸€æ ·)
+*		%i / %ui: int / unsigned int(longä¸intä¸€æ ·)
 *		%L / %uL: long long / unsigned long long
 *		%f: float
 *		%d: double
 *		%s: string
-*		%b: unsigned char * ¶ş½øÖÆ×Ö·û´®
-*		%t: time_t ±íÊ¾ÈÕÆÚºÍ/»òÊ±¼äµÄÊ±¼äÖµ
+*		%b: unsigned char * äºŒè¿›åˆ¶å­—ç¬¦ä¸²
+*		%t: time_t è¡¨ç¤ºæ—¥æœŸå’Œ/æˆ–æ—¶é—´çš„æ—¶é—´å€¼
 */
 static unsigned int _dbc_result_gets(
 	dbi_object_t obj, unsigned int rowidx, const char *fmt, ...)
@@ -103,13 +103,13 @@ static unsigned int _dbc_result_gets(
 }
 
 /*
-* º¯Êı: _dbc_result_get_char
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: char
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_char
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: char
+* è¯´æ˜: 
 */
 static char _dbc_result_get_char(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -131,13 +131,13 @@ static char _dbc_result_get_char(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_uchar
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: unsigned char
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_uchar
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: unsigned char
+* è¯´æ˜: 
 */
 static unsigned char _dbc_result_get_uchar(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -159,13 +159,13 @@ static unsigned char _dbc_result_get_uchar(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_short
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: short
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_short
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: short
+* è¯´æ˜: 
 */
 static short _dbc_result_get_short(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -187,13 +187,13 @@ static short _dbc_result_get_short(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_ushort
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: unsigned short
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_ushort
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: unsigned short
+* è¯´æ˜: 
 */
 static unsigned short _dbc_result_get_ushort(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -215,13 +215,13 @@ static unsigned short _dbc_result_get_ushort(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_int
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: int
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_int
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: int
+* è¯´æ˜: 
 */
 static int _dbc_result_get_int(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -243,13 +243,13 @@ static int _dbc_result_get_int(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_uint
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: unsigned int
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_uint
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: unsigned int
+* è¯´æ˜: 
 */
 static unsigned int _dbc_result_get_uint(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -271,13 +271,13 @@ static unsigned int _dbc_result_get_uint(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_long
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: long
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_long
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: long
+* è¯´æ˜: 
 */
 static long _dbc_result_get_long(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -299,13 +299,13 @@ static long _dbc_result_get_long(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_ulong
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: unsigned long
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_ulong
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: unsigned long
+* è¯´æ˜: 
 */
 static unsigned long _dbc_result_get_ulong(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -327,13 +327,13 @@ static unsigned long _dbc_result_get_ulong(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_longlong
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: long long
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_longlong
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: long long
+* è¯´æ˜: 
 */
 static long long _dbc_result_get_longlong(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -355,13 +355,13 @@ static long long _dbc_result_get_longlong(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_ulonglong
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: unsigned long long
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_ulonglong
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: unsigned long long
+* è¯´æ˜: 
 */
 static unsigned long long _dbc_result_get_ulonglong(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -383,13 +383,13 @@ static unsigned long long _dbc_result_get_ulonglong(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_float
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: float
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_float
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: float
+* è¯´æ˜: 
 */
 static float _dbc_result_get_float(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -411,13 +411,13 @@ static float _dbc_result_get_float(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_double
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: double
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_double
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: double
+* è¯´æ˜: 
 */
 static double _dbc_result_get_double(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -439,13 +439,13 @@ static double _dbc_result_get_double(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_string
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: const char *
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_string
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: const char *
+* è¯´æ˜: 
 */
 static const char *_dbc_result_get_string(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -467,13 +467,13 @@ static const char *_dbc_result_get_string(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_binary
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: const unsigned char *
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_binary
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: const unsigned char *
+* è¯´æ˜: 
 */
 static const unsigned char *_dbc_result_get_binary(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -495,13 +495,13 @@ static const unsigned char *_dbc_result_get_binary(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_datetime
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		field	×Ö¶ÎÃû
-* ·µ»Ø: time_t
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_datetime
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		field	å­—æ®µå
+* è¿”å›: time_t
+* è¯´æ˜: 
 */
 static time_t _dbc_result_get_datetime(dbi_object_t obj, 
 			unsigned int rowidx, const char *field)
@@ -524,13 +524,13 @@ static time_t _dbc_result_get_datetime(dbi_object_t obj,
 
 
 /*
-* º¯Êı: _dbc_result_get_char_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: char
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_char_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: char
+* è¯´æ˜: 
 */
 static char _dbc_result_get_char_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -552,13 +552,13 @@ static char _dbc_result_get_char_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_uchar_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned char
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_uchar_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned char
+* è¯´æ˜: 
 */
 static unsigned char _dbc_result_get_uchar_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -580,13 +580,13 @@ static unsigned char _dbc_result_get_uchar_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_short_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: short
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_short_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: short
+* è¯´æ˜: 
 */
 static short _dbc_result_get_short_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -608,13 +608,13 @@ static short _dbc_result_get_short_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_ushort_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned short
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_ushort_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned short
+* è¯´æ˜: 
 */
 static unsigned short _dbc_result_get_ushort_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -636,13 +636,13 @@ static unsigned short _dbc_result_get_ushort_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_int_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: int
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_int_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: int
+* è¯´æ˜: 
 */
 static int _dbc_result_get_int_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -664,13 +664,13 @@ static int _dbc_result_get_int_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_uint_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned int
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_uint_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned int
+* è¯´æ˜: 
 */
 static unsigned int _dbc_result_get_uint_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -692,13 +692,13 @@ static unsigned int _dbc_result_get_uint_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_long_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: long
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_long_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: long
+* è¯´æ˜: 
 */
 static long _dbc_result_get_long_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -720,13 +720,13 @@ static long _dbc_result_get_long_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_ulong_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned long
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_ulong_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned long
+* è¯´æ˜: 
 */
 static unsigned long _dbc_result_get_ulong_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -748,13 +748,13 @@ static unsigned long _dbc_result_get_ulong_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_longlong_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: long long
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_longlong_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: long long
+* è¯´æ˜: 
 */
 static long long _dbc_result_get_longlong_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -776,13 +776,13 @@ static long long _dbc_result_get_longlong_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_ulonglong_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned long long
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_ulonglong_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned long long
+* è¯´æ˜: 
 */
 static unsigned long long _dbc_result_get_ulonglong_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -804,13 +804,13 @@ static unsigned long long _dbc_result_get_ulonglong_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_float_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: float
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_float_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: float
+* è¯´æ˜: 
 */
 static float _dbc_result_get_float_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -832,13 +832,13 @@ static float _dbc_result_get_float_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_double_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: double
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_double_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: double
+* è¯´æ˜: 
 */
 static double _dbc_result_get_double_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -860,13 +860,13 @@ static double _dbc_result_get_double_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_string_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: const char *
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_string_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: const char *
+* è¯´æ˜: 
 */
 static const char *_dbc_result_get_string_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -888,13 +888,13 @@ static const char *_dbc_result_get_string_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_binary_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: const unsigned char *
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_binary_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: const unsigned char *
+* è¯´æ˜: 
 */
 static const unsigned char *_dbc_result_get_binary_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -916,13 +916,13 @@ static const unsigned char *_dbc_result_get_binary_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_get_datetime_by_colidx
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: obj 	dbi object
-*		rowidx	µÚ¼¸ĞĞ£¬´Ó1¿ªÊ¼
-*		columnidx	ÁĞºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: time_t
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_get_datetime_by_colidx
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: obj 	dbi object
+*		rowidx	ç¬¬å‡ è¡Œï¼Œä»1å¼€å§‹
+*		columnidx	åˆ—å·ï¼Œä»1å¼€å§‹
+* è¿”å›: time_t
+* è¯´æ˜: 
 */
 static time_t _dbc_result_get_datetime_by_colidx(dbi_object_t obj, 
 			unsigned int rowidx, unsigned int columnidx)
@@ -944,11 +944,11 @@ static time_t _dbc_result_get_datetime_by_colidx(dbi_object_t obj,
 }
 
 /*
-* º¯Êı: _dbc_result_count
-* ¹¦ÄÜ: »ñÈ¡µ±Ç°½á¹û¼¯ºÏÖĞ×ÜĞĞÊı
-* ²ÎÊı: obj			dbi ¶ÔÏó
-* ·µ»Ø: unsigned long long	ĞĞÊı
-* ËµÃ÷: 
+* å‡½æ•°: _dbc_result_count
+* åŠŸèƒ½: è·å–å½“å‰ç»“æœé›†åˆä¸­æ€»è¡Œæ•°
+* å‚æ•°: obj			dbi å¯¹è±¡
+* è¿”å›: unsigned long long	è¡Œæ•°
+* è¯´æ˜: 
 */
 static unsigned long long _dbc_result_count(dbi_object_t obj)
 {
@@ -962,20 +962,20 @@ static unsigned long long _dbc_result_count(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: dbc_connect
-* ¹¦ÄÜ: Á¬½ÓÊı¾İ¿â
-* ²ÎÊı: obj		¶ÔÏóÊµÀı
-*		args	Ò»Ğ©Êı¾İ¿âÏà¹ØµÄ²ÎÊı£¬±ÈÈçÁ¬½ÓÊı¾İ¿âĞèÒªµÄ²ÎÊı
-* ·µ»Ø: dbc_t	·µ»ØÒ»¸ödbc¶ÔÏó
-* ËµÃ÷: args½á¹¹ÌåÀïÃæµÄ²ÎÊı²¢·ÇËùÓĞ¶¼Òª¸³Öµ£¬Õë¶ÔÊı¾İ¿â²»Í¬£¬ËùĞè²ÎÊıÒ²²»Í¬
-*		±ÈÈçmysqlÊı¾İ¿âÓÃµ½µÄÊÇusername password hostname£¬¶øsqlite3ÓÃµ½µÄÔò
-*		ÊÇdbdirºÍdbname
-*		Ê¹ÓÃ·½·¨:
-*			ÒÔsqlite3ÎªÀı:
+* å‡½æ•°: dbc_connect
+* åŠŸèƒ½: è¿æ¥æ•°æ®åº“
+* å‚æ•°: obj		å¯¹è±¡å®ä¾‹
+*		args	ä¸€äº›æ•°æ®åº“ç›¸å…³çš„å‚æ•°ï¼Œæ¯”å¦‚è¿æ¥æ•°æ®åº“éœ€è¦çš„å‚æ•°
+* è¿”å›: dbc_t	è¿”å›ä¸€ä¸ªdbcå¯¹è±¡
+* è¯´æ˜: argsç»“æ„ä½“é‡Œé¢çš„å‚æ•°å¹¶éæ‰€æœ‰éƒ½è¦èµ‹å€¼ï¼Œé’ˆå¯¹æ•°æ®åº“ä¸åŒï¼Œæ‰€éœ€å‚æ•°ä¹Ÿä¸åŒ
+*		æ¯”å¦‚mysqlæ•°æ®åº“ç”¨åˆ°çš„æ˜¯username password hostnameï¼Œè€Œsqlite3ç”¨åˆ°çš„åˆ™
+*		æ˜¯dbdirå’Œdbname
+*		ä½¿ç”¨æ–¹æ³•:
+*			ä»¥sqlite3ä¸ºä¾‹:
 *			dbc_sql_args_t sql_args = {.dbdir="", .dbname=""};
 *			dbc_connect(obj, sql_args);
-*		Ö±½Ó¶¨ÒåÒ»¸öargs±äÁ¿²¢ÇÒ³õÊ¼»¯Öµ£¬ÔÙ½øĞĞ´«²Î£¬²»ĞèÒªÖ¸Õë²Ù×÷£¬
-*		½ö½öÖ»ÊÇÓÃÀ´´«µİ²ÎÊı¶øÒÑ£¬Õâ±¾ÊÇÉè¼ÆµÄ³õÖÔ
+*		ç›´æ¥å®šä¹‰ä¸€ä¸ªargså˜é‡å¹¶ä¸”åˆå§‹åŒ–å€¼ï¼Œå†è¿›è¡Œä¼ å‚ï¼Œä¸éœ€è¦æŒ‡é’ˆæ“ä½œï¼Œ
+*		ä»…ä»…åªæ˜¯ç”¨æ¥ä¼ é€’å‚æ•°è€Œå·²ï¼Œè¿™æœ¬æ˜¯è®¾è®¡çš„åˆè¡·
 */
 dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 {
@@ -1012,6 +1012,9 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 				c = f; \
 			} \
 		} while (0)
+
+	set_fun(dbc.lock, dbi_object_mutex_lock);
+	set_fun(dbc.unlock, dbi_object_mutex_unlock);
 
 	set_fun(dbc.disconnect, dbi_disconnect);
 
@@ -1056,7 +1059,7 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 	set_fun(dbc.result.get_string_by_colidx, _dbc_result_get_string_by_colidx);
 	set_fun(dbc.result.get_binary_by_colidx, _dbc_result_get_binary_by_colidx);
 	set_fun(dbc.result.get_datetime_by_colidx, _dbc_result_get_datetime_by_colidx);
-	
+
 	set_fun(dbc.result.count, _dbc_result_count);
 
 	dbc.valid = true;
@@ -1071,11 +1074,11 @@ dbc_t dbc_connect(dbi_object_t obj, dbc_sql_args_t args)
 }
 
 /*
-* º¯Êı: dbc_is_valid
-* ¹¦ÄÜ: ÅĞ¶ÏdbcÊÇ·ñÓĞĞ§
-* ²ÎÊı: dbc		dbcÊµÀı
-* ·µ»Ø: bool	false±íÊ¾ÎŞĞ§dbc
-* ËµÃ÷: ÔÚdbc_connectºó·µ»Ødbc£¬´ËÊ±Ó¦¸ÃÔÙµ÷ÓÃ´Ëº¯ÊıÀ´ÅĞ¶ÏdbcÊÇ·ñÓĞĞ§
+* å‡½æ•°: dbc_is_valid
+* åŠŸèƒ½: åˆ¤æ–­dbcæ˜¯å¦æœ‰æ•ˆ
+* å‚æ•°: dbc		dbcå®ä¾‹
+* è¿”å›: bool	falseè¡¨ç¤ºæ— æ•ˆdbc
+* è¯´æ˜: åœ¨dbc_connectåè¿”å›dbcï¼Œæ­¤æ—¶åº”è¯¥å†è°ƒç”¨æ­¤å‡½æ•°æ¥åˆ¤æ–­dbcæ˜¯å¦æœ‰æ•ˆ
 */
 bool dbc_is_valid(dbc_t dbc)
 {

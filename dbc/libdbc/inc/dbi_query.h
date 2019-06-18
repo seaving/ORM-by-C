@@ -4,83 +4,83 @@
 #include "dbi_object.h"
 
 /*
-* º¯Êı: dbi_query
-* ¹¦ÄÜ: Ö´ĞĞsqlÓï¾ä²¢·µ»Ø½á¹û
-* ²ÎÊı: obj		dbi¶ÔÏó
-*		sql		sqlÓï¾ä×Ö·û´®
-* ·µ»Ø: dbi_results_t	½á¹û¼¯ºÏ
-*		- NULL Ö´ĞĞÊ§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_query
+* åŠŸèƒ½: æ‰§è¡Œsqlè¯­å¥å¹¶è¿”å›ç»“æœ
+* å‚æ•°: obj		dbiå¯¹è±¡
+*		sql		sqlè¯­å¥å­—ç¬¦ä¸²
+* è¿”å›: dbi_results_t	ç»“æœé›†åˆ
+*		- NULL æ‰§è¡Œå¤±è´¥
+* è¯´æ˜: 
 */
 dbi_results_t dbi_query(dbi_object_t obj, const char *sql);
 
 /*
-* º¯Êı: dbi_query_by_statement_buf
-* ¹¦ÄÜ: Ö´ĞĞsqlÓï¾ä²¢·µ»Ø½á¹û
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: dbi_results_t	½á¹û¼¯ºÏ
-*		- NULL Ö´ĞĞÊ§°Ü
-* ËµÃ÷: sqlÓï¾äÀ´Ô´ÓÚobj³ÉÔ±statement
+* å‡½æ•°: dbi_query_by_statement_buf
+* åŠŸèƒ½: æ‰§è¡Œsqlè¯­å¥å¹¶è¿”å›ç»“æœ
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: dbi_results_t	ç»“æœé›†åˆ
+*		- NULL æ‰§è¡Œå¤±è´¥
+* è¯´æ˜: sqlè¯­å¥æ¥æºäºobjæˆå‘˜statement
 */
 dbi_results_t dbi_query_by_statement_buf(dbi_object_t obj);
 
 /*
-* º¯Êı: dbi_queryf
-* ¹¦ÄÜ: Ö´ĞĞsqlÓï¾ä²¢·µ»Ø½á¹û
-* ²ÎÊı: obj		dbi¶ÔÏó
-*		fmt		¸ñÊ½»¯×Ö·û´®£¬ÀàËÆprintf
-*		...		¸ñÊ½»¯²ÎÊıÁĞ±í
-* ·µ»Ø: dbi_results_t	½á¹û¼¯ºÏ
-*		- NULL Ö´ĞĞÊ§°Ü
-* ËµÃ÷: fmtºÍ... ¹²Í¬¹¹ÔìÒ»¸ösqlÓï¾ä×Ö·û´®
+* å‡½æ•°: dbi_queryf
+* åŠŸèƒ½: æ‰§è¡Œsqlè¯­å¥å¹¶è¿”å›ç»“æœ
+* å‚æ•°: obj		dbiå¯¹è±¡
+*		fmt		æ ¼å¼åŒ–å­—ç¬¦ä¸²ï¼Œç±»ä¼¼printf
+*		...		æ ¼å¼åŒ–å‚æ•°åˆ—è¡¨
+* è¿”å›: dbi_results_t	ç»“æœé›†åˆ
+*		- NULL æ‰§è¡Œå¤±è´¥
+* è¯´æ˜: fmtå’Œ... å…±åŒæ„é€ ä¸€ä¸ªsqlè¯­å¥å­—ç¬¦ä¸²
 */
 dbi_results_t dbi_queryf(dbi_object_t obj, const char *fmt, ...);
 
 /*
-* º¯Êı: dbi_queryf2
-* ¹¦ÄÜ: Ö´ĞĞsqlÓï¾ä²¢·µ»Ø½á¹û
-* ²ÎÊı: obj		dbi¶ÔÏó
-*		fmt		¸ñÊ½»¯×Ö·û´®£¬ÀàËÆprintf
-*		args	¸ñÊ½»¯²ÎÊıÁĞ±í
-* ·µ»Ø: dbi_results_t	½á¹û¼¯ºÏ
-*		- NULL Ö´ĞĞÊ§°Ü
-* ËµÃ÷: fmtºÍ... ¹²Í¬¹¹ÔìÒ»¸ösqlÓï¾ä×Ö·û´®
-*		¿ÉÒÔÓÃÓÚ¶ş¼¶´«²Î
+* å‡½æ•°: dbi_queryf2
+* åŠŸèƒ½: æ‰§è¡Œsqlè¯­å¥å¹¶è¿”å›ç»“æœ
+* å‚æ•°: obj		dbiå¯¹è±¡
+*		fmt		æ ¼å¼åŒ–å­—ç¬¦ä¸²ï¼Œç±»ä¼¼printf
+*		args	æ ¼å¼åŒ–å‚æ•°åˆ—è¡¨
+* è¿”å›: dbi_results_t	ç»“æœé›†åˆ
+*		- NULL æ‰§è¡Œå¤±è´¥
+* è¯´æ˜: fmtå’Œ... å…±åŒæ„é€ ä¸€ä¸ªsqlè¯­å¥å­—ç¬¦ä¸²
+*		å¯ä»¥ç”¨äºäºŒçº§ä¼ å‚
 */
 dbi_results_t dbi_queryf2(dbi_object_t obj, const char *sql_fmt, va_list args);
 
 /*
-* º¯Êı: dbi_query_db_list
-* ¹¦ÄÜ: ²éÑ¯Êı¾İ¿âÁĞ±í
-* ²ÎÊı: obj		dbi¶ÔÏó
-*		pattern	SQLÕıÔò±í´ïÊ½£¬Îª¿ÕÔò²éÑ¯ËùÓĞ¿ÉÓÃ
-* ·µ»Ø: dbi_results_t	½á¹û¼¯ºÏ
-*		- NULL ²éÑ¯Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_query_db_list
+* åŠŸèƒ½: æŸ¥è¯¢æ•°æ®åº“åˆ—è¡¨
+* å‚æ•°: obj		dbiå¯¹è±¡
+*		pattern	SQLæ­£åˆ™è¡¨è¾¾å¼ï¼Œä¸ºç©ºåˆ™æŸ¥è¯¢æ‰€æœ‰å¯ç”¨
+* è¿”å›: dbi_results_t	ç»“æœé›†åˆ
+*		- NULL æŸ¥è¯¢å¤±è´¥
+* è¯´æ˜: 
 */
 dbi_results_t dbi_query_db_list(dbi_object_t obj, const char *pattern);
 
 /*
-* º¯Êı: dbi_query_table_list
-* ¹¦ÄÜ: ²éÑ¯Êı¾İ±íÁĞ±í
-* ²ÎÊı: obj		dbi¶ÔÏó
-*		db		Êı¾İ¿â
-*		pattern	SQLÕıÔò±í´ïÊ½£¬Îª¿ÕÔò²éÑ¯ËùÓĞ¿ÉÓÃ
-* ·µ»Ø: dbi_results_t	½á¹û¼¯ºÏ
-*		- NULL ²éÑ¯Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_query_table_list
+* åŠŸèƒ½: æŸ¥è¯¢æ•°æ®è¡¨åˆ—è¡¨
+* å‚æ•°: obj		dbiå¯¹è±¡
+*		db		æ•°æ®åº“
+*		pattern	SQLæ­£åˆ™è¡¨è¾¾å¼ï¼Œä¸ºç©ºåˆ™æŸ¥è¯¢æ‰€æœ‰å¯ç”¨
+* è¿”å›: dbi_results_t	ç»“æœé›†åˆ
+*		- NULL æŸ¥è¯¢å¤±è´¥
+* è¯´æ˜: 
 */
 dbi_results_t dbi_query_table_list(dbi_object_t obj, 
 	const char *db, const char *pattern);
 
 /*
-* º¯Êı: dbi_switches_db
-* ¹¦ÄÜ: ÇĞ»»Êı¾İ¿â
-* ²ÎÊı: obj		dbi¶ÔÏó
-*		db		Êı¾İ¿â
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_switches_db
+* åŠŸèƒ½: åˆ‡æ¢æ•°æ®åº“
+* å‚æ•°: obj		dbiå¯¹è±¡
+*		db		æ•°æ®åº“
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_switches_db(dbi_object_t obj, const char *db);
 

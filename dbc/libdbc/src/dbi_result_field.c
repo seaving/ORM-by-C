@@ -11,11 +11,11 @@
 #include "dbi_misc.h"
 
 /*
-* º¯Êı: bdi_result_parse_field_formatstr
-* ¹¦ÄÜ: ½âÎöformat×Ö·û´®
-* ²ÎÊı: 
-* ·µ»Ø: 
-* ËµÃ÷: 
+* å‡½æ•°: bdi_result_parse_field_formatstr
+* åŠŸèƒ½: è§£æformatå­—ç¬¦ä¸²
+* å‚æ•°: 
+* è¿”å›: 
+* è¯´æ˜: 
 */
 unsigned int bdi_parse_field_formatstr(
 	const char *format, char ***tokens_dest, char ***fieldnames_dest)
@@ -73,11 +73,11 @@ unsigned int bdi_parse_field_formatstr(
 }
 
 /*
-* º¯Êı: dbi_free_string_list
-* ¹¦ÄÜ: 
-* ²ÎÊı: 
-* ·µ»Ø: 
-* ËµÃ÷: 
+* å‡½æ•°: dbi_free_string_list
+* åŠŸèƒ½: 
+* å‚æ•°: 
+* è¿”å›: 
+* è¯´æ˜: 
 */
 void dbi_free_string_list(char **ptrs, int total)
 {
@@ -97,12 +97,12 @@ void dbi_free_string_list(char **ptrs, int total)
 }
 
 /*
-* º¯Êı: dbi_result_field_get_length_by_fieldname
-* ¹¦ÄÜ: Í¨¹ıfieldname»ñÈ¡¸Ã×Ö¶ÎÄÚÈİµÄ³¤¶È
-* ²ÎÊı: row		½á¹û¼¯ºÏµÄĞĞ
-* ·µ»Ø: size_t
-* ËµÃ÷: ¶ÔÓÚ×Ö·û´®»òÕß¶ş½øÖÆ×Ö·û´®ÒÔÍâµÄ×Ö¶ÎÀàĞÍµÄÄÚÈİ³¤¶È·µ»Ø0
-*		ÀıÈç IntĞÍµÄ×Ö¶ÎÄÚÈİ³¤¶ÈÔò·µ»Ø0
+* å‡½æ•°: dbi_result_field_get_length_by_fieldname
+* åŠŸèƒ½: é€šè¿‡fieldnameè·å–è¯¥å­—æ®µå†…å®¹çš„é•¿åº¦
+* å‚æ•°: row		ç»“æœé›†åˆçš„è¡Œ
+* è¿”å›: size_t
+* è¯´æ˜: å¯¹äºå­—ç¬¦ä¸²æˆ–è€…äºŒè¿›åˆ¶å­—ç¬¦ä¸²ä»¥å¤–çš„å­—æ®µç±»å‹çš„å†…å®¹é•¿åº¦è¿”å›0
+*		ä¾‹å¦‚ Intå‹çš„å­—æ®µå†…å®¹é•¿åº¦åˆ™è¿”å›0
 */
 size_t dbi_result_field_get_length_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -116,14 +116,14 @@ size_t dbi_result_field_get_length_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_field_get_length_by_idx
-* ¹¦ÄÜ: Í¨¹ıĞòÁĞºÅ»ñÈ¡¸Ã×Ö¶ÎµÄ³¤¶È
-* ²ÎÊı: row		½á¹û¼¯ºÏµÄĞĞ
-*		idx		¸ÃĞĞµÄµÚ¼¸ÁĞ£¬ĞòºÅÊÇ´Ó1¿ªÊ¼µÄ
-* ·µ»Ø: size_t
-* ËµÃ÷: ĞòÁĞºÅÊÇ´Ó1¿ªÊ¼µÄ
-*		¶ÔÓÚ×Ö·û´®»òÕß¶ş½øÖÆ×Ö·û´®ÒÔÍâµÄ×Ö¶ÎÀàĞÍµÄÄÚÈİ³¤¶È·µ»Ø0
-*		ÀıÈç IntĞÍµÄ×Ö¶ÎÄÚÈİ³¤¶ÈÔò·µ»Ø0
+* å‡½æ•°: dbi_result_field_get_length_by_idx
+* åŠŸèƒ½: é€šè¿‡åºåˆ—å·è·å–è¯¥å­—æ®µçš„é•¿åº¦
+* å‚æ•°: row		ç»“æœé›†åˆçš„è¡Œ
+*		idx		è¯¥è¡Œçš„ç¬¬å‡ åˆ—ï¼Œåºå·æ˜¯ä»1å¼€å§‹çš„
+* è¿”å›: size_t
+* è¯´æ˜: åºåˆ—å·æ˜¯ä»1å¼€å§‹çš„
+*		å¯¹äºå­—ç¬¦ä¸²æˆ–è€…äºŒè¿›åˆ¶å­—ç¬¦ä¸²ä»¥å¤–çš„å­—æ®µç±»å‹çš„å†…å®¹é•¿åº¦è¿”å›0
+*		ä¾‹å¦‚ Intå‹çš„å­—æ®µå†…å®¹é•¿åº¦åˆ™è¿”å›0
 */
 size_t dbi_result_field_get_length_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -137,14 +137,14 @@ size_t dbi_result_field_get_length_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_field_get_idx
-* ¹¦ÄÜ: ²éÑ¯×Ö¶ÎÔÚrowÖĞµÄĞòºÅ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: unsigned int
-*		- > 0	¸Ã×Ö¶ÎµÄĞòºÅ
-*		- = 0	´íÎó
-* ËµÃ÷: ĞòÁĞºÅÊÇ´Ó1¿ªÊ¼µÄ
+* å‡½æ•°: dbi_result_field_get_idx
+* åŠŸèƒ½: æŸ¥è¯¢å­—æ®µåœ¨rowä¸­çš„åºå·
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: unsigned int
+*		- > 0	è¯¥å­—æ®µçš„åºå·
+*		- = 0	é”™è¯¯
+* è¯´æ˜: åºåˆ—å·æ˜¯ä»1å¼€å§‹çš„
 */
 unsigned int dbi_result_field_get_idx(
 	dbi_results_t row, const char *fieldname)
@@ -158,13 +158,13 @@ unsigned int dbi_result_field_get_idx(
 }
 
 /*
-* º¯Êı: dbi_result_field_get_name
-* ¹¦ÄÜ: ÔÚrowÖĞ²éÑ¯Ö¸¶¨ĞòºÅµÄ×Ö¶ÎÃû³Æ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: const char *
-*		- NULL		²éÑ¯Ê§°Ü
-* ËµÃ÷: ĞòÁĞºÅÊÇ´Ó1¿ªÊ¼µÄ
+* å‡½æ•°: dbi_result_field_get_name
+* åŠŸèƒ½: åœ¨rowä¸­æŸ¥è¯¢æŒ‡å®šåºå·çš„å­—æ®µåç§°
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: const char *
+*		- NULL		æŸ¥è¯¢å¤±è´¥
+* è¯´æ˜: åºåˆ—å·æ˜¯ä»1å¼€å§‹çš„
 */
 const char *dbi_result_field_get_name(
 	dbi_results_t row, unsigned int idx)
@@ -178,12 +178,12 @@ const char *dbi_result_field_get_name(
 }
 
 /*
-* º¯Êı: dbi_result_field_get_count
-* ¹¦ÄÜ: ÔÚrowÖĞÍ³¼Æ×Ö¶ÎÊıÁ¿
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-* ·µ»Ø: unsigned int
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_get_count
+* åŠŸèƒ½: åœ¨rowä¸­ç»Ÿè®¡å­—æ®µæ•°é‡
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+* è¿”å›: unsigned int
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned int dbi_result_field_get_count(dbi_results_t row)
 {
@@ -196,13 +196,13 @@ unsigned int dbi_result_field_get_count(dbi_results_t row)
 }
 
 /*
-* º¯Êı: dbi_result_field_get_type_by_fieldname
-* ¹¦ÄÜ: ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÀàĞÍ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû
-* ·µ»Ø: unsigned short
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_get_type_by_fieldname
+* åŠŸèƒ½: åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„ç±»å‹
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µå
+* è¿”å›: unsigned short
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned short dbi_result_field_get_type_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -216,13 +216,13 @@ unsigned short dbi_result_field_get_type_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_field_get_type_by_idx
-* ¹¦ÄÜ: ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÀàĞÍ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬ĞèÒª´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned short
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_get_type_by_idx
+* åŠŸèƒ½: åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„ç±»å‹
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œéœ€è¦ä»1å¼€å§‹
+* è¿”å›: unsigned short
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned short dbi_result_field_get_type_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -236,14 +236,14 @@ unsigned short dbi_result_field_get_type_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_field_is_null_value_by_fieldname
-* ¹¦ÄÜ: ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµÊÇ·ñÎª¿Õ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-*		- true		Îª¿Õ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_is_null_value_by_fieldname
+* åŠŸèƒ½: åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼æ˜¯å¦ä¸ºç©º
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: bool
+*		- false		å¤±è´¥
+*		- true		ä¸ºç©º
+* è¯´æ˜: 
 */
 bool dbi_result_field_is_null_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -257,14 +257,14 @@ bool dbi_result_field_is_null_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_field_is_null_value_by_idx
-* ¹¦ÄÜ: ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµÊÇ·ñÎª¿Õ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬ĞèÒª´Ó1¿ªÊ¼
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-*		- true		Îª¿Õ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_is_null_value_by_idx
+* åŠŸèƒ½: åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼æ˜¯å¦ä¸ºç©º
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œéœ€è¦ä»1å¼€å§‹
+* è¿”å›: bool
+*		- false		å¤±è´¥
+*		- true		ä¸ºç©º
+* è¯´æ˜: 
 */
 bool dbi_result_field_is_null_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -278,13 +278,13 @@ bool dbi_result_field_is_null_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_char_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: char
-*		- 0		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_char_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: char
+*		- 0		å¤±è´¥
+* è¯´æ˜: 
 */
 char dbi_result_get_char_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -298,13 +298,13 @@ char dbi_result_get_char_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_uchar_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: unsigned char
-*		- 0		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_uchar_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: unsigned char
+*		- 0		å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned char dbi_result_get_uchar_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -319,13 +319,13 @@ unsigned char dbi_result_get_uchar_value_by_fieldname(
 
 
 /*
-* º¯Êı: dbi_result_get_short_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: short
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_short_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: short
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 short dbi_result_get_short_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -339,13 +339,13 @@ short dbi_result_get_short_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_ushort_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: unsigned short
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_ushort_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: unsigned short
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned short dbi_result_get_ushort_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -359,13 +359,13 @@ unsigned short dbi_result_get_ushort_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_int_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: int
-*		- 0		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_int_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: int
+*		- 0		å¤±è´¥
+* è¯´æ˜: 
 */
 int dbi_result_get_int_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -379,13 +379,13 @@ int dbi_result_get_int_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_uint_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: unsigned int
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_uint_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: unsigned int
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned int dbi_result_get_uint_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -399,13 +399,13 @@ unsigned int dbi_result_get_uint_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_long_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: int
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_long_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: int
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 int dbi_result_get_long_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -414,13 +414,13 @@ int dbi_result_get_long_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_ulong_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: unsigned int
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_ulong_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: unsigned int
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned int dbi_result_get_ulong_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -429,13 +429,13 @@ unsigned int dbi_result_get_ulong_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_longlong_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: long long
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_longlong_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: long long
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 long long dbi_result_get_longlong_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -449,13 +449,13 @@ long long dbi_result_get_longlong_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_ulonglong_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: unsigned long long
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_ulonglong_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: unsigned long long
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned long long dbi_result_get_ulonglong_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -469,13 +469,13 @@ unsigned long long dbi_result_get_ulonglong_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_float_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: float
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_float_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: float
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 float dbi_result_get_float_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -489,13 +489,13 @@ float dbi_result_get_float_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_double_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: double
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_double_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: double
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 double dbi_result_get_double_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -509,13 +509,13 @@ double dbi_result_get_double_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_string_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: const char *
-*		- NULL		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_string_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: const char *
+*		- NULL		å¤±è´¥
+* è¯´æ˜: 
 */
 const char *dbi_result_get_string_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -529,13 +529,13 @@ const char *dbi_result_get_string_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_binary_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: const unsigned char *
-*		- NULL		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_binary_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: const unsigned char *
+*		- NULL		å¤±è´¥
+* è¯´æ˜: 
 */
 const unsigned char *dbi_result_get_binary_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -554,13 +554,13 @@ const unsigned char *dbi_result_get_binary_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_datetime_value_by_fieldname
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		fieldname	×Ö¶ÎÃû³Æ
-* ·µ»Ø: time_t
-*		- 0			Ê§°Ü
-* ËµÃ÷: ¿ÉÒÔÊ¹ÓÃ gmtime »òÕß localtime ×ª»»¿É¶Á¸ñÊ½
+* å‡½æ•°: dbi_result_get_datetime_value_by_fieldname
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		fieldname	å­—æ®µåç§°
+* è¿”å›: time_t
+*		- 0			å¤±è´¥
+* è¯´æ˜: å¯ä»¥ä½¿ç”¨ gmtime æˆ–è€… localtime è½¬æ¢å¯è¯»æ ¼å¼
 */
 time_t dbi_result_get_datetime_value_by_fieldname(
 	dbi_results_t row, const char *fieldname)
@@ -574,13 +574,13 @@ time_t dbi_result_get_datetime_value_by_fieldname(
 }
 
 /*
-* º¯Êı: dbi_result_get_char_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: char
-*		- 0		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_char_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: char
+*		- 0		å¤±è´¥
+* è¯´æ˜: 
 */
 char dbi_result_get_char_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -594,13 +594,13 @@ char dbi_result_get_char_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_uchar_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned char
-*		- 0		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_uchar_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned char
+*		- 0		å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned char dbi_result_get_uchar_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -614,13 +614,13 @@ unsigned char dbi_result_get_uchar_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_short_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: short
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_short_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: short
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 short dbi_result_get_short_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -634,13 +634,13 @@ short dbi_result_get_short_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_ushort_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned short
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_ushort_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned short
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned short dbi_result_get_ushort_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -654,13 +654,13 @@ unsigned short dbi_result_get_ushort_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_int_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: int
-*		- 0		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_int_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: int
+*		- 0		å¤±è´¥
+* è¯´æ˜: 
 */
 int dbi_result_get_int_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -674,13 +674,13 @@ int dbi_result_get_int_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_uint_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned int
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_uint_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned int
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned int dbi_result_get_uint_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -694,13 +694,13 @@ unsigned int dbi_result_get_uint_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_long_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: int
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_long_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: int
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 int dbi_result_get_long_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -709,13 +709,13 @@ int dbi_result_get_long_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_ulong_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned int
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_ulong_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned int
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned int dbi_result_get_ulong_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -724,13 +724,13 @@ unsigned int dbi_result_get_ulong_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_longlong_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: long long
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_longlong_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: long long
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 long long dbi_result_get_longlong_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -744,13 +744,13 @@ long long dbi_result_get_longlong_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_ulonglong_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: unsigned long long
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_ulonglong_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: unsigned long long
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 unsigned long long dbi_result_get_ulonglong_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -764,13 +764,13 @@ unsigned long long dbi_result_get_ulonglong_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_float_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: float
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_float_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: float
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 float dbi_result_get_float_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -784,13 +784,13 @@ float dbi_result_get_float_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_double_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: double
-*		- 0			Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_double_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: double
+*		- 0			å¤±è´¥
+* è¯´æ˜: 
 */
 double dbi_result_get_double_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -804,13 +804,13 @@ double dbi_result_get_double_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_string_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: const char *
-*		- NULL		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_string_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: const char *
+*		- NULL		å¤±è´¥
+* è¯´æ˜: 
 */
 const char *dbi_result_get_string_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -824,13 +824,13 @@ const char *dbi_result_get_string_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_binary_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: const unsigned char *
-*		- NULL		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_get_binary_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: const unsigned char *
+*		- NULL		å¤±è´¥
+* è¯´æ˜: 
 */
 const unsigned char *dbi_result_get_binary_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -849,13 +849,13 @@ const unsigned char *dbi_result_get_binary_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_get_datetime_value_by_idx
-* ¹¦ÄÜ: »ñÈ¡ÔÚrowÖĞÖ¸¶¨×Ö¶ÎµÄÖµ
-* ²ÎÊı: row			½á¹û¼¯ºÏµÄĞĞ
-*		idx			ĞòºÅ£¬´Ó1¿ªÊ¼
-* ·µ»Ø: time_t
-*		- 0			Ê§°Ü
-* ËµÃ÷: ¿ÉÒÔÊ¹ÓÃ gmtime »òÕß localtime ×ª»»¿É¶Á¸ñÊ½
+* å‡½æ•°: dbi_result_get_datetime_value_by_idx
+* åŠŸèƒ½: è·å–åœ¨rowä¸­æŒ‡å®šå­—æ®µçš„å€¼
+* å‚æ•°: row			ç»“æœé›†åˆçš„è¡Œ
+*		idx			åºå·ï¼Œä»1å¼€å§‹
+* è¿”å›: time_t
+*		- 0			å¤±è´¥
+* è¯´æ˜: å¯ä»¥ä½¿ç”¨ gmtime æˆ–è€… localtime è½¬æ¢å¯è¯»æ ¼å¼
 */
 time_t dbi_result_get_datetime_value_by_idx(
 	dbi_results_t row, unsigned int idx)
@@ -869,14 +869,14 @@ time_t dbi_result_get_datetime_value_by_idx(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_char_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_char_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_char_value(
 	dbi_results_t result, const char *fieldname, char value)
@@ -890,14 +890,14 @@ bool dbi_result_field_bind_char_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_uchar_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_uchar_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_uchar_value(
 	dbi_results_t result, const char *fieldname, unsigned char value)
@@ -911,14 +911,14 @@ bool dbi_result_field_bind_uchar_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_short_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_short_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_short_value(
 	dbi_results_t result, const char *fieldname, short value)
@@ -932,14 +932,14 @@ bool dbi_result_field_bind_short_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_ushort_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_ushort_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_ushort_value(
 	dbi_results_t result, const char *fieldname, unsigned short value)
@@ -953,14 +953,14 @@ bool dbi_result_field_bind_ushort_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_int_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_int_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_int_value(
 	dbi_results_t result, const char *fieldname, int value)
@@ -974,14 +974,14 @@ bool dbi_result_field_bind_int_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_uint_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_uint_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_uint_value(
 	dbi_results_t result, const char *fieldname, unsigned int value)
@@ -995,14 +995,14 @@ bool dbi_result_field_bind_uint_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_long_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_long_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_long_value(
 	dbi_results_t result, const char *fieldname, long value)
@@ -1011,14 +1011,14 @@ bool dbi_result_field_bind_long_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_ulong_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_ulong_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_ulong_value(
 	dbi_results_t result, const char *fieldname, unsigned long value)
@@ -1027,14 +1027,14 @@ bool dbi_result_field_bind_ulong_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_longlong_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_longlong_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_longlong_value(
 	dbi_results_t result, const char *fieldname, long long value)
@@ -1048,14 +1048,14 @@ bool dbi_result_field_bind_longlong_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_ulonglong_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_ulonglong_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_ulonglong_value(
 	dbi_results_t result, const char *fieldname, unsigned long long value)
@@ -1069,14 +1069,14 @@ bool dbi_result_field_bind_ulonglong_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_float_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_float_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_float_value(
 	dbi_results_t result, const char *fieldname, float value)
@@ -1090,14 +1090,14 @@ bool dbi_result_field_bind_float_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_double_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏµÄĞĞ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_double_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆçš„è¡Œ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_double_value(
 	dbi_results_t result, const char *fieldname, double value)
@@ -1111,14 +1111,14 @@ bool dbi_result_field_bind_double_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_string_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_string_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_string_value(
 	dbi_results_t result, const char *fieldname, const char *value)
@@ -1132,14 +1132,14 @@ bool dbi_result_field_bind_string_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_binary_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result		½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_binary_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result		ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_binary_value(
 	dbi_results_t result, const char *fieldname, const unsigned char *value)
@@ -1153,14 +1153,14 @@ bool dbi_result_field_bind_binary_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bind_datetime_value
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result			½á¹û¼¯ºÏ
-*		fieldname 	×Ö¶ÎÃû
-*		value		°ó¶¨µÄÖµ
-* ·µ»Ø: bool
-*		- false		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_result_field_bind_datetime_value
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result			ç»“æœé›†åˆ
+*		fieldname 	å­—æ®µå
+*		value		ç»‘å®šçš„å€¼
+* è¿”å›: bool
+*		- false		å¤±è´¥
+* è¯´æ˜: 
 */
 bool dbi_result_field_bind_datetime_value(
 	dbi_results_t result, const char *fieldname, time_t value)
@@ -1174,27 +1174,27 @@ bool dbi_result_field_bind_datetime_value(
 }
 
 /*
-* º¯Êı: dbi_result_field_bindf
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞÅúÁ¿ĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result	½á¹û¼¯ºÏ
-*		fmt 	¸ñÊ½»¯×Ö·û´®£¬ÀàËÆprintfº¯Êı¸ñÊ½
-*		... 	¸ñÊ½»¯²ÎÊıÁĞ±í
-* ·µ»Ø: unsigned int	°ó¶¨³É¹¦×Ö¶ÎÊıÁ¿
-*		- 0 			Ê§°Ü
-* ËµÃ÷: fmt ¸ñÊ½: "fieldname1.%ul fieldname2.%s fieldname3.%s"
-*				fmt×Ö·û´®ÖĞ±ØĞëÊÇ[×Ö¶ÎÃû.¸ñÊ½»¯±êÊ¶]£¬¶à¸ö×Ö¶ÎÖ®¼äÓÃ¿Õ¸ñ¸ô¿ª
-*		¾ÙÀı: dbi_result_row_add(row, "name.%s sex.%s age.%d", name, sex, age)
-*	--- ¸ñÊ½×Ö·û:
+* å‡½æ•°: dbi_result_field_bindf
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ‰¹é‡æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result	ç»“æœé›†åˆ
+*		fmt 	æ ¼å¼åŒ–å­—ç¬¦ä¸²ï¼Œç±»ä¼¼printfå‡½æ•°æ ¼å¼
+*		... 	æ ¼å¼åŒ–å‚æ•°åˆ—è¡¨
+* è¿”å›: unsigned int	ç»‘å®šæˆåŠŸå­—æ®µæ•°é‡
+*		- 0 			å¤±è´¥
+* è¯´æ˜: fmt æ ¼å¼: "fieldname1.%ul fieldname2.%s fieldname3.%s"
+*				fmtå­—ç¬¦ä¸²ä¸­å¿…é¡»æ˜¯[å­—æ®µå.æ ¼å¼åŒ–æ ‡è¯†]ï¼Œå¤šä¸ªå­—æ®µä¹‹é—´ç”¨ç©ºæ ¼éš”å¼€
+*		ä¸¾ä¾‹: dbi_result_row_add(row, "name.%s sex.%s age.%d", name, sex, age)
+*	--- æ ¼å¼å­—ç¬¦:
 *		%c / %uc: char / unsigned char
 *		%h / %uh: short / unsigned short
-*		%l / %ul: int / unsigned int(longÓëintÒ»Ñù)
-*		%i / %ui: int / unsigned int(longÓëintÒ»Ñù)
+*		%l / %ul: int / unsigned int(longä¸intä¸€æ ·)
+*		%i / %ui: int / unsigned int(longä¸intä¸€æ ·)
 *		%L / %uL: long long / unsigned long long
 *		%f: float
 *		%d: double
 *		%s: string
-*		%b: unsigned char * ¶ş½øÖÆ×Ö·û´®
-*		%t: time_t ±íÊ¾ÈÕÆÚºÍ/»òÊ±¼äµÄÊ±¼äÖµ
+*		%b: unsigned char * äºŒè¿›åˆ¶å­—ç¬¦ä¸²
+*		%t: time_t è¡¨ç¤ºæ—¥æœŸå’Œ/æˆ–æ—¶é—´çš„æ—¶é—´å€¼
 */
 unsigned int dbi_result_field_bindf(
 	dbi_results_t result, const char *format, ...)
@@ -1209,27 +1209,27 @@ unsigned int dbi_result_field_bindf(
 }
 
 /*
-* º¯Êı: dbi_result_field_bindf2
-* ¹¦ÄÜ: ÔÚresult¼¯ºÏÖĞÅúÁ¿ĞÂÔö×Ö¶ÎºÍÖµ
-* ²ÎÊı: result	½á¹û¼¯ºÏ
-*		fmt 	¸ñÊ½»¯×Ö·û´®£¬ÀàËÆprintfº¯Êı¸ñÊ½
-*		args 	¸ñÊ½»¯²ÎÊıÁĞ±í
-* ·µ»Ø: unsigned int	°ó¶¨³É¹¦×Ö¶ÎÊıÁ¿
-*		- 0 			Ê§°Ü
-* ËµÃ÷: fmt ¸ñÊ½: "fieldname1.%ul fieldname2.%s fieldname3.%s"
-*				fmt×Ö·û´®ÖĞ±ØĞëÊÇ[×Ö¶ÎÃû.¸ñÊ½»¯±êÊ¶]£¬¶à¸ö×Ö¶ÎÖ®¼äÓÃ¿Õ¸ñ¸ô¿ª
-*		¾ÙÀı: dbi_result_row_add(row, "name.%s sex.%s age.%d", name, sex, age)
-*	--- ¸ñÊ½×Ö·û:
+* å‡½æ•°: dbi_result_field_bindf2
+* åŠŸèƒ½: åœ¨resulté›†åˆä¸­æ‰¹é‡æ–°å¢å­—æ®µå’Œå€¼
+* å‚æ•°: result	ç»“æœé›†åˆ
+*		fmt 	æ ¼å¼åŒ–å­—ç¬¦ä¸²ï¼Œç±»ä¼¼printfå‡½æ•°æ ¼å¼
+*		args 	æ ¼å¼åŒ–å‚æ•°åˆ—è¡¨
+* è¿”å›: unsigned int	ç»‘å®šæˆåŠŸå­—æ®µæ•°é‡
+*		- 0 			å¤±è´¥
+* è¯´æ˜: fmt æ ¼å¼: "fieldname1.%ul fieldname2.%s fieldname3.%s"
+*				fmtå­—ç¬¦ä¸²ä¸­å¿…é¡»æ˜¯[å­—æ®µå.æ ¼å¼åŒ–æ ‡è¯†]ï¼Œå¤šä¸ªå­—æ®µä¹‹é—´ç”¨ç©ºæ ¼éš”å¼€
+*		ä¸¾ä¾‹: dbi_result_row_add(row, "name.%s sex.%s age.%d", name, sex, age)
+*	--- æ ¼å¼å­—ç¬¦:
 *		%c / %uc: char / unsigned char
 *		%h / %uh: short / unsigned short
-*		%l / %ul: int / unsigned int(longÓëintÒ»Ñù)
-*		%i / %ui: int / unsigned int(longÓëintÒ»Ñù)
+*		%l / %ul: int / unsigned int(longä¸intä¸€æ ·)
+*		%i / %ui: int / unsigned int(longä¸intä¸€æ ·)
 *		%L / %uL: long long / unsigned long long
 *		%f: float
 *		%d: double
 *		%s: string
-*		%b: unsigned char * ¶ş½øÖÆ×Ö·û´®
-*		%t: time_t ±íÊ¾ÈÕÆÚºÍ/»òÊ±¼äµÄÊ±¼äÖµ
+*		%b: unsigned char * äºŒè¿›åˆ¶å­—ç¬¦ä¸²
+*		%t: time_t è¡¨ç¤ºæ—¥æœŸå’Œ/æˆ–æ—¶é—´çš„æ—¶é—´å€¼
 */
 unsigned int dbi_result_field_bindf2(
 	dbi_results_t result, const char *format, va_list args)
@@ -1266,7 +1266,7 @@ unsigned int dbi_result_field_bindf2(
 		uflag = strlen(tokens[curidx]) > 1 && tokens[curidx][0] == 'u';
 		switch (tokens[curidx][strlen(tokens[curidx]) - 1])
 		{
-			//¶ÔÓÚva_arg()¿É±ä²ÎÊıÀàĞÍĞèÒªÏòÉÏÌáÉı
+			//å¯¹äºva_arg()å¯å˜å‚æ•°ç±»å‹éœ€è¦å‘ä¸Šæå‡
 			//char short / uchar ushort -> int / uint
 			//float -> double
 			case 'c':
@@ -1386,7 +1386,7 @@ unsigned int dbi_result_field_bindf2(
 					"dbi_result_field_bind_binary_value error!\n");
 				break;
 			}
-			case 't': //datetime Êµ¼ÊÊÇtime_t
+			case 't': //datetime å®é™…æ˜¯time_t
 			{
 				assert_return(
 					dbi_result_field_bind_datetime_value(
@@ -1410,28 +1410,28 @@ unsigned int dbi_result_field_bindf2(
 }
 
 /*
-* º¯Êı: dbi_result_field_get_values
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: result	½á¹û¼¯ºÏ
-*		fmt 	¸ñÊ½»¯×Ö·û´®£¬ÀàËÆprintfº¯Êı¸ñÊ½
-*		... 	¸ñÊ½»¯²ÎÊıÁĞ±í£¬ÓÃÓÚ±£´æ»ñÈ¡µ½µÄÖµ
-* ·µ»Ø: unsigned int	»ñÈ¡³É¹¦×Ö¶ÎÊıÁ¿
-*		- 0 			Ê§°Ü
-* ËµÃ÷: fmt ¸ñÊ½: "fieldname1.%ul fieldname2.%s fieldname3.%s"
-*				fmt×Ö·û´®ÖĞ±ØĞëÊÇ[×Ö¶ÎÃû.¸ñÊ½»¯±êÊ¶]£¬¶à¸ö×Ö¶ÎÖ®¼äÓÃ¿Õ¸ñ¸ô¿ª
-*		... Îª¿É±ä²ÎÊı£¬Ã¿¸ö²ÎÊı´«²Î±ØĞë¼ÓÉÏÈ¡µØÖ··ûºÅ &
-*		¾ÙÀı: dbi_result_field_get_values(row, "name.%s sex.%s age.%d", &name, &sex, &age)
-*	--- ¸ñÊ½×Ö·û:
+* å‡½æ•°: dbi_result_field_get_values
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: result	ç»“æœé›†åˆ
+*		fmt 	æ ¼å¼åŒ–å­—ç¬¦ä¸²ï¼Œç±»ä¼¼printfå‡½æ•°æ ¼å¼
+*		... 	æ ¼å¼åŒ–å‚æ•°åˆ—è¡¨ï¼Œç”¨äºä¿å­˜è·å–åˆ°çš„å€¼
+* è¿”å›: unsigned int	è·å–æˆåŠŸå­—æ®µæ•°é‡
+*		- 0 			å¤±è´¥
+* è¯´æ˜: fmt æ ¼å¼: "fieldname1.%ul fieldname2.%s fieldname3.%s"
+*				fmtå­—ç¬¦ä¸²ä¸­å¿…é¡»æ˜¯[å­—æ®µå.æ ¼å¼åŒ–æ ‡è¯†]ï¼Œå¤šä¸ªå­—æ®µä¹‹é—´ç”¨ç©ºæ ¼éš”å¼€
+*		... ä¸ºå¯å˜å‚æ•°ï¼Œæ¯ä¸ªå‚æ•°ä¼ å‚å¿…é¡»åŠ ä¸Šå–åœ°å€ç¬¦å· &
+*		ä¸¾ä¾‹: dbi_result_field_get_values(row, "name.%s sex.%s age.%d", &name, &sex, &age)
+*	--- æ ¼å¼å­—ç¬¦:
 *		%c / %uc: char / unsigned char
 *		%h / %uh: short / unsigned short
-*		%l / %ul: int / unsigned int(longÓëintÒ»Ñù)
-*		%i / %ui: int / unsigned int(longÓëintÒ»Ñù)
+*		%l / %ul: int / unsigned int(longä¸intä¸€æ ·)
+*		%i / %ui: int / unsigned int(longä¸intä¸€æ ·)
 *		%L / %uL: long long / unsigned long long
 *		%f: float
 *		%d: double
 *		%s: string
-*		%b: unsigned char * ¶ş½øÖÆ×Ö·û´®
-*		%t: time_t ±íÊ¾ÈÕÆÚºÍ/»òÊ±¼äµÄÊ±¼äÖµ
+*		%b: unsigned char * äºŒè¿›åˆ¶å­—ç¬¦ä¸²
+*		%t: time_t è¡¨ç¤ºæ—¥æœŸå’Œ/æˆ–æ—¶é—´çš„æ—¶é—´å€¼
 */
 unsigned int dbi_result_field_get_values(
 	dbi_results_t row, const char *format, ...)
@@ -1446,28 +1446,28 @@ unsigned int dbi_result_field_get_values(
 }
 
 /*
-* º¯Êı: dbi_result_field_get_values2
-* ¹¦ÄÜ: ÔÚrowÖĞÅúÁ¿»ñÈ¡×Ö¶ÎµÄÖµ
-* ²ÎÊı: result	½á¹û¼¯ºÏ
-*		fmt 	¸ñÊ½»¯×Ö·û´®£¬ÀàËÆprintfº¯Êı¸ñÊ½
-*		args 	¸ñÊ½»¯²ÎÊıÁĞ±í£¬ÓÃÓÚ±£´æ»ñÈ¡µ½µÄÖµ
-* ·µ»Ø: unsigned int	»ñÈ¡³É¹¦×Ö¶ÎÊıÁ¿
-*		- 0 			Ê§°Ü
-* ËµÃ÷: fmt ¸ñÊ½: "fieldname1.%ul fieldname2.%s fieldname3.%s"
-*				fmt×Ö·û´®ÖĞ±ØĞëÊÇ[×Ö¶ÎÃû.¸ñÊ½»¯±êÊ¶]£¬¶à¸ö×Ö¶ÎÖ®¼äÓÃ¿Õ¸ñ¸ô¿ª
-*		... Îª¿É±ä²ÎÊı£¬Ã¿¸ö²ÎÊı´«²Î±ØĞë¼ÓÉÏÈ¡µØÖ··ûºÅ &
-*		¾ÙÀı: dbi_result_field_get_values(row, "name.%s sex.%s age.%d", &name, &sex, &age)
-*	--- ¸ñÊ½×Ö·û:
+* å‡½æ•°: dbi_result_field_get_values2
+* åŠŸèƒ½: åœ¨rowä¸­æ‰¹é‡è·å–å­—æ®µçš„å€¼
+* å‚æ•°: result	ç»“æœé›†åˆ
+*		fmt 	æ ¼å¼åŒ–å­—ç¬¦ä¸²ï¼Œç±»ä¼¼printfå‡½æ•°æ ¼å¼
+*		args 	æ ¼å¼åŒ–å‚æ•°åˆ—è¡¨ï¼Œç”¨äºä¿å­˜è·å–åˆ°çš„å€¼
+* è¿”å›: unsigned int	è·å–æˆåŠŸå­—æ®µæ•°é‡
+*		- 0 			å¤±è´¥
+* è¯´æ˜: fmt æ ¼å¼: "fieldname1.%ul fieldname2.%s fieldname3.%s"
+*				fmtå­—ç¬¦ä¸²ä¸­å¿…é¡»æ˜¯[å­—æ®µå.æ ¼å¼åŒ–æ ‡è¯†]ï¼Œå¤šä¸ªå­—æ®µä¹‹é—´ç”¨ç©ºæ ¼éš”å¼€
+*		... ä¸ºå¯å˜å‚æ•°ï¼Œæ¯ä¸ªå‚æ•°ä¼ å‚å¿…é¡»åŠ ä¸Šå–åœ°å€ç¬¦å· &
+*		ä¸¾ä¾‹: dbi_result_field_get_values(row, "name.%s sex.%s age.%d", &name, &sex, &age)
+*	--- æ ¼å¼å­—ç¬¦:
 *		%c / %uc: char / unsigned char
 *		%h / %uh: short / unsigned short
-*		%l / %ul: int / unsigned int(longÓëintÒ»Ñù)
-*		%i / %ui: int / unsigned int(longÓëintÒ»Ñù)
+*		%l / %ul: int / unsigned int(longä¸intä¸€æ ·)
+*		%i / %ui: int / unsigned int(longä¸intä¸€æ ·)
 *		%L / %uL: long long / unsigned long long
 *		%f: float
 *		%d: double
 *		%s: string
-*		%b: unsigned char * ¶ş½øÖÆ×Ö·û´®
-*		%t: time_t ±íÊ¾ÈÕÆÚºÍ/»òÊ±¼äµÄÊ±¼äÖµ
+*		%b: unsigned char * äºŒè¿›åˆ¶å­—ç¬¦ä¸²
+*		%t: time_t è¡¨ç¤ºæ—¥æœŸå’Œ/æˆ–æ—¶é—´çš„æ—¶é—´å€¼
 */
 unsigned int dbi_result_field_get_values2(
 	dbi_results_t row, const char *format, va_list args)

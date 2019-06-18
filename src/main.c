@@ -21,7 +21,7 @@ static void _dbc_test_create()
 					   "ADDRESS        CHAR(50),"
 					   "SALARY         REAL"
 					");", TABLE_NAME_1);
-	
+
 	dbc.exec(obj, "CREATE TABLE IF NOT EXISTS %s("
 					   "ID INT PRIMARY KEY     NOT NULL,"
 					   "NAME           TEXT    NOT NULL,"
@@ -278,57 +278,61 @@ int main(int argc, char **argv)
 		.dbdir = ".",
 		.dbname = "test.db",
 	};
-	
+
 	obj = dbi_object_new();
 	dbc = dbc_connect(obj, dbc_args);
 
+	dbc.lock(obj);
+
 	LOG_DEBUG_TRACE("*************************************\n");
 	
-	//½¨±í
+	//å»ºè¡¨
 	_dbc_test_create();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//²åÈë
+	//æ’å…¥
 	_dbc_test_insert();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//²é¿´²åÈëºóµÄ±íÊı¾İ
+	//æŸ¥çœ‹æ’å…¥åçš„è¡¨æ•°æ®
 	_dbc_test_select();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//É¾³ı¼ÇÂ¼
+	//åˆ é™¤è®°å½•
 	_dbc_test_delete();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//²é¿´É¾³ıºóµÄ±íÊı¾İ
+	//æŸ¥çœ‹åˆ é™¤åçš„è¡¨æ•°æ®
 	_dbc_test_select();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//¸üĞÂÊı¾İ
+	//æ›´æ–°æ•°æ®
 	_dbc_test_update();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//²é¿´¸üĞÂºóµÄ±íÊı¾İ
+	//æŸ¥çœ‹æ›´æ–°åçš„è¡¨æ•°æ®
 	_dbc_test_select();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//¿½±´Êı¾İ¿âÊı¾İµ½ÁíÍâÒ»¸öÊı¾İ¿â
+	//æ‹·è´æ•°æ®åº“æ•°æ®åˆ°å¦å¤–ä¸€ä¸ªæ•°æ®åº“
 	_dbc_test_insertfrom();
 
-	//²é¿´¿½±´ºóµÄÊı¾İ¿âÊı¾İ
+	//æŸ¥çœ‹æ‹·è´åçš„æ•°æ®åº“æ•°æ®
 	_dbc_test_select();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//join²âÊÔ
+	//joinæµ‹è¯•
 	_dbc_test_join();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	//²âÊÔÊÂÎñ
+	//æµ‹è¯•äº‹åŠ¡
 	_dbc_test_transaction();
 	
-	//²é¿´ÊÂÎñºóµÄÊı¾İ¿âÊı¾İ
+	//æŸ¥çœ‹äº‹åŠ¡åçš„æ•°æ®åº“æ•°æ®
 	_dbc_test_select();
 	LOG_DEBUG_TRACE("*************************************\n");
+
+	dbc.unlock(obj);
 
 	dbc.disconnect(obj);
 	dbi_object_delete(obj);

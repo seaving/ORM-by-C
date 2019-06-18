@@ -11,11 +11,11 @@
 #include "dbi_misc.h"
 
 /*
-* º¯Êı: dbi_driver_list_debug
-* ¹¦ÄÜ: Êä³öÖ§³ÖµÄÇı¶¯ÁĞ±í
-* ²ÎÊı: obj		¶ÔÏóÊµÀı
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_driver_list_debug
+* åŠŸèƒ½: è¾“å‡ºæ”¯æŒçš„é©±åŠ¨åˆ—è¡¨
+* å‚æ•°: obj		å¯¹è±¡å®ä¾‹
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_driver_list_debug(dbi_object_t obj)
 {

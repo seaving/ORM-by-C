@@ -11,12 +11,12 @@
 #include "dbi_misc.h"
 
 /*
-* º¯Êı: dbi_object_new
-* ¹¦ÄÜ: ´´½¨¶ÔÏóÊµÀı
-* ²ÎÊı: ÎŞ
-* ·µ»Ø: dbi¶ÔÏó
-*		- 0		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_new
+* åŠŸèƒ½: åˆ›å»ºå¯¹è±¡å®ä¾‹
+* å‚æ•°: æ— 
+* è¿”å›: dbiå¯¹è±¡
+*		- 0		å¤±è´¥
+* è¯´æ˜: 
 */
 dbi_object_t dbi_object_new()
 {
@@ -29,6 +29,7 @@ dbi_object_t dbi_object_new()
 		return (dbi_object_t) NULL;
 	}
 
+	pthread_mutex_init(&instance->lock, NULL);
 	ret = dbi_initialize_r("/usr/local/lib/dbd", &instance->instance);
 	if (ret < 0)
 	{
@@ -49,11 +50,11 @@ dbi_object_t dbi_object_new()
 }
 
 /*
-* º¯Êı: dbi_object_delete
-* ¹¦ÄÜ: Ïú»Ù¶ÔÏóÊµÀı
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_delete
+* åŠŸèƒ½: é”€æ¯å¯¹è±¡å®ä¾‹
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_object_delete(dbi_object_t obj)
 {
@@ -72,17 +73,50 @@ void dbi_object_delete(dbi_object_t obj)
 		{
 			dbi_shutdown_r(instance->instance);
 		}
+		pthread_mutex_destroy(&instance->lock);
 		free(instance);
 	}
 }
 
 /*
-* º¯Êı: dbi_object_statement_compose
-* ¹¦ÄÜ: ¹¹ÔìsqlÓï¾ä
-* ²ÎÊı: obj			dbi¶ÔÏó
-*		statement	Óï¾ä
-* ·µ»Ø: int		µ±Ç°³¤¶È
-* ËµÃ÷: 
+* ??: dbi_object_mutex_lock
+* ??: ???
+* ??: obj			dbi??
+* ??: ?
+* ??: 
+*/
+void dbi_object_mutex_lock(dbi_object_t obj)
+{
+	dbi_instance_t *instance = (dbi_instance_t *) obj;
+	if (instance)
+	{
+		pthread_mutex_lock(&instance->lock);
+	}
+}
+
+/*
+* ??: dbi_object_mutex_unlock
+* ??: ???
+* ??: obj			dbi??
+* ??: ?
+* ??: 
+*/
+void dbi_object_mutex_unlock(dbi_object_t obj)
+{
+	dbi_instance_t *instance = (dbi_instance_t *) obj;
+	if (instance)
+	{
+		pthread_mutex_unlock(&instance->lock);
+	}
+}
+
+/*
+* ??: dbi_object_statement_compose
+* ??: ??sql??
+* ??: obj			dbi??
+*		statement	??
+* ??: int		????
+* ??: 
 */
 int dbi_object_statement_compose(dbi_object_t obj, char *statement)
 {
@@ -102,13 +136,13 @@ int dbi_object_statement_compose(dbi_object_t obj, char *statement)
 }
 
 /*
-* º¯Êı: dbi_object_statement_composef
-* ¹¦ÄÜ: ¹¹ÔìsqlÓï¾ä
-* ²ÎÊı: obj			dbi¶ÔÏó
-*		fmt			¸ñÊ½»¯Óï¾ä
-*		...			²ÎÊıÁĞ±í
-* ·µ»Ø: int		µ±Ç°³¤¶È
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_composef
+* åŠŸèƒ½: æ„é€ sqlè¯­å¥
+* å‚æ•°: obj			dbiå¯¹è±¡
+*		fmt			æ ¼å¼åŒ–è¯­å¥
+*		...			å‚æ•°åˆ—è¡¨
+* è¿”å›: int		å½“å‰é•¿åº¦
+* è¯´æ˜: 
 */
 int dbi_object_statement_composef(dbi_object_t obj, char *fmt, ...)
 {
@@ -139,13 +173,13 @@ int dbi_object_statement_composef(dbi_object_t obj, char *fmt, ...)
 }
 
 /*
-* º¯Êı: dbi_object_statement_composef2
-* ¹¦ÄÜ: ¹¹ÔìsqlÓï¾ä
-* ²ÎÊı: obj			dbi¶ÔÏó
-*		fmt			¸ñÊ½»¯Óï¾ä
-*		args		²ÎÊıÁĞ±í
-* ·µ»Ø: int		µ±Ç°³¤¶È
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_composef2
+* åŠŸèƒ½: æ„é€ sqlè¯­å¥
+* å‚æ•°: obj			dbiå¯¹è±¡
+*		fmt			æ ¼å¼åŒ–è¯­å¥
+*		args		å‚æ•°åˆ—è¡¨
+* è¿”å›: int		å½“å‰é•¿åº¦
+* è¯´æ˜: 
 */
 int dbi_object_statement_composef2(dbi_object_t obj, char *fmt, va_list args)
 {
@@ -176,11 +210,11 @@ int dbi_object_statement_composef2(dbi_object_t obj, char *fmt, va_list args)
 }
 
 /*
-* º¯Êı: dbi_object_statement_clear_buf
-* ¹¦ÄÜ: Çå¿ÕsqlÓï¾äbufµÄÖ¸Õë
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_clear_buf
+* åŠŸèƒ½: æ¸…ç©ºsqlè¯­å¥bufçš„æŒ‡é’ˆ
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_object_statement_clear_buf(dbi_object_t obj)
 {
@@ -192,11 +226,11 @@ void dbi_object_statement_clear_buf(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: dbi_object_statement_get_buf
-* ¹¦ÄÜ: »ñÈ¡sqlÓï¾äbufµÄÖ¸Õë
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_get_buf
+* åŠŸèƒ½: è·å–sqlè¯­å¥bufçš„æŒ‡é’ˆ
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 char *dbi_object_statement_get_buf(dbi_object_t obj)
 {
@@ -210,14 +244,14 @@ char *dbi_object_statement_get_buf(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: dbi_object_get_results
-* ¹¦ÄÜ: »ñÈ¡½á¹û¼¯
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: dbi_results_t
-*		- NULL	Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_get_results
+* åŠŸèƒ½: è·å–ç»“æœé›†
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: dbi_results_t
+*		- NULL	å¤±è´¥
+* è¯´æ˜: 
 */
-dbi_results_t *dbi_object_get_results(dbi_object_t obj)
+dbi_results_t dbi_object_get_results(dbi_object_t obj)
 {
 	dbi_instance_t *instance = (dbi_instance_t *) obj;
 	if (instance)

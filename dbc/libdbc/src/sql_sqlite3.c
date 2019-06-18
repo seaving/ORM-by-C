@@ -80,12 +80,12 @@ dbc_t sqlite3 = {
 };
 /******************************************************************************/
 /*
-* º¯Êı: sum
-* ¹¦ÄÜ: »ã×Ü£¬±¾ÖÊÒ²ÊÇ¹¹Ôì×Ö·û´®
-* ²ÎÊı: field		±»Í³¼ÆµÄ×Ö¶Î
-* ·µ»Ø: char *
-*		- NULL		Ê§°Ü
-* ËµÃ÷: ÅäºÏselectÊ¹ÓÃ
+* å‡½æ•°: sum
+* åŠŸèƒ½: æ±‡æ€»ï¼Œæœ¬è´¨ä¹Ÿæ˜¯æ„é€ å­—ç¬¦ä¸²
+* å‚æ•°: field		è¢«ç»Ÿè®¡çš„å­—æ®µ
+* è¿”å›: char *
+*		- NULL		å¤±è´¥
+* è¯´æ˜: é…åˆselectä½¿ç”¨
 */
 static const char *_sql_sqlite3_fun_sum(const char *field)
 {
@@ -95,12 +95,12 @@ static const char *_sql_sqlite3_fun_sum(const char *field)
 }
 
 /*
-* º¯Êı: count
-* ¹¦ÄÜ: Í³¼ÆÊıÁ¿£¬±¾ÖÊÒ²ÊÇ¹¹Ôì×Ö·û´®
-* ²ÎÊı: field		±»Í³¼ÆµÄ×Ö¶Î
-* ·µ»Ø: char *
-*		- NULL		Ê§°Ü
-* ËµÃ÷: ÅäºÏselectÊ¹ÓÃ
+* å‡½æ•°: count
+* åŠŸèƒ½: ç»Ÿè®¡æ•°é‡ï¼Œæœ¬è´¨ä¹Ÿæ˜¯æ„é€ å­—ç¬¦ä¸²
+* å‚æ•°: field		è¢«ç»Ÿè®¡çš„å­—æ®µ
+* è¿”å›: char *
+*		- NULL		å¤±è´¥
+* è¯´æ˜: é…åˆselectä½¿ç”¨
 */
 static const char *_sql_sqlite3_fun_count(const char *field)
 {
@@ -110,12 +110,12 @@ static const char *_sql_sqlite3_fun_count(const char *field)
 }
 
 /*
-* º¯Êı: distinct
-* ¹¦ÄÜ: È¥ÖØ£¬±¾ÖÊÒ²ÊÇ¹¹Ôì×Ö·û´®
-* ²ÎÊı: field		È¥ÖØ×Ö¶Î
-* ·µ»Ø: char *
-*		- NULL		Ê§°Ü
-* ËµÃ÷: ÅäºÏselectÊ¹ÓÃ
+* å‡½æ•°: distinct
+* åŠŸèƒ½: å»é‡ï¼Œæœ¬è´¨ä¹Ÿæ˜¯æ„é€ å­—ç¬¦ä¸²
+* å‚æ•°: field		å»é‡å­—æ®µ
+* è¿”å›: char *
+*		- NULL		å¤±è´¥
+* è¯´æ˜: é…åˆselectä½¿ç”¨
 */
 static const char *_sql_sqlite3_fun_distinct(const char *field)
 {
@@ -125,12 +125,12 @@ static const char *_sql_sqlite3_fun_distinct(const char *field)
 }
 
 /*
-* º¯Êı: _sql_sqlite3_fun_max
-* ¹¦ÄÜ: »ñÈ¡×Ö¶Î×î´óÖµ
-* ²ÎÊı: field		×Ö¶Î
-* ·µ»Ø: char *
-*		- NULL		Ê§°Ü
-* ËµÃ÷: ÅäºÏselectÊ¹ÓÃ
+* å‡½æ•°: _sql_sqlite3_fun_max
+* åŠŸèƒ½: è·å–å­—æ®µæœ€å¤§å€¼
+* å‚æ•°: field		å­—æ®µ
+* è¿”å›: char *
+*		- NULL		å¤±è´¥
+* è¯´æ˜: é…åˆselectä½¿ç”¨
 */
 static const char *_sql_sqlite3_fun_max(const char *field)
 {
@@ -141,16 +141,16 @@ static const char *_sql_sqlite3_fun_max(const char *field)
 /******************************************************************************/
 
 /*
-* º¯Êı: _sql_sqlite3_filter_and
-* ¹¦ÄÜ: ¹¹ÔìÌõ¼ş£¬sqlÓï¾äÖĞµÄANDÌõ¼ş
-*		¸Ãº¯Êı×Ô¶¯»á°ÑAND¼ÓÉÏ£¬²»ĞèÒªÓÃ»§´¦Àí
-*		ÓÃ»§Ö»ĞèÒª°´ÕÕ×Ö·û´®µÄĞÎÊ½°ÑÌõ¼ş´«²Î
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		condition_fmt	Ìõ¼şÓï¾ä¸ñÊ½»¯
-*		... 			²ÎÊıÁĞ±í
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ¹æ¶¨conditionÖ»ÄÜÊÇÒ»¸öÅĞ¶ÏÓï¾ä
+* å‡½æ•°: _sql_sqlite3_filter_and
+* åŠŸèƒ½: æ„é€ æ¡ä»¶ï¼Œsqlè¯­å¥ä¸­çš„ANDæ¡ä»¶
+*		è¯¥å‡½æ•°è‡ªåŠ¨ä¼šæŠŠANDåŠ ä¸Šï¼Œä¸éœ€è¦ç”¨æˆ·å¤„ç†
+*		ç”¨æˆ·åªéœ€è¦æŒ‰ç…§å­—ç¬¦ä¸²çš„å½¢å¼æŠŠæ¡ä»¶ä¼ å‚
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		condition_fmt	æ¡ä»¶è¯­å¥æ ¼å¼åŒ–
+*		... 			å‚æ•°åˆ—è¡¨
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: è§„å®šconditionåªèƒ½æ˜¯ä¸€ä¸ªåˆ¤æ–­è¯­å¥
 *	e.g. _sql_sqlite3_filter_and(obj, "name != 'jorry'")
 *	e.g. _sql_sqlite3_filter_and(obj, "age > 20")
 *	e.g. _sql_sqlite3_filter_and(obj, "age == %d", age)
@@ -191,16 +191,16 @@ static bool _sql_sqlite3_filter_and(dbi_object_t obj, char *condition_fmt, ...)
 }
 
 /*
-* º¯Êı: _sql_sqlite3_filter_or
-* ¹¦ÄÜ: ¹¹ÔìÌõ¼ş£¬sqlÓï¾äÖĞµÄORÌõ¼ş
-*		¸Ãº¯Êı×Ô¶¯»á°ÑOR¼ÓÉÏ£¬²»ĞèÒªÓÃ»§´¦Àí
-*		ÓÃ»§Ö»ĞèÒª°´ÕÕ×Ö·û´®µÄĞÎÊ½°ÑÌõ¼ş´«²Î
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		condition_fmt	Ìõ¼şÓï¾ä¸ñÊ½»¯
-*		... 			²ÎÊıÁĞ±í
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ¹æ¶¨conditionÖ»ÄÜÊÇÒ»¸öÅĞ¶ÏÓï¾ä
+* å‡½æ•°: _sql_sqlite3_filter_or
+* åŠŸèƒ½: æ„é€ æ¡ä»¶ï¼Œsqlè¯­å¥ä¸­çš„ORæ¡ä»¶
+*		è¯¥å‡½æ•°è‡ªåŠ¨ä¼šæŠŠORåŠ ä¸Šï¼Œä¸éœ€è¦ç”¨æˆ·å¤„ç†
+*		ç”¨æˆ·åªéœ€è¦æŒ‰ç…§å­—ç¬¦ä¸²çš„å½¢å¼æŠŠæ¡ä»¶ä¼ å‚
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		condition_fmt	æ¡ä»¶è¯­å¥æ ¼å¼åŒ–
+*		... 			å‚æ•°åˆ—è¡¨
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: è§„å®šconditionåªèƒ½æ˜¯ä¸€ä¸ªåˆ¤æ–­è¯­å¥
 *	e.g. _sql_sqlite3_filter_or(obj, "name != 'jorry'")
 *	e.g. _sql_sqlite3_filter_or(obj, "age > 20")
 *	e.g. _sql_sqlite3_filter_or(obj, "age == %d", age)
@@ -240,14 +240,14 @@ static bool _sql_sqlite3_filter_or(dbi_object_t obj, char *condition_fmt, ...)
 	return true;
 }
 /*
-* º¯Êı: _sql_sqlite3_filter_limit
-* ¹¦ÄÜ: ¹¹ÔìÌõ¼ş£¬sqlÓï¾äÖĞµÄLIMIT OFFSETÃüÁî
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		offset			Æ«ÒÆµ½µÚ¼¸ĞĞ
-*		limit_			µ½offset+limit_ĞĞ½áÊø
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ¸Ãº¯Êı½áºÏselectÊ¹ÓÃ
+* å‡½æ•°: _sql_sqlite3_filter_limit
+* åŠŸèƒ½: æ„é€ æ¡ä»¶ï¼Œsqlè¯­å¥ä¸­çš„LIMIT OFFSETå‘½ä»¤
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		offset			åç§»åˆ°ç¬¬å‡ è¡Œ
+*		limit_			åˆ°offset+limit_è¡Œç»“æŸ
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: è¯¥å‡½æ•°ç»“åˆselectä½¿ç”¨
 */
 static bool _sql_sqlite3_filter_limit(dbi_object_t obj, 
 	unsigned int offset, unsigned int limit)
@@ -262,13 +262,13 @@ static bool _sql_sqlite3_filter_limit(dbi_object_t obj,
 }
 /******************************************************************************/
 /*
-* º¯Êı: _sql_sqlite3_join_inner
-* ¹¦ÄÜ: ÄÚÁ¬½Ó
-* ²ÎÊı: obj 		¶ÔÏóÊµÀı
-*		tbname		±íÃû³Æ
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: _sql_sqlite3_join_inner
+* åŠŸèƒ½: å†…è¿æ¥
+* å‚æ•°: obj 		å¯¹è±¡å®ä¾‹
+*		tbname		è¡¨åç§°
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: 
 */
 static bool _sql_sqlite3_join_inner(dbi_object_t obj, const char *tbname)
 {
@@ -296,13 +296,13 @@ static bool _sql_sqlite3_join_inner(dbi_object_t obj, const char *tbname)
 }
 /******************************************************************************/
 /*
-* º¯Êı: _sql_sqlite3_query
-* ¹¦ÄÜ: Ö´ĞĞsql
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: Ö´ĞĞËùÓĞµÄinsert£¬delete£¬update£¬selectµÈsql²Ù×÷º¯Êıºó
-*		±ØĞë×îÖÕµ÷ÓÃqueryÀ´ÕæÕıµÄÈÃÊı¾İ¿âÒıÇæÖ´ĞĞsql²Ù×÷²¢ÇÒ·µ»Ø½á¹û
+* å‡½æ•°: _sql_sqlite3_query
+* åŠŸèƒ½: æ‰§è¡Œsql
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: æ‰§è¡Œæ‰€æœ‰çš„insertï¼Œdeleteï¼Œupdateï¼Œselectç­‰sqlæ“ä½œå‡½æ•°å
+*		å¿…é¡»æœ€ç»ˆè°ƒç”¨queryæ¥çœŸæ­£çš„è®©æ•°æ®åº“å¼•æ“æ‰§è¡Œsqlæ“ä½œå¹¶ä¸”è¿”å›ç»“æœ
 */
 static bool _sql_sqlite3_query(dbi_object_t obj)
 {
@@ -321,18 +321,18 @@ static bool _sql_sqlite3_query(dbi_object_t obj)
 }
 /******************************************************************************/
 /*
-* º¯Êı: _sql_sqlite3_insert
-* ¹¦ÄÜ: ²åÈë²Ù×÷
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		tbname			±íÃû
-*		fields			×Ö¶ÎÁĞ±í
-*		values_fmt		ÖµÁĞ±í
-*		...				²ÎÊıÁĞ±í
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ×Ö¶ÎÁĞ±íÊÇ×Ö·û´®¸ñÊ½: "field1, field2, field3, field4" ÓÃ¶ººÅ¸ô¿ª
-*		ÖµÁĞ±íÊÇ×Ö·û´®¸ñÊ½: "value1, value2, value3, value4" ÓÃ¶ººÅ¸ô¿ª
-*		ÖµÁĞ±íÖĞÈç¹ûÓĞÖµÊÇ×Ö·û´®£¬±ØĞë¼ÓÉÏ''ºÅ£¬Òª×ñ´ÓsqlÓï¾ä¸ñÊ½
+* å‡½æ•°: _sql_sqlite3_insert
+* åŠŸèƒ½: æ’å…¥æ“ä½œ
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		tbname			è¡¨å
+*		fields			å­—æ®µåˆ—è¡¨
+*		values_fmt		å€¼åˆ—è¡¨
+*		...				å‚æ•°åˆ—è¡¨
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: å­—æ®µåˆ—è¡¨æ˜¯å­—ç¬¦ä¸²æ ¼å¼: "field1, field2, field3, field4" ç”¨é€—å·éš”å¼€
+*		å€¼åˆ—è¡¨æ˜¯å­—ç¬¦ä¸²æ ¼å¼: "value1, value2, value3, value4" ç”¨é€—å·éš”å¼€
+*		å€¼åˆ—è¡¨ä¸­å¦‚æœæœ‰å€¼æ˜¯å­—ç¬¦ä¸²ï¼Œå¿…é¡»åŠ ä¸Š''å·ï¼Œè¦éµä»sqlè¯­å¥æ ¼å¼
 */
 static bool _sql_sqlite3_insert(
 	dbi_object_t obj, const char *tbname, 
@@ -377,14 +377,14 @@ static bool _sql_sqlite3_insert(
 }
 
 /*
-* º¯Êı: _sql_sqlite3_insert_many
-* ¹¦ÄÜ: ÅúÁ¿²åÈë²Ù×÷
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		tbname			±íÃû
-*		fields			×Ö¶ÎÁĞ±í
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ×Ö¶ÎÁĞ±íÊÇ×Ö·û´®¸ñÊ½: "field1, field2, field3, field4" ÓÃ¶ººÅ¸ô¿ª
+* å‡½æ•°: _sql_sqlite3_insert_many
+* åŠŸèƒ½: æ‰¹é‡æ’å…¥æ“ä½œ
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		tbname			è¡¨å
+*		fields			å­—æ®µåˆ—è¡¨
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: å­—æ®µåˆ—è¡¨æ˜¯å­—ç¬¦ä¸²æ ¼å¼: "field1, field2, field3, field4" ç”¨é€—å·éš”å¼€
 */
 static bool _sql_sqlite3_insert_many(
 	dbi_object_t obj, const char *tbname, const char *fields)
@@ -401,16 +401,16 @@ static bool _sql_sqlite3_insert_many(
 }
 
 /*
-* º¯Êı: _sql_sqlite3_value_add
-* ¹¦ÄÜ: Ôö¼ÓÒ»ÌõÊı¾İÖµ£¬ÅäºÏinsert_manyÊ¹ÓÃ
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		tbname			±íÃû
-*		values_fmt		ÖµÁĞ±í
-*		... 			²ÎÊıÁĞ±í
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ÖµÁĞ±íÊÇ×Ö·û´®¸ñÊ½: "value1, value2, value3, value4" ÓÃ¶ººÅ¸ô¿ª
-*		¸Ã·½·¨ÊÇ·şÎñÓÚinsert_manyµÄ
+* å‡½æ•°: _sql_sqlite3_value_add
+* åŠŸèƒ½: å¢åŠ ä¸€æ¡æ•°æ®å€¼ï¼Œé…åˆinsert_manyä½¿ç”¨
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		tbname			è¡¨å
+*		values_fmt		å€¼åˆ—è¡¨
+*		... 			å‚æ•°åˆ—è¡¨
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: å€¼åˆ—è¡¨æ˜¯å­—ç¬¦ä¸²æ ¼å¼: "value1, value2, value3, value4" ç”¨é€—å·éš”å¼€
+*		è¯¥æ–¹æ³•æ˜¯æœåŠ¡äºinsert_manyçš„
 */
 static bool _sql_sqlite3_value_add(dbi_object_t obj, const char *values_fmt, ...)
 {
@@ -458,15 +458,15 @@ static bool _sql_sqlite3_value_add(dbi_object_t obj, const char *values_fmt, ...
 }
 
 /*
-* º¯Êı: _sql_sqlite3_insertfrom
-* ¹¦ÄÜ: ²åÈë²Ù×÷
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		tbname			±íÃû
-*		fields			×Ö¶ÎÁĞ±í- *ºÅ»òÕßÎª¿Õ×Ö·û´®»òÕßNULL±íÊ¾ËùÓĞ×Ö¶Î
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ×Ö¶ÎÁĞ±íÊÇ×Ö·û´®¸ñÊ½: "field1, field2, field3, field4" ÓÃ¶ººÅ¸ô¿ª
-*		ÅäºÏselectÊ¹ÓÃ£¬´ÓÆäËû±í»ñÈ¡Êı¾İ²¢²åÈëµ½±¾±í
+* å‡½æ•°: _sql_sqlite3_insertfrom
+* åŠŸèƒ½: æ’å…¥æ“ä½œ
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		tbname			è¡¨å
+*		fields			å­—æ®µåˆ—è¡¨- *å·æˆ–è€…ä¸ºç©ºå­—ç¬¦ä¸²æˆ–è€…NULLè¡¨ç¤ºæ‰€æœ‰å­—æ®µ
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: å­—æ®µåˆ—è¡¨æ˜¯å­—ç¬¦ä¸²æ ¼å¼: "field1, field2, field3, field4" ç”¨é€—å·éš”å¼€
+*		é…åˆselectä½¿ç”¨ï¼Œä»å…¶ä»–è¡¨è·å–æ•°æ®å¹¶æ’å…¥åˆ°æœ¬è¡¨
 */
 static bool _sql_sqlite3_insertfrom(
 	dbi_object_t obj, const char *tbname, const char *fields)
@@ -501,15 +501,15 @@ static bool _sql_sqlite3_insertfrom(
 }
 
 /*
-* º¯Êı: _sql_sqlite3_delete
-* ¹¦ÄÜ: ¸üĞÂ²Ù×÷
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		tbname			±íÃû³Æ
-*		set_fmt 		×Ö¶Î¸³Öµ¸ñÊ½»¯Óï¾ä
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ½áºÏfilterÖĞÌá¹©µÄ·½·¨¹¹ÔìÌõ¼ş
-*		set_fmt ¸ñÊ½×ñ´ÓsqlÓï·¨£¬"field1=value1, field2='value2', field3='value3'"
+* å‡½æ•°: _sql_sqlite3_delete
+* åŠŸèƒ½: æ›´æ–°æ“ä½œ
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		tbname			è¡¨åç§°
+*		set_fmt 		å­—æ®µèµ‹å€¼æ ¼å¼åŒ–è¯­å¥
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: ç»“åˆfilterä¸­æä¾›çš„æ–¹æ³•æ„é€ æ¡ä»¶
+*		set_fmt æ ¼å¼éµä»sqlè¯­æ³•ï¼Œ"field1=value1, field2='value2', field3='value3'"
 */
 static bool _sql_sqlite3_delete(
 	dbi_object_t obj, const char *tbname)
@@ -525,14 +525,14 @@ static bool _sql_sqlite3_delete(
 }
 
 /*
-* º¯Êı: _sql_sqlite3_update
-* ¹¦ÄÜ: ¸üĞÂÊı¾İ
-* ²ÎÊı: obj				¶ÔÏóÊµÀı
-*		tbname			±íÃû³Æ
-*		set_fmt			×Ö¶Î¸³Öµ¸ñÊ½»¯Óï¾ä
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: set_fmt×ñ´ÓsqlÓï·¨
+* å‡½æ•°: _sql_sqlite3_update
+* åŠŸèƒ½: æ›´æ–°æ•°æ®
+* å‚æ•°: obj				å¯¹è±¡å®ä¾‹
+*		tbname			è¡¨åç§°
+*		set_fmt			å­—æ®µèµ‹å€¼æ ¼å¼åŒ–è¯­å¥
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: set_fmtéµä»sqlè¯­æ³•
 */
 static bool _sql_sqlite3_update(
 	dbi_object_t obj, const char *tbname, 
@@ -567,16 +567,16 @@ static bool _sql_sqlite3_update(
 }
 
 /*
-* º¯Êı: _sql_sqlite3_select
-* ¹¦ÄÜ: ²éÑ¯²Ù×÷
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-*		tbname			±íÃû³Æ
-*		field1			Òª²éÑ¯µÄ×Ö¶Î£¬*ºÅ±íÊ¾ËùÓĞ×Ö¶Î
-*		...				×Ö¶ÎÁĞ±í
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: ½áºÏfilterÖĞÌá¹©µÄ·½·¨¹¹ÔìÌõ¼ş
-*		¿É±ä²ÎÊıÁĞ±í±ØĞëÒÔNULL½áÎ²£¬·ñÔò³ÌĞò»áÄÚ´æÒç³ö
+* å‡½æ•°: _sql_sqlite3_select
+* åŠŸèƒ½: æŸ¥è¯¢æ“ä½œ
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+*		tbname			è¡¨åç§°
+*		field1			è¦æŸ¥è¯¢çš„å­—æ®µï¼Œ*å·è¡¨ç¤ºæ‰€æœ‰å­—æ®µ
+*		...				å­—æ®µåˆ—è¡¨
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: ç»“åˆfilterä¸­æä¾›çš„æ–¹æ³•æ„é€ æ¡ä»¶
+*		å¯å˜å‚æ•°åˆ—è¡¨å¿…é¡»ä»¥NULLç»“å°¾ï¼Œå¦åˆ™ç¨‹åºä¼šå†…å­˜æº¢å‡º
 *		_sql_sqlite3_select(obj, taname, "field1", "field2", "count(name)", NULL);
 */
 static bool _sql_sqlite3_select(
@@ -598,7 +598,7 @@ static bool _sql_sqlite3_select(
 	}
 
 	va_start(ap, field1);
-	len += strlen(field1) + 1 + 1; // Ò»¸ö¶ººÅ Ò»¸ö¿Õ¸ñ
+	len += strlen(field1) + 1 + 1; // ä¸€ä¸ªé€—å· ä¸€ä¸ªç©ºæ ¼
 	for (cnt = 1; (field = va_arg(ap, const char *)) != NULL; cnt ++)
 	{
 		len += strlen(field) + 1 + 1;
@@ -634,12 +634,12 @@ static bool _sql_sqlite3_select(
 }
 /******************************************************************************/
 /*
-* º¯Êı: _sql_sqlite3_begin
-* ¹¦ÄÜ: ÊÂÎñ¿ªÊ¼
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: _sql_sqlite3_begin
+* åŠŸèƒ½: äº‹åŠ¡å¼€å§‹
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: 
 */
 static bool _sql_sqlite3_begin(dbi_object_t obj)
 {
@@ -652,12 +652,12 @@ static bool _sql_sqlite3_begin(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: _sql_sqlite3_commit
-* ¹¦ÄÜ: Ìá½»ÊÂÎñ
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: _sql_sqlite3_commit
+* åŠŸèƒ½: æäº¤äº‹åŠ¡
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: 
 */
 static bool _sql_sqlite3_commit(dbi_object_t obj)
 {
@@ -676,12 +676,12 @@ static bool _sql_sqlite3_commit(dbi_object_t obj)
 }
 
 /*
-* º¯Êı: _sql_sqlite3_rollback
-* ¹¦ÄÜ: »Ø¹ö
-* ²ÎÊı: obj 			¶ÔÏóÊµÀı
-* ·µ»Ø: bool
-*		- false Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: _sql_sqlite3_rollback
+* åŠŸèƒ½: å›æ»š
+* å‚æ•°: obj 			å¯¹è±¡å®ä¾‹
+* è¿”å›: bool
+*		- false å¤±è´¥
+* è¯´æ˜: 
 */
 static bool _sql_sqlite3_rollback(dbi_object_t obj)
 {

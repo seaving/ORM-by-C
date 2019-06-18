@@ -5,14 +5,14 @@
 * @Description: The function interface
 *
 
-libdbi ĞèÒªÏÈ±àÒë°²×°libdbi¿ò¼Ü£¬ÔÙ°²×°libdbi driver
-ÔÚ°²×°driverÊ±ºò£¬ĞèÒª°²×°Êı¾İ¿âµÄlibÎÄ¼ş
-¾ÙÀı:
-	sqlite3 driver°²×°:
-		ÏÈ°²×°libsqlite3£¬´Ó¹ÙÍøÏÂÔØ×îĞÂµÄsqlite£¬±àÒë°²×°
-		Æä´Îµ½libdbi driverÔ´ÂëÖĞÖ´ĞĞ ./configure --with-sqlite3½øĞĞ°²×°driver
-		×¢Òâ: sqlite3°æ±¾¾¡Á¿Ñ¡ÔñĞÂ°æ±¾£¬ÀÏ°æ±¾±àÒë³öÀ´µÄsqlite¿â»áÈ±ÉÙº¯Êı£¬²»ÄÜ
-		ÓëlibdbiÏàÆ¥Åä£¬µ¼ÖÂÎŞ·¨¼ÓÔØdriver
+libdbi éœ€è¦å…ˆç¼–è¯‘å®‰è£…libdbiæ¡†æ¶ï¼Œå†å®‰è£…libdbi driver
+åœ¨å®‰è£…driveræ—¶å€™ï¼Œéœ€è¦å®‰è£…æ•°æ®åº“çš„libæ–‡ä»¶
+ä¸¾ä¾‹:
+	sqlite3 driverå®‰è£…:
+		å…ˆå®‰è£…libsqlite3ï¼Œä»å®˜ç½‘ä¸‹è½½æœ€æ–°çš„sqliteï¼Œç¼–è¯‘å®‰è£…
+		å…¶æ¬¡åˆ°libdbi driveræºç ä¸­æ‰§è¡Œ ./configure --with-sqlite3è¿›è¡Œå®‰è£…driver
+		æ³¨æ„: sqlite3ç‰ˆæœ¬å°½é‡é€‰æ‹©æ–°ç‰ˆæœ¬ï¼Œè€ç‰ˆæœ¬ç¼–è¯‘å‡ºæ¥çš„sqliteåº“ä¼šç¼ºå°‘å‡½æ•°ï¼Œä¸èƒ½
+		ä¸libdbiç›¸åŒ¹é…ï¼Œå¯¼è‡´æ— æ³•åŠ è½½driver
 ********************************************************************************/
 
 #ifndef __DBI_OBJECT_H__
@@ -41,6 +41,8 @@ typedef struct __dbi_instance__
 	char encoding[20];
 	char version[64];
 	int query_log;
+
+	pthread_mutex_t lock;
 } dbi_instance_t;
 
 typedef intptr_t dbi_object_t;
@@ -49,92 +51,110 @@ typedef dbi_result dbi_results_t;
 #define DBI_OBJECT_NULL		(0)
 
 /*
-* º¯Êı: dbi_object_new
-* ¹¦ÄÜ: ´´½¨¶ÔÏóÊµÀı
-* ²ÎÊı: ÎŞ
-* ·µ»Ø: dbi¶ÔÏó
-*		- 0		Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_new
+* åŠŸèƒ½: åˆ›å»ºå¯¹è±¡å®ä¾‹
+* å‚æ•°: æ— 
+* è¿”å›: dbiå¯¹è±¡
+*		- 0		å¤±è´¥
+* è¯´æ˜: 
 */
 dbi_object_t dbi_object_new();
 
 /*
-* º¯Êı: dbi_object_delete
-* ¹¦ÄÜ: Ïú»Ù¶ÔÏóÊµÀı
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_delete
+* åŠŸèƒ½: é”€æ¯å¯¹è±¡å®ä¾‹
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_object_delete(dbi_object_t obj);
 
 /*
-* º¯Êı: dbi_object_statement_compose
-* ¹¦ÄÜ: ¹¹ÔìsqlÓï¾ä
-* ²ÎÊı: obj			dbi¶ÔÏó
-*		statement	Óï¾ä
-* ·µ»Ø: int		µ±Ç°³¤¶È
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_mutex_lock
+* åŠŸèƒ½: äº’æ–¥é”
+* å‚æ•°: obj			dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
+*/
+void dbi_object_mutex_lock(dbi_object_t obj);
+
+/*
+* å‡½æ•°: dbi_object_mutex_unlock
+* åŠŸèƒ½: äº’æ–¥é”
+* å‚æ•°: obj			dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
+*/
+void dbi_object_mutex_unlock(dbi_object_t obj);
+
+/*
+* å‡½æ•°: dbi_object_statement_compose
+* åŠŸèƒ½: æ„é€ sqlè¯­å¥
+* å‚æ•°: obj			dbiå¯¹è±¡
+*		statement	è¯­å¥
+* è¿”å›: int		å½“å‰é•¿åº¦
+* è¯´æ˜: 
 */
 int dbi_object_statement_compose(dbi_object_t obj, char *statement);
 
 /*
-* º¯Êı: dbi_object_statement_composef
-* ¹¦ÄÜ: ¹¹ÔìsqlÓï¾ä
-* ²ÎÊı: obj			dbi¶ÔÏó
-*		fmt			¸ñÊ½»¯Óï¾ä
-*		...			²ÎÊıÁĞ±í
-* ·µ»Ø: int		µ±Ç°³¤¶È
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_composef
+* åŠŸèƒ½: æ„é€ sqlè¯­å¥
+* å‚æ•°: obj			dbiå¯¹è±¡
+*		fmt			æ ¼å¼åŒ–è¯­å¥
+*		...			å‚æ•°åˆ—è¡¨
+* è¿”å›: int		å½“å‰é•¿åº¦
+* è¯´æ˜: 
 */
 int dbi_object_statement_composef(dbi_object_t obj, char *fmt, ...);
 
 /*
-* º¯Êı: dbi_object_statement_composef2
-* ¹¦ÄÜ: ¹¹ÔìsqlÓï¾ä
-* ²ÎÊı: obj			dbi¶ÔÏó
-*		fmt			¸ñÊ½»¯Óï¾ä
-*		args		²ÎÊıÁĞ±í
-* ·µ»Ø: int		µ±Ç°³¤¶È
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_composef2
+* åŠŸèƒ½: æ„é€ sqlè¯­å¥
+* å‚æ•°: obj			dbiå¯¹è±¡
+*		fmt			æ ¼å¼åŒ–è¯­å¥
+*		args		å‚æ•°åˆ—è¡¨
+* è¿”å›: int		å½“å‰é•¿åº¦
+* è¯´æ˜: 
 */
 int dbi_object_statement_composef2(dbi_object_t obj, char *fmt, va_list args);
 
 /*
-* º¯Êı: dbi_object_statement_clear_buf
-* ¹¦ÄÜ: »ñÈ¡sqlÓï¾äbufµÄÖ¸Õë
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_clear_buf
+* åŠŸèƒ½: è·å–sqlè¯­å¥bufçš„æŒ‡é’ˆ
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_object_statement_clear_buf(dbi_object_t obj);
 
 /*
-* º¯Êı: dbi_object_statement_debug
-* ¹¦ÄÜ: Êä³öµ±Ç°sqlÓï¾ä
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_debug
+* åŠŸèƒ½: è¾“å‡ºå½“å‰sqlè¯­å¥
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 void dbi_object_statement_debug(dbi_object_t obj);
 
 /*
-* º¯Êı: dbi_object_statement_get_buf
-* ¹¦ÄÜ: »ñÈ¡sqlÓï¾äbufµÄÖ¸Õë
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: ÎŞ
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_statement_get_buf
+* åŠŸèƒ½: è·å–sqlè¯­å¥bufçš„æŒ‡é’ˆ
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: æ— 
+* è¯´æ˜: 
 */
 char *dbi_object_statement_get_buf(dbi_object_t obj);
 
 /*
-* º¯Êı: dbi_object_get_results
-* ¹¦ÄÜ: »ñÈ¡½á¹û¼¯
-* ²ÎÊı: obj		dbi¶ÔÏó
-* ·µ»Ø: dbi_results_t
-*		- NULL	Ê§°Ü
-* ËµÃ÷: 
+* å‡½æ•°: dbi_object_get_results
+* åŠŸèƒ½: è·å–ç»“æœé›†
+* å‚æ•°: obj		dbiå¯¹è±¡
+* è¿”å›: dbi_results_t
+*		- NULL	å¤±è´¥
+* è¯´æ˜: 
 */
-dbi_results_t *dbi_object_get_results(dbi_object_t obj);
+dbi_results_t dbi_object_get_results(dbi_object_t obj);
 
 
 #endif
