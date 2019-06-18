@@ -82,6 +82,13 @@ C语言实现基于libdbi仿python ORM数据库操作
 	dbc中增加了事务begin、commit、rollback<br>
 	dbc中增加了continuty方法用于作为sql与sql之间的连接符，dbc.query可以批量执行多条sql<br>
 	dbc中增加了insert_many、value_add方法用于批量插入<br>
+<br>
+
+3、2019年6月18日：<br>
+	dbc中互斥锁<br>
+	dbc中增肌sql中的function方法：count，distinct，max，sum<br>
+	dbc中增加对结果result的操作方法（取值操作，count操作等<br>
+	修改dbi_results_t *dbi_object_get_results函数返回dbi_results_t *改为dbi_results_t类型<br>
 
 --------------------------------------------------
 持续更新中 ...
