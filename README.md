@@ -85,8 +85,8 @@ C语言实现基于libdbi仿python ORM数据库操作
 <br>
 
 3、2019年6月18日：<br>
-	dbc中互斥锁<br>
-	dbc中增肌sql中的function方法：count，distinct，max，sum<br>
+	dbc中增加互斥锁<br>
+	dbc中增加sql中的function方法：count，distinct，max，sum<br>
 	dbc中增加对结果result的操作方法（取值操作，count操作等<br>
 	修改dbi_results_t *dbi_object_get_results函数返回dbi_results_t *改为dbi_results_t类型<br>
 
