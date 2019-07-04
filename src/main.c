@@ -14,7 +14,11 @@ dbi_object_t obj;
 /******************************************************************************/
 static void _dbc_test_create()
 {
-	dbc.exec(obj, "CREATE TABLE IF NOT EXISTS %s("
+	//使用副本来操作可以不用dbc.lock，
+	//但是多线程操作同一个副本一样要加锁
+	dbi_object_t obj_copy = DBI_OBJECT_NULL;
+	obj_copy = dbi_object_copy_new(obj);
+	dbc.exec(obj_copy, "CREATE TABLE IF NOT EXISTS %s("
 					   "ID INT PRIMARY KEY     NOT NULL,"
 					   "NAME           TEXT    NOT NULL,"
 					   "AGE            INT     NOT NULL,"
@@ -22,7 +26,7 @@ static void _dbc_test_create()
 					   "SALARY         REAL"
 					");", TABLE_NAME_1);
 
-	dbc.exec(obj, "CREATE TABLE IF NOT EXISTS %s("
+	dbc.exec(obj_copy, "CREATE TABLE IF NOT EXISTS %s("
 					   "ID INT PRIMARY KEY     NOT NULL,"
 					   "NAME           TEXT    NOT NULL,"
 					   "AGE            INT     NOT NULL,"
@@ -30,92 +34,103 @@ static void _dbc_test_create()
 					   "SALARY         REAL"
 					");", TABLE_NAME_2);
 
-	dbc.exec(obj, "CREATE TABLE %s("
+	dbc.exec(obj_copy, "CREATE TABLE %s("
 					   "ID INT PRIMARY KEY      NOT NULL,"
 					   "DEPT           CHAR(50) NOT NULL,"
 					   "EMP_ID         INT      NOT NULL"
 					");", TABLE_NAME_3);
+	dbi_object_copy_delete(obj_copy);
 }
 /******************************************************************************/
 static void _dbc_test_insert()
 {
-	dbc.insert(obj, TABLE_NAME_1, 
+	//使用副本来操作可以不用dbc.lock，
+	//但是多线程操作同一个副本一样要加锁
+	dbi_object_t obj_copy = DBI_OBJECT_NULL;
+	obj_copy = dbi_object_copy_new(obj);
+
+	dbc.insert(obj_copy, TABLE_NAME_1, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		3, "Paul", 32, "California", 20000.00);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 	
-	dbc.insert(obj, TABLE_NAME_1, 
+	dbc.insert(obj_copy, TABLE_NAME_1, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		9, "Wade", 35, "New yourk", 10300.00);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 	
-	dbc.insert(obj, TABLE_NAME_1, 
+	dbc.insert(obj_copy, TABLE_NAME_1, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		23, "Jame", 34, "Calverrle", 43000.35);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 
-	dbc.insert(obj, TABLE_NAME_2, 
+	dbc.insert(obj_copy, TABLE_NAME_2, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		24, "Jorzhi", 38, "OKC", 24030.32);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 	//------------------------------------------
-	dbc.insert(obj, TABLE_NAME_2, 
+	dbc.insert(obj_copy, TABLE_NAME_2, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		24, "Kobe", 38, "Laker", 28000.00);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 	
-	dbc.insert(obj, TABLE_NAME_2, 
+	dbc.insert(obj_copy, TABLE_NAME_2, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		41, "Nowiski", 40, "Moveerelkjr", 500.00);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 	
-	dbc.insert(obj, TABLE_NAME_2, 
+	dbc.insert(obj_copy, TABLE_NAME_2, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		21, "Deng", 44, "Spur", 21000.68);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 
-	dbc.insert(obj, TABLE_NAME_2, 
+	dbc.insert(obj_copy, TABLE_NAME_2, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		56, "Jorry", 28, "Spursdfsdf Spur sdfsdfwefd sdfsdf wefse fdsfc sd dfds f", 12332.68);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 
 	//---------------------------------------
-	dbc.insert(obj, TABLE_NAME_3, 
+	dbc.insert(obj_copy, TABLE_NAME_3, 
 		"ID, DEPT, EMP_ID", 
 		"%d, '%s', %d", 
 		24, "dept_test222", 28);
-	dbc.query(obj);
-	dbc.insert(obj, TABLE_NAME_3, 
+	dbc.query(obj_copy);
+	dbc.insert(obj_copy, TABLE_NAME_3, 
 		"ID, DEPT, EMP_ID", 
 		"%d, '%s', %d", 
 		23, "dept_test32sesdfsdf", 33);
-	dbc.query(obj);
+	dbc.query(obj_copy);
+	dbi_object_copy_delete(obj_copy);
 }
 
 static void _dbc_test_insertfrom()
 {
-	dbc.insertfrom(obj, TABLE_NAME_1, "*");
-	dbc.select(obj, TABLE_NAME_2, "*", NULL);
-	dbc.query(obj);
+	dbi_object_t obj_copy = DBI_OBJECT_NULL;
+	obj_copy = dbi_object_copy_new(obj);
+
+	dbc.insertfrom(obj_copy, TABLE_NAME_1, "*");
+	dbc.select(obj_copy, TABLE_NAME_2, "*", NULL);
+	dbc.query(obj_copy);
 	//-------------------------
-	dbc.insert(obj, TABLE_NAME_2, 
+	dbc.insert(obj_copy, TABLE_NAME_2, 
 		"ID, NAME, AGE, ADDRESS, SALARY", 
 		"%d, '%s', %d, '%s', %f", 
 		55, "Simon", 29, "jiangxi ganzhou", 2100.00);
-	dbc.query(obj);
+	dbc.query(obj_copy);
 	
-	dbc.insertfrom(obj, TABLE_NAME_1, "ID, NAME, AGE, ADDRESS, SALARY");
-	dbc.select(obj, TABLE_NAME_2, "ID, NAME, AGE, ADDRESS, SALARY", NULL);
-	dbc.filter.and(obj, "NAME = '%s'", "Simon");
-	dbc.query(obj);
+	dbc.insertfrom(obj_copy, TABLE_NAME_1, "ID, NAME, AGE, ADDRESS, SALARY");
+	dbc.select(obj_copy, TABLE_NAME_2, "ID, NAME, AGE, ADDRESS, SALARY", NULL);
+	dbc.filter.and(obj_copy, "NAME = '%s'", "Simon");
+	dbc.query(obj_copy);
+	dbi_object_copy_delete(obj_copy);
 }
 /******************************************************************************/
 static void _dbc_test_delete()
@@ -282,7 +297,7 @@ int main(int argc, char **argv)
 	obj = dbi_object_new();
 	dbc = dbc_connect(obj, dbc_args);
 
-	dbc.lock(obj);
+	//dbc.lock(obj);
 
 	LOG_DEBUG_TRACE("*************************************\n");
 	
@@ -332,7 +347,7 @@ int main(int argc, char **argv)
 	_dbc_test_select();
 	LOG_DEBUG_TRACE("*************************************\n");
 
-	dbc.unlock(obj);
+	//dbc.unlock(obj);
 
 	dbc.disconnect(obj);
 	dbi_object_delete(obj);

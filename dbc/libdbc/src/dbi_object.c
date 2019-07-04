@@ -79,11 +79,61 @@ void dbi_object_delete(dbi_object_t obj)
 }
 
 /*
-* ??: dbi_object_mutex_lock
-* ??: ???
-* ??: obj			dbi??
-* ??: ?
-* ??: 
+* 函数: dbi_object_copy_new
+* 功能: 创建对象实例副本
+* 参数: 无
+* 返回: dbi对象
+*		- 0		失败
+* 说明: 
+*/
+dbi_object_t dbi_object_copy_new(dbi_object_t obj)
+{
+	dbi_instance_t *ins_copy = NULL;
+	dbi_instance_t *instance = (dbi_instance_t *) obj;
+	if (instance)
+	{
+		ins_copy = 	calloc(sizeof(dbi_instance_t), 1);
+		if (ins_copy == NULL)
+		{
+			LOG_DEBUG_PERROR("calloc error!\n");
+			return (dbi_object_t) NULL;
+		}
+
+		pthread_mutex_init(&ins_copy->lock, NULL);
+		ins_copy->instance = instance->instance;
+		ins_copy->conn = instance->conn;
+	}
+
+	return (dbi_object_t) ins_copy;
+}
+
+/*
+* 函数: dbi_object_copy_delete
+* 功能: 销毁对象实例副本
+* 参数: obj_copy		副本对象
+* 返回: 无
+* 说明: 
+*/
+void dbi_object_copy_delete(dbi_object_t obj_copy)
+{
+	dbi_instance_t *instance = (dbi_instance_t *) obj_copy;
+	if (instance)
+	{
+		if (instance->result)
+		{
+			dbi_result_free(instance->result);
+		}
+		pthread_mutex_destroy(&instance->lock);
+		free(instance);
+	}
+}
+
+/*
+* 函数: dbi_object_mutex_lock
+* 功能: 互斥锁
+* 参数: obj			dbi对象
+* 返回: 无
+* 说明: 
 */
 void dbi_object_mutex_lock(dbi_object_t obj)
 {
@@ -95,11 +145,11 @@ void dbi_object_mutex_lock(dbi_object_t obj)
 }
 
 /*
-* ??: dbi_object_mutex_unlock
-* ??: ???
-* ??: obj			dbi??
-* ??: ?
-* ??: 
+* 函数: dbi_object_mutex_unlock
+* 功能: 互斥锁
+* 参数: obj			dbi对象
+* 返回: 无
+* 说明: 
 */
 void dbi_object_mutex_unlock(dbi_object_t obj)
 {
@@ -111,12 +161,12 @@ void dbi_object_mutex_unlock(dbi_object_t obj)
 }
 
 /*
-* ??: dbi_object_statement_compose
-* ??: ??sql??
-* ??: obj			dbi??
-*		statement	??
-* ??: int		????
-* ??: 
+* 函数: dbi_object_statement_compose
+* 功能: 构造sql语句
+* 参数: obj			dbi对象
+*		statement	语句
+* 返回: int		当前长度
+* 说明: 
 */
 int dbi_object_statement_compose(dbi_object_t obj, char *statement)
 {

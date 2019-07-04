@@ -70,6 +70,25 @@ dbi_object_t dbi_object_new();
 void dbi_object_delete(dbi_object_t obj);
 
 /*
+* 函数: dbi_object_copy_new
+* 功能: 创建对象实例副本
+* 参数: 无
+* 返回: dbi对象
+*		- 0		失败
+* 说明: 
+*/
+dbi_object_t dbi_object_copy_new(dbi_object_t obj);
+
+/*
+* 函数: dbi_object_copy_delete
+* 功能: 销毁对象实例副本
+* 参数: obj_copy		副本对象
+* 返回: 无
+* 说明: 
+*/
+void dbi_object_copy_delete(dbi_object_t obj_copy);
+
+/*
 * 函数: dbi_object_mutex_lock
 * 功能: 互斥锁
 * 参数: obj			dbi对象
