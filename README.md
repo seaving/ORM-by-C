@@ -89,7 +89,12 @@ C语言实现基于libdbi仿python ORM数据库操作
 	dbc中增加sql中的function方法：count，distinct，max，sum<br>
 	dbc中增加对结果result的操作方法（取值操作，count操作等<br>
 	修改dbi_results_t *dbi_object_get_results函数返回dbi_results_t *改为dbi_results_t类型<br>
-
+<br>
+4、2019年7月3日：<br>
+	dbi_object增加副本操作,dbi_object_copy_new和dbi_object_copy_delete，<br>
+	通过副本来进行dbc操作，不需要使用dbc.lock来进行保护，但是全局副本的话，多线程操作还是需要进行保护的，<br>
+	详见demo中main.c使用<br>
+<br>
 --------------------------------------------------
 持续更新中 ...
 --------------------------------------------------
