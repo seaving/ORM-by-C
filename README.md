@@ -24,87 +24,102 @@ dbc（database container）介绍:
 	要，目前实现了sqlite3的数据库封装，对于其他数据库，只需要仿照sqlite3来实现各个数据库的封装，程序猿针对sqlite3编程时，基本不需要再构造sql语
 	句，通过sqlite3中封装的insert select update delete 以及过滤器中的and or limit 等来进行操作.
 
-三、dbc组成:<br>
-1、dbc结构体:<br>
-	作为模板或者接口，抽象类；<br>
-	dbc结构体起到一个namespace的作用（因为insert， select ...这些名词并不是sqlite所有）；<br>
-2、dbi_object:<br>
-	实现对libdbi的API进行进一步封装，对外统一使用dbi object来操作接口；<br>
-	dbi_object 是线程不安全的(后续改进并且增加连接池管理~)；<br>
-3、sql_sqlite3:<br>
-	dbc数据类型的变量，可以理解为继承了抽象类的子类；<br>
-	实现sqlite3基于dbi_object的进一步封装，所有函数静态化，对外通过sqlite3结构体来操作：<br>
-		- sqlite3.insert；<br>
-		- sqlite3.select；<br>
-		- sqlite3.filter.and；<br>
-		- 具体看dbc.h；<br>
-<br>
+dbc组成:
+
+1、dbc结构体:
+	作为模板或者接口，抽象类;
+	dbc结构体起到一个namespace的作用（因为insert， select ...这些名词并不是sqlite所有）;
+
+2、dbi_object:
+
+	实现对libdbi的API进行进一步封装，对外统一使用dbi object来操作接口;
+	dbi_object 是线程不安全的(后续改进并且增加连接池管理~);
+
+3、sql_sqlite3:
+
+	dbc数据类型的变量，可以理解为继承了抽象类的子类;
+	实现sqlite3基于dbi_object的进一步封装，所有函数静态化，对外通过sqlite3结构体来操作:
+		- sqlite3.insert
+		- sqlite3.select
+		- sqlite3.filter.and
+		- 具体看dbc.h
+
+编译:
+
+		在编译dbc之前，需要安装libdbi，libsqlite3等库文件。安装数据库引擎的源码库，比如我现在使用的是sqlite3，则需要安装sqlite3源码库，
+	因为dbi就是这些源码库的API的一个统一的封装，必须依赖，否则在安装libdriver时，会提示找不到sqlite3的头文件等错误，libdbddriver也必须
+	基于数据库引擎源码库以及libdbi安装成功才能进行编译安装.
+
+1、libsqlite3安装方法：（其他数据库如mysql可以到网上搜索方法，大同小异）
+
+	下载最新版sqlite3源码
+	wget https://www.sqlite.org/2019/sqlite-autoconf-3270200.tar.gz
+	解压文件
+	tar zxvf sqlite-autoconf-3270200.tar.gz
+	进入到解压后的文件夹中
+	cd sqlite-autoconf-3270200
+	./configure
+	 make
+	sudo make install
+
+2、libdbi的安装方法:
+
+	下载最新版libdbi
+	wget https://nchc.dl.sourceforge.net/project/libdbi/libdbi/libdbi-0.9.0/libdbi-0.9.0.tar.gz
+	解压文件
+	tar zxvf libdbi-0.9.0.tar.gz
+	进入到解压后的文件夹中
+	cd libdbi-0.9.0
+	./configure
+	make>
+	sudo make install
+
+3、liddriver的安装方法：
+
+	下载与libdbi对应的版本
+	wget https://jaist.dl.sourceforge.net/project/libdbi-drivers/libdbi-drivers/libdbi-drivers-0.9.0/libdbi-drivers-0.9.0.tar.gz
+	解压文件
+	tar zxvf libdbi-drivers-0.9.0.tar.gz
+	进入到解压目录
+	cd libdbi-drivers-0.9.0
+	./configure --with-sqlite3 (你也可以选定支持的数据库引擎 ./configure --with-sqlite --with-pgsql)
+	make
+	sudo make install
+
+		至此，dbi相关的库都已经编译安装完成，默认库位置在/usr/local/lib/和/usr/local/lib/dbd/目录下，分别为libdbi的库目录以及libdriver
+	的库目录，/usr/local/lib/dbd/就是dbi_object_new中需要制定的driver路径.
+
+更新说明：
+
+2019年4月10日：
+
+		新增dbc容器，类似于接口，对外程序猿通过创建dbc实例操作数据库，不用关系底层用的是何种数据库，dbc旨在把sql语句全部封装，insert、
+	select、update、delete、create、join、order by、where等等sql命令全部封装成函数，比如程序猿需要select的时候 只需要调用dbc.select方法，
+	具体的select的sql语句是底层去构造对应数据库的sql语句.
+		dbc其实是结构体，结构体中有sql的方法，也就是函数指针，如果要支持sqlite3 或者mysql等，只需要继承dbc结构体，实现结构体中的方法，上层
+	使用者在创建一个dbc的时候，传入当前要连接的数据（sqlite3，mysql等），dbc自动选择子类对象，实际上就是定义声明dbc数据类型的sqlite，mysql变
+	量，然后实现dbc中的各种方法，这样用户创建一个dbc的时候，就是返回一个对应数据库的dbc类型变量，具体看dbc_connect函数，里面有set_fun的宏
+
+2019年4月12日：
+
+	dbc中增加了事务begin、commit、rollback
+	dbc中增加了continuty方法用于作为sql与sql之间的连接符，dbc.query可以批量执行多条sql
+	dbc中增加了insert_many、value_add方法用于批量插入
+
+2019年6月18日：
+
+	dbc中增加互斥锁
+	dbc中增加sql中的function方法：count，distinct，max，sum
+	dbc中增加对结果result的操作方法（取值操作，count操作等
+	修改dbi_results_t *dbi_object_get_results函数返回dbi_results_t *改为dbi_results_t类型
+
+2019年7月3日：
+
+	dbi_object增加副本操作,dbi_object_copy_new和dbi_object_copy_delete，通过副本来进行dbc操作，不需要使用dbc.lock来进行保护，但是全局
+	副本的话，多线程操作还是需要进行保护的，详见demo中main.c使用
 
 --------------------------------------------------
-四、编译: <br>
-		在编译dbc之前，需要安装libdbi，libsqlite3等库文件。安装数据库引擎的源码库，比如我现在使用的是sqlite3，则需要安装sqlite3源码库，因为dbi就是这些源码库的API的一个统一的封装，必须依赖，否则在安装libdriver时，会提示找不到sqlite3的头文件等错误，libdbddriver也必须基于数据库引擎源码库以及libdbi安装成功才能进行编译安装。<br>
 
-1、libsqlite3安装方法：（其他数据库如mysql可以到网上搜索方法，大同小异）<br>
-	下载最新版sqlite3源码<br>
-	wget https://www.sqlite.org/2019/sqlite-autoconf-3270200.tar.gz<br>
-	解压文件<br>
-	tar zxvf sqlite-autoconf-3270200.tar.gz<br>
-	进入到解压后的文件夹中<br>
-	cd sqlite-autoconf-3270200<br>
-	./configure<br>
-	 make<br>
-	sudo make install<br>
-<br>
-2、libdbi的安装方法:<br>
-	下载最新版libdbi<br>
-	wget https://nchc.dl.sourceforge.net/project/libdbi/libdbi/libdbi-0.9.0/libdbi-0.9.0.tar.gz<br>
-	解压文件<br>
-	tar zxvf libdbi-0.9.0.tar.gz<br>
-	进入到解压后的文件夹中<br>
-	cd libdbi-0.9.0<br>
-	./configure<br>
-	make<br>
-	sudo make install<br>
-<br>
-3、liddriver的安装方法：<br>
-	下载与libdbi对应的版本<br>
-	wget https://jaist.dl.sourceforge.net/project/libdbi-drivers/libdbi-drivers/libdbi-drivers-0.9.0/libdbi-drivers-0.9.0.tar.gz<br>
-	解压文件<br>
-	tar zxvf libdbi-drivers-0.9.0.tar.gz<br>
-	进入到解压目录<br>
-	cd libdbi-drivers-0.9.0<br>
-	./configure --with-sqlite3 (你也可以选定支持的数据库引擎 ./configure --with-sqlite --with-pgsql)<br>
-	make<br>
-	sudo make install<br>
-<br>
-		至此，dbi相关的库都已经编译安装完成，默认库位置在/usr/local/lib/和/usr/local/lib/dbd/目录下，分别为libdbi的库目录以及libdriver的库目录，/usr/local/lib/dbd/就是dbi_object_new中需要制定的driver路径。<br>
-<br>
-
-------------------------------------------------
-五、更新说明：<br>
-1、2019年4月10日：<br>
-		新增dbc容器，类似于接口，对外程序猿通过创建dbc实例操作数据库，不用关系底层用的是何种数据库，dbc旨在把sql语句全部封装，insert、select、update、delete、create、join、order by、where等等sql命令全部封装成函数，比如程序猿需要select的时候 只需要调用dbc.select方法，具体的select的sql语句是底层去构造对应数据库的sql语句。<br>
-		dbc其实是结构体，结构体中有sql的方法，也就是函数指针，如果要支持sqlite3 或者mysql等，只需要继承dbc结构体，实现结构体中的方法，上层使用者在创建一个dbc的时候，传入当前要连接的数据（sqlite3，mysql等），dbc自动选择子类对象，实际上就是定义声明dbc数据类型的sqlite，mysql变量，然后实现dbc中的各种方法，这样用户创建一个dbc的时候，就是返回一个对应数据库的dbc类型变量，具体看dbc_connect函数，里面有set_fun的宏，有点类似于C++中的子类重写父类方法。<br>
-<br>
-
-2、2019年4月12日：<br>
-	dbc中增加了事务begin、commit、rollback<br>
-	dbc中增加了continuty方法用于作为sql与sql之间的连接符，dbc.query可以批量执行多条sql<br>
-	dbc中增加了insert_many、value_add方法用于批量插入<br>
-<br>
-
-3、2019年6月18日：<br>
-	dbc中增加互斥锁<br>
-	dbc中增加sql中的function方法：count，distinct，max，sum<br>
-	dbc中增加对结果result的操作方法（取值操作，count操作等<br>
-	修改dbi_results_t *dbi_object_get_results函数返回dbi_results_t *改为dbi_results_t类型<br>
-<br>
-4、2019年7月3日：<br>
-	dbi_object增加副本操作,dbi_object_copy_new和dbi_object_copy_delete，<br>
-	通过副本来进行dbc操作，不需要使用dbc.lock来进行保护，但是全局副本的话，多线程操作还是需要进行保护的，<br>
-	详见demo中main.c使用<br>
-<br>
---------------------------------------------------
 持续更新中 ...
---------------------------------------------------
+
 --------------------------------------------------
